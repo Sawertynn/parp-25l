@@ -4,13 +4,17 @@
 :- retractall(at(_, _)), retractall(i_am_at(_)), retractall(alive(_)).
 :- discontiguous subject/3.
 :- discontiguous conversation_result/2.
+:- discontiguous shout_response/3.
+:- discontiguous shout_result/2.
 
 i_am_at(urząd).
 person_at(sekretarz, urząd).
 person_at(urzędnik, dziwne_biuro).
 person_at(urzędniczka, parter).
 person_at(urzędniczka2, okienko2).
-person_at(portiernia, portier).
+person_at(portier, portiernia).
+person_at(prefekt, portiernia).
+person_at(urzędniczka3, trzecie_piętro).
 
 connection(urząd, sekretariat).
 connection(urząd, okienko1).
@@ -19,6 +23,8 @@ connection(dziwne_biuro, szóste_piętro).
 connection(szóste_piętro, parter).
 connection(parter, okienko2).
 connection(okienko2, portiernia).
+connection(portiernia, trzecie_piętro).
+connection(trzecie_piętro, okienko8).
 
 
 /* These rules describe how to pick up an object. */
@@ -94,7 +100,7 @@ notice_objects_at(_).
 resolve_real_person(urzędniczka, Real) :-
     i_am_at(Place),
     person_at(Real, Place),
-    member(Real, [urzędniczka, urzędniczka2]), !.
+    member(Real, [urzędniczka, urzędniczka2, urzędniczka3]), !.
 
 resolve_real_person(Name, Name).
 
@@ -134,12 +140,65 @@ conversation_result(urzędniczka, a38) :-
 
 
 subject(urzędniczka2, a38,
-    'Urzędniczka: Numer 2? Hm... Nie, to nie tutaj. Tutaj jest okienko nyner. 4. To obok to numer 8. Jeśli bardzo państwu zależy, proszę popytać portiera.').
+    'Urzędniczka: Numer 2? Hm... Nie, to nie tutaj. Tutaj jest okienko numer. 4. To obok to numer 8. Jeśli bardzo państwu zależy, proszę popytać portiera.').
 
 conversation_result(urzędniczka2, a38) :-
     write('Asterix: Okienko 2, które jest czwórką, a obok ósemka...'), nl,
     write('Obelix: A może by tak rzucić to wszystko i wrócić do dzików?'), nl,
     write('[Nowa lokacja odblokowana: "portiernia"]'), nl.
+
+
+subject(portier, okienko2, 'Portier: CO?').
+
+conversation_result(portier, okienko2) :-
+    write('Asterix: Chyba potrzebujemy formularza A39, żeby nas ktoś usłyszał.'), nl.
+
+shout_response(portier, okienko2, 'Portier: COOOOO?!?!?!').
+
+shout_result(portier, okienko2) :-
+    write('Rozmowę przypadkiem usłyszał przechodzący obok prefekt.'), nl,
+    write('Prefekt: No, no… tylko spokojnie. Tutaj przecież ludzie pracują.'), nl,
+    write('Prefekt: Przyjacielu, powiedz — czego potrzebujesz?'), nl.
+
+
+subject(prefekt, okienko2,
+    'Prefekt: Numer 2? Zaraz... gdzie ono się teraz znajduje?\nPortier: Gdy widziałem je po raz ostatni, Panie Prefekcie, było na trzecim piętrze, korytarz szósty. Łatwo trafić.\nPrefekt: No, widzicie Panowie? Teraz już wszystko jasne. I po co to całe zamieszanie?').
+
+conversation_result(prefekt, okienko2) :-
+    write('[Nowa lokacja odblokowana: "trzecie_piętro"]'), nl.
+
+
+subject(prefekt, a38, 'Asterix: Prefekt, czy wie Pan, gdzie znajduje się formularz A38?').
+
+conversation_result(prefekt, a38) :-
+    write('Prefekt: A38? O nie, znowu ten koszmar...'), nl,
+    write('Prefekt: Proszę wybaczyć, ale kawa mi stygnie, a formularze to nie moja działka.'), nl,
+    write('Prefekt: Na trzecim piętrze na pewno ktoś będzie wiedział więcej. Jeśli jeszcze pamiętają.'), nl,
+    write('Asterix: Zaczynam się zastanawiać, czy ten formularz w ogóle istnieje.'), nl,
+    write('Obelix: A ja zaczynam podejrzewać, że nie zdążymy dziś na obiad...'), nl.
+
+
+subject(urzędniczka3, a38,
+    'Urzędniczka: Nie widzi Pan, że jestem zajęta? Proszę poczekać.').
+
+conversation_result(urzędniczka3, a38) :-
+    write('Urzędniczki wracają do rozmowy o znajomej i jej domniemanych aferach, zupełnie ignorując obecność Galów.'), nl.
+
+
+shout_response(urzędniczka3, a38,
+    'Urzędniczka: Och, ci ludzie są naprawdę niemożliwi. Krzyczeć w biurze? To przecież skandal!\nZaświadczenie A38, tak? A czy ma pan niebieski formularz?').
+
+shout_result(urzędniczka3, a38) :-
+    write('[Możesz teraz zapytać o "niebieski_formularz"]'), nl.
+
+
+subject(urzędniczka3, niebieski_formularz,
+    'Urzędniczka: W celu uzyskania zaświadczenia A38 należy najpierw przedstawić niebieski formularz. Proszę udać się do okienka nr 8.').
+
+conversation_result(urzędniczka3, niebieski_formularz) :-
+    write('Asterix: Och... Przecież już tam byliśmy...'), nl,
+    write('[Nowa lokacja odblokowana: "okienko8"]'), nl.
+
 
 /* These rules are for asking a person about some subject */
 
@@ -242,7 +301,7 @@ instructions :-
     write('drop(Przedmiot).   -- upuść przedmiot.'), nl,
     write('talk(Postać).      -- zobacz, o co możesz zapytać daną postać.'), nl,
     write('ask(Postać, Temat).-- zapytaj postać o dany temat.'), nl,
-    write('shout(Postać, Temat).-- lrzyknij coś na dany temat.'), nl,
+    write('shout(Postać, Temat).-- krzyknij coś na dany temat.'), nl,
     write('instructions.      -- pokaż tę pomoc jeszcze raz.'), nl,
     write('halt.              -- zakończ grę.'), nl,
     nl.
@@ -310,13 +369,24 @@ describe(parter) :-
     write('Za szybą siedzi urzędniczka z lekko znudzoną miną.'), nl,
     write('Urzędniczka: "W jakiej sprawie?"'), nl.
 
-
 describe(okienko2) :-
     write('Asterix i Obelix docierają do okienka nr 2... a przynajmniej tak im się wydaje.'), nl,
-    write('Numer ledwo widoczny, przekreślony i poprawiony kilka razy. Pod spodem naklejony "4".'), nl.
+    write('Numer ledwo widoczny, przekreślony i poprawiony kilka razy. Pod spodem naklejony "4".'), nl,
+    write('Za szybą siedzi urzędniczka, która rzuca im krótkie, złowrogie spojrzenie.'), nl.
 
 describe(portiernia) :-
     write('Asterix i Obelix docierają do portierni - małego pomieszczenia z drewnianą ladą i zapachem mokrej tuniki.'), nl,
     write('Za ladą siedzi portier - stary, znużony mężczyzna, którego powieki wydają się ważyć więcej niż cały Rzym.'), nl,
     write('Spogląda na nich nieobecnym wzrokiem, jakby wciąż próbował przypomnieć sobie, co tu właściwie robi.'), nl,
     write('Portier: ...?'), nl.
+
+describe(trzecie_piętro) :-
+    write('Asterix i Obelix docierają w końcu na trzecie piętro.'), nl,
+    write('Na końcu długiego korytarza znajduje się okienko numer 2.'), nl,
+    write('Za szybą siedzą dwie urzędniczki, pochłonięte ożywioną rozmową.'), nl,
+    write('Jedna z nich rzuca krótkie spojrzenie w ich stronę, po czym wraca do plotek.'), nl.
+
+describe(okienko8) :-
+    write('Okienko numer 8 jest zamknięte.'), nl,
+    write('Na drzwiach wisi krzywo przyklejona kartka: "Przerwa obiadowa - wracam za 15 minut".'), nl,
+    write('Niestety, nie wiadomo od kiedy...'), nl.
