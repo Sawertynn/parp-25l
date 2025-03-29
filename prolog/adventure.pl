@@ -2,13 +2,24 @@
 
 :- dynamic i_am_at/1, at/2, holding/1, person_at/2.
 :- retractall(at(_, _)), retractall(i_am_at(_)), retractall(alive(_)).
+:- discontiguous subject/3.
+:- discontiguous conversation_result/2.
 
 i_am_at(urząd).
 person_at(sekretarz, urząd).
+person_at(urzędnik, dziwne_biuro).
+person_at(urzędniczka, parter).
+person_at(urzędniczka2, okienko2).
+person_at(portiernia, portier).
 
 connection(urząd, sekretariat).
-connection(okienko1, dziwne_biuro).
 connection(urząd, okienko1).
+connection(okienko1, dziwne_biuro).
+connection(dziwne_biuro, szóste_piętro).
+connection(szóste_piętro, parter).
+connection(parter, okienko2).
+connection(okienko2, portiernia).
+
 
 /* These rules describe how to pick up an object. */
 
@@ -78,6 +89,15 @@ notice_objects_at(Place) :-
 
 notice_objects_at(_).
 
+/* These rules are for aliases, for example when we want to say 'urzędniczka' instead of 'urzędniczka2'  */
+
+resolve_real_person(urzędniczka, Real) :-
+    i_am_at(Place),
+    person_at(Real, Place),
+    member(Real, [urzędniczka, urzędniczka2]), !.
+
+resolve_real_person(Name, Name).
+
 /* Subjects to talk aobut */
 
 subject(sekretarz, a38,
@@ -95,25 +115,54 @@ shout_result(sekretarz, a38) :-
     connection(urząd, sekretariat),
     write('Możesz teraz przejść do okienka nr 1. [nazwa: okienko1]'), nl.
 
+
+
+subject(urzędnik, okienko1,
+    'Urzędnik: Sprawdźcie plan. Szóste piętro. I proszę zamknąć za sobą drzwi. Co za bezczelność... Proszę dalej, panienko.').
+
+conversation_result(urzędnik, okienko1) :-
+    write('Asterix: Chyba kogoś przeszkodziliśmy...'), nl,
+    write('[Nowa lokacja odblokowana: "szóste_piętro"'), nl.
+
+
+subject(urzędniczka, a38,
+    'Urzędniczka: A38? Nie, źle was poinformowano. Musicie iść do okienka nr. 2.').
+
+conversation_result(urzędniczka, a38) :-
+    write('Asterix: Czyli musimy iść dalej...'), nl,
+    write('[Nowa lokacja odblokowana: "okienko2"]'), nl.
+
+
+subject(urzędniczka2, a38,
+    'Urzędniczka: Numer 2? Hm... Nie, to nie tutaj. Tutaj jest okienko nyner. 4. To obok to numer 8. Jeśli bardzo państwu zależy, proszę popytać portiera.').
+
+conversation_result(urzędniczka2, a38) :-
+    write('Asterix: Okienko 2, które jest czwórką, a obok ósemka...'), nl,
+    write('Obelix: A może by tak rzucić to wszystko i wrócić do dzików?'), nl,
+    write('[Nowa lokacja odblokowana: "portiernia"]'), nl.
+
 /* These rules are for asking a person about some subject */
 
-talk(Person) :-
-    person_at(Person, Place),
+talk(PersonAlias) :-
+    resolve_real_person(PersonAlias, RealPerson),
+    person_at(RealPerson, Place),
     i_am_at(Place),
-    write('Możesz zapytać '), write(Person), write(' o:'),
+    write('Możesz zapytać '), write(RealPerson), write(' o:'),
     nl,
     fail.
 
-talk(Person) :-
-    person_at(Person, Place),
+talk(PersonAlias) :-
+    resolve_real_person(PersonAlias, RealPerson),
+    person_at(RealPerson, Place),
     i_am_at(Place),
-    subject(Person, Subject, _),
+    subject(RealPerson, Subject, _),
     write(Subject),
     nl,
     fail.
 
-talk(Person) :-
-    person_at(Person, Place),
+talk(PersonAlias) :-
+    resolve_real_person(PersonAlias, RealPerson),
+    person_at(RealPerson, Place),
     i_am_at(Place),
     !.
 
@@ -121,38 +170,43 @@ talk(Person) :-
     write('Nie ma tutaj nikogo o imieniu '), write(Person),
     nl, !.
 
-ask(Person, Subject) :-
-    person_at(Person, Place),
+ask(PersonAlias, Subject) :-
+    resolve_real_person(PersonAlias, RealPerson),
+    person_at(RealPerson, Place),
     i_am_at(Place),
-    subject(Person, Subject, Message),
+    subject(RealPerson, Subject, Message),
     write(Message),
     nl,
-    conversation_result(Person, Subject),
+    conversation_result(RealPerson, Subject),
     !.
 
-ask(Person, Subject) :-
-    person_at(Person, Place),
+ask(PersonAlias, Subject) :-
+    resolve_real_person(PersonAlias, RealPerson),
+    person_at(RealPerson, Place),
     i_am_at(Place),
-    subject(Person, Subject, _), !.
+    subject(RealPerson, Subject, _),
+    !.
 
-ask(Person, Subject) :-
-    person_at(Person, Place),
+ask(PersonAlias, Subject) :-
+    resolve_real_person(PersonAlias, RealPerson),
+    person_at(RealPerson, Place),
     i_am_at(Place),
-    write(Person), write(' nie wie nic o '), write(Subject),
+    write(RealPerson), write(' nie wie nic o '), write(Subject),
     nl,
     !.
 
-ask(Person, _) :-
-    write('Nie ma tutaj nikogo o imieniu '), write(Person),
+ask(PersonAlias, _) :-
+    write('Nie ma tutaj nikogo o imieniu '), write(PersonAlias),
     nl, !.
 
-shout(Person, Subject) :-
-    person_at(Person, Place),
+shout(PersonAlias, Subject) :-
+    resolve_real_person(PersonAlias, RealPerson),
+    person_at(RealPerson, Place),
     i_am_at(Place),
-    shout_response(Person, Subject, Message),
-    write('Krzyczysz do '), write(Person), write(': "'), write(Subject), write('!!"'), nl,
+    shout_response(RealPerson, Subject, Message),
+    write('Krzyczysz do '), write(PersonAlias), write(': "'), write(Subject), write('!!"'), nl,
     write(Message), nl,
-    shout_result(Person, Subject),
+    shout_result(RealPerson, Subject),
     !.
 
 shout(_, _) :-
@@ -188,6 +242,7 @@ instructions :-
     write('drop(Przedmiot).   -- upuść przedmiot.'), nl,
     write('talk(Postać).      -- zobacz, o co możesz zapytać daną postać.'), nl,
     write('ask(Postać, Temat).-- zapytaj postać o dany temat.'), nl,
+    write('shout(Postać, Temat).-- lrzyknij coś na dany temat.'), nl,
     write('instructions.      -- pokaż tę pomoc jeszcze raz.'), nl,
     write('halt.              -- zakończ grę.'), nl,
     nl.
@@ -230,7 +285,7 @@ describe(okienko1) :-
     write('Zamiast tego, po lewej - jedyne widoczne wejście, lekko uchylone, jakby samo zapraszało do środka.'), nl,
     write('Wygląda na to, że sekretarz pomylił kierunki. Znowu.'), nl,
     nl,
-    write('[Nowa lokacja odblokowana: „dziwne_biuro” - możesz tam teraz wejść za pomocą komendy go(dziwne_biuro).]').
+    write('[Nowa lokacja odblokowana: "dziwne_biuro"]').
 
 
 describe(dziwne_biuro) :-
@@ -238,3 +293,30 @@ describe(dziwne_biuro) :-
     write('Zamiast tego - huśtawka. Na niej urzędnik w togach, obok dama w czerwonej tunice, zajęci rozmową.'), nl,
     write('Gdy Asterix i Obelix wchodzą, oboje zamierają.'), nl,
     write('Urzędnik (oburzony): "KTO WAM POZWOLIŁ WEJŚĆ DO MEGO BIURA?!"'), nl.
+
+describe(szóste_piętro) :-
+    write('Asterix i Obelix ledwo żywi docierają na szóste piętro po niezliczonych schodach.'), nl,
+    write('Po drodze robią kilka przerw - na oddech, narzekanie i rozważenie powrotu do wioski.'), nl,
+    write('Na ścianie wisi plan budynku...'), nl,
+    write('...i wtedy uświadamiają sobie coś niepokojącego.'), nl,
+    write('Okienko nr 1 znajduje się na parterze. Po prawej stronie od wejścia.'), nl,
+    nl,
+    write('[Nowy lokacja odblokowana: "parter"]'), nl.
+
+describe(parter) :-
+    write('Asterix i Obelix schodzą na parter, zgodnie z planem budynku.'), nl,
+    write('Po prawej stronie od wejścia znajduje się coś, co najwyraźniej umknęło ich uwadze wcześniej:'), nl,
+    write('skromne okienko z numerem "1", ledwo widoczne między doniczką a stojakiem na papirusy.'), nl,
+    write('Za szybą siedzi urzędniczka z lekko znudzoną miną.'), nl,
+    write('Urzędniczka: "W jakiej sprawie?"'), nl.
+
+
+describe(okienko2) :-
+    write('Asterix i Obelix docierają do okienka nr 2... a przynajmniej tak im się wydaje.'), nl,
+    write('Numer ledwo widoczny, przekreślony i poprawiony kilka razy. Pod spodem naklejony "4".'), nl.
+
+describe(portiernia) :-
+    write('Asterix i Obelix docierają do portierni - małego pomieszczenia z drewnianą ladą i zapachem mokrej tuniki.'), nl,
+    write('Za ladą siedzi portier - stary, znużony mężczyzna, którego powieki wydają się ważyć więcej niż cały Rzym.'), nl,
+    write('Spogląda na nich nieobecnym wzrokiem, jakby wciąż próbował przypomnieć sobie, co tu właściwie robi.'), nl,
+    write('Portier: ...?'), nl.
