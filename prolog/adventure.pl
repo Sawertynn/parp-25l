@@ -7,7 +7,7 @@
 :- discontiguous shout_response/3.
 :- discontiguous shout_result/2.
 
-i_am_at(urząd).
+i_am_at(portiernia). /* tutaj mozesz sobie zmianc */
 person_at(sekretarz, urząd).
 person_at(urzędnik, dziwne_biuro).
 person_at(urzędniczka, parter).
