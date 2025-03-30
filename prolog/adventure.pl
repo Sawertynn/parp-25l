@@ -365,8 +365,8 @@ wait :-
     look, !.
 
 wait :-
-    i_am_at(Miejsce),
-    write('Asterix i Obelix siadają gdzieś w kącie w miejscu: '), write(Miejsce), write('.'), nl,
+    i_am_at(Place),
+    write('Asterix i Obelix siadają gdzieś w kącie w miejscu: '), write(Place), write('.'), nl,
     write('Nie mają nawet na co czekać, ale przynajmniej mogą chwilę odpocząć.'), nl,
     write('Obelix: Może coś zjemy?'), nl,
     write('Asterix: Na Jowisza, najpierw znajdźmy ten formularz.'), nl.
