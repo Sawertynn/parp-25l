@@ -7,7 +7,7 @@
 :- discontiguous shout_response/3.
 :- discontiguous shout_result/2.
 
-i_am_at(portiernia). /* tutaj mozesz sobie zmianc */
+i_am_at(okienko42). /* tutaj mozesz sobie zmianc */
 person_at(sekretarz, urząd).
 person_at(urzędnik, dziwne_biuro).
 person_at(urzędniczka, parter).
@@ -15,6 +15,9 @@ person_at(urzędniczka2, okienko2).
 person_at(portier, portiernia).
 person_at(prefekt, portiernia).
 person_at(urzędniczka3, trzecie_piętro).
+person_at(urzędniczka4, okienko8_po_otwarciu).
+person_at(urzędniczka4_5, okienko35).
+person_at(urzędniczka5, okienko42).
 
 connection(urząd, sekretariat).
 connection(urząd, okienko1).
@@ -25,7 +28,33 @@ connection(parter, okienko2).
 connection(okienko2, portiernia).
 connection(portiernia, trzecie_piętro).
 connection(trzecie_piętro, okienko8).
+connection(okienko8_po_otwarciu, okienko35).
+connection(okienko35, okienko42).
 
+/* Special pick rule that indicates that the game is nearly ending */
+take(niebieski_formularz) :-
+    i_am_at(Place),
+    at(niebieski_formularz, Place),
+    retract(at(niebieski_formularz, Place)),
+    assert(holding(niebieski_formularz)),
+    write('Urzędniczka: Panowie właśnie wybija 16, więc urząd się zamyka teraz, zapraszamy jutro w celu dokończenia formalności.'), nl,
+    write('Asterix i Obelix błąkają się po urzędzie bez końca. Formularz prowadzi do formularza, ten do kolejnego - i tak w nieskończoność.'), nl,
+    write('W końcu Obelix nie wytrzymuje. Zaczyna chodzić w kółko, wymachując rękami, krzycząc i z każdym krokiem rośnie jego frustracja.'), nl,
+    write('Obelix: Nigdy stąd nie wyjdziemy, Asteriksie... Tu chyba nie ma nadziei, a formularz za formularzem...'), nl,
+    write('Asterix: Spokojnie, Obelix. Może coś się jeszcze uda załatwić...'), nl,
+    nl,
+    write('Nagle pojawia się ochrona. Zauważyli hałas i zaczynają podejście do Galów.'), nl,
+    write('Ochroniarz: Panowie, spokojnie... W urzędzie nie krzyczymy. Macie zakaz wstępu do tego budynku na razie.'), nl,
+    write('Bez zbędnych słów wyprowadzają Asteriksa i Obeliksa na zewnątrz.'), nl,
+    write('Asterix i Obelix stoją teraz przed urzędowym budynkiem, nie wiedząc, co zrobić dalej.'), nl,
+    write('Ochroniarz: A tak w ogóle, jaki był powód tej awantury?'), nl,
+    write('Obelix: Eee... formularze. Znowu formularze... Cały ten urząd to jedno wielkie zamieszanie!'), nl,
+    write('Asterix: Spokojnie, Obelix. Wiesz, jak to bywa... biurokracja...'), nl,
+    write('Ochroniarz: Biurokracja, mówicie... No cóż, w takim razie życzę powodzenia, panowie. W urzędzie wszystko ma swój czas... a wasz czas skończył się na dziś.'), nl,
+    write('[Nowa lokacja odblokowana: "przed_urzędem". Możesz się rozjrzeć poleceniem "look."'), nl,
+    retract(i_am_at(Place)),
+    assert(i_am_at(przed_urzędem)),
+    !.
 
 /* These rules describe how to pick up an object. */
 
@@ -100,7 +129,7 @@ notice_objects_at(_).
 resolve_real_person(urzędniczka, Real) :-
     i_am_at(Place),
     person_at(Real, Place),
-    member(Real, [urzędniczka, urzędniczka2, urzędniczka3]), !.
+    member(Real, [urzędniczka, urzędniczka2, urzędniczka3, urzędniczka4, urzędniczka4_5, urzędniczka5]), !.
 
 resolve_real_person(Name, Name).
 
@@ -200,6 +229,55 @@ conversation_result(urzędniczka3, niebieski_formularz) :-
     write('[Nowa lokacja odblokowana: "okienko8"]'), nl.
 
 
+subject(urzędniczka4, niebieski_formularz,
+    'Urzędniczka: Niebieski formularz? To nie tutaj. Okienko 35, czwarte piętro.').
+
+conversation_result(urzędniczka4, niebieski_formularz) :-
+    write('Asterix: Ciekawe, ile w tym budynku jest pięter...'), nl,
+    write('Obelix: Mam nadzieję, że na czwartym piętrze mają coś do jedzenia.'), nl,
+    write('[Nowa lokacja odblokowana: "okienko35"]'), nl.
+
+
+subject(urzędniczka4_5, niebieski_formularz, '').
+
+conversation_result(urzędniczka4_5, niebieski_formularz) :-
+    \+ at(fioletowy_formularz, okienko35),
+    assert(at(fioletowy_formularz, okienko35)),
+    write('Urzędniczka: Proszę, oto fioletowy formularz. Teraz proszę udać się na piąte piętro, schody K, korytarz W, okienko numer 42.'), nl,
+    write('Asterix: Fioletowy? Przecież pytaliśmy o niebieski...'), nl,
+    write('Obelix: Cicho, mamy jakiś formularz. Bierz i idziemy.'), nl,
+    write('["fioletowy_formularz" jest dostepny do wzięcia przez polecenie "take"]'), nl,
+    write('[Nowa lokacja odblokowana: "okienko42"]'), nl.
+
+conversation_result(urzędniczka4_5, niebieski_formularz) :-
+    holding(fioletowy_formularz),  % Jeśli gracz trzyma formularz
+    write('Urzędniczka: Przecież macie już fioletowy formularz w ręku! Nie wiem nic o niebieskim formularzu. Dajcie mi spokój.'), nl,
+    write('Urzędniczka: Idźcie do okienka 42, bo urząd się zaraz zamknie!'), nl.
+
+conversation_result(urzędniczka4_5, niebieski_formularz) :-
+    at(fioletowy_formularz, okienko42),  % Jeśli formularz leży na okienku
+    write('Urzędniczka: Przecież ten formularz już tu leży! Macie go w zasięgu ręki. Dajcie mi spokój z tym niebieskim formularzem.'), nl,
+    write('Urzędniczka: Idźcie do okienka 42, bo urząd zaraz zamyka drzwi!'), nl.
+
+
+subject(urzędniczka5, niebieski_formularz, '').
+
+conversation_result(urzędniczka5, niebieski_formularz) :-
+    \+ at(niebieski_formularz, okienko42),
+    assert(at(niebieski_formularz, okienko42)),
+    write('Urzędniczka: Aaaa, formularz A38? Oczywiście. To jest ten niebieski. Proszę bardzo — do odbioru.'), nl,
+    write('Urzędniczka kładzie przed nimi niebieski formularz. Wydaje się... zwyczajny.'), nl,
+    write('["niebieski_formularz" jest dostępny do wzięcia przez polecenie "take"]'), nl.
+
+conversation_result(urzędniczka5, niebieski_formularz) :-
+    holding(niebieski_formularz),
+    write('Urzędniczka: Przecież już macie ten formularz w ręku!'), nl.
+
+conversation_result(urzędniczka5, niebieski_formularz) :-
+    at(niebieski_formularz, okienko42),
+    write('Urzędniczka: Przecież już wam go podałam, leży tu.'), nl.
+
+
 /* These rules are for asking a person about some subject */
 
 talk(PersonAlias) :-
@@ -271,10 +349,25 @@ shout(PersonAlias, Subject) :-
 shout(_, _) :-
     write('Krzyczysz w pustkę... Nikt cię nie słyszy.'), nl.
 
-/* This rule tells how to die. */
+/* This rules are for waiting for something */
 
-die :-
-        finish.
+wait :-
+    i_am_at(okienko8),
+    write('Asterix i Obelix siadają na ławce pod okienkiem nr 8 i cierpliwie czekają.'), nl,
+    write('Czas mija. Przerwa trwa dalej. Kartka na drzwiach wisi nieporuszona.'), nl,
+    write('Obelix: Myślisz, że te "15 minut" to w rzymskich godzinach?'), nl,
+    write('Asterix: Może mają inny kalendarz...'), nl,
+    write('[Okienko zostało otwarte]'), nl,
+    retract(i_am_at(okienko8)),
+    assert(i_am_at(okienko8_po_otwarciu)),
+    look, !.
+
+wait :-
+    i_am_at(Miejsce),
+    write('Asterix i Obelix siadają gdzieś w kącie w miejscu: '), write(Miejsce), write('.'), nl,
+    write('Nie mają nawet na co czekać, ale przynajmniej mogą chwilę odpocząć.'), nl,
+    write('Obelix: Może coś zjemy?'), nl,
+    write('Asterix: Na Jowisza, najpierw znajdźmy ten formularz.'), nl.
 
 
 /* Under UNIX, the "halt." command quits Prolog but does not
@@ -294,16 +387,17 @@ instructions :-
     nl,
     write('Używaj standardowej składni Prologa do wpisywania poleceń.'), nl,
     write('Dostępne polecenia:'), nl,
-    write('start.             -- rozpocznij grę.'), nl,
-    write('go(Miejsce).       -- przejdź do wskazanego miejsca.'), nl,
-    write('look.              -- rozejrzyj się dookoła.'), nl,
-    write('take(Przedmiot).   -- podnieś przedmiot.'), nl,
-    write('drop(Przedmiot).   -- upuść przedmiot.'), nl,
-    write('talk(Postać).      -- zobacz, o co możesz zapytać daną postać.'), nl,
-    write('ask(Postać, Temat).-- zapytaj postać o dany temat.'), nl,
+    write('start.               -- rozpocznij grę.'), nl,
+    write('go(Miejsce).         -- przejdź do wskazanego miejsca.'), nl,
+    write('look.                -- rozejrzyj się dookoła.'), nl,
+    write('take(Przedmiot).     -- podnieś przedmiot.'), nl,
+    write('drop(Przedmiot).     -- upuść przedmiot.'), nl,
+    write('talk(Postać).        -- zobacz, o co możesz zapytać daną postać.'), nl,
+    write('ask(Postać, Temat).  -- zapytaj postać o dany temat.'), nl,
     write('shout(Postać, Temat).-- krzyknij coś na dany temat.'), nl,
-    write('instructions.      -- pokaż tę pomoc jeszcze raz.'), nl,
-    write('halt.              -- zakończ grę.'), nl,
+    write('instructions.        -- pokaż tę pomoc jeszcze raz.'), nl,
+    write('wait.                -- zaczekaj chwilę.'), nl,
+    write('halt.                -- zakończ grę.'), nl,
     nl.
 
 
@@ -390,3 +484,28 @@ describe(okienko8) :-
     write('Okienko numer 8 jest zamknięte.'), nl,
     write('Na drzwiach wisi krzywo przyklejona kartka: "Przerwa obiadowa - wracam za 15 minut".'), nl,
     write('Niestety, nie wiadomo od kiedy...'), nl.
+
+describe(okienko8_po_otwarciu) :-
+    write('Drzwi otwierają się. Pojawia się młoda urzędniczka,'), nl,
+    write('która wita Asteriksa i Obeliksa z uprzejmym uśmiechem.'), nl,
+    write('Urzędniczka: Dzień dobry! W czym mogę pomóc?'), nl.
+
+describe(okienko35) :-
+    write('Przy okienku siedzi urzędniczka z kamienną twarzą, przeglądająca stos pergaminów.'), nl,
+    write('Asterix i Obelix podchodzą ostrożnie — już wiedzą, że każde okienko może być pułapką.'), nl.
+
+describe(okienko42) :-
+    write('Na końcu korytarza widać jasne światło...'), nl,
+    write('...a nad okienkiem widnieje tabliczka: "NIEBIESKIE FORMULARZE DO A38".'), nl,
+    write('Asterix i Obelix przystają, przecierają oczy i nie dowierzają.'), nl,
+    write('Obelix: Asterix... czy my... czy my dobrze widzimy?'), nl,
+    write('Asterix: Tak, Obelixie. To chyba naprawdę ono.'), nl,
+    write('Za okienkiem siedzi uprzejma pani, która spogląda na nich z uśmiechem.'), nl,
+    write('Urzędniczka: "Dzień dobry! W czym mogę pomóc?"'), nl.
+
+describe(przed_urzędem) :-
+    write('Asterix i Obelix stoją przed zamkniętym urzędem. Obelix siedzi na schodach i patrzy w niebo, mamrocząc coś o dziczyźnie.'), nl,
+    write('Asterix tylko wzdycha i wyciąga z sakiewki bilet powrotny do wioski.'), nl,
+    write('Asterix: "Wiesz co, Obeliksie? Może lepiej pokonać Rzym siłą. To przynajmniej jest prostsze."'), nl,
+    write('Obelix: "I bez schodów..."'), nl,
+    finish.

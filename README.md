@@ -8,7 +8,7 @@
 - Haskell: 11. maja
 - Smalltalk: 1. czerwca
 
-## Fabuła
+## Fabuła (zarys - będzie dostosowana w trakcie implementacji)
 
 [start rozgrywki]
 
@@ -118,21 +118,21 @@ Okienko numer 8 jest zamknięte. Na drzwiach wisi krzywo przyklejona kartka: „
 
 [zaczekaj na otwarcie okienka]
 
-Drzwi otwierają się. Pojawia się młoda urzędniczka o imieniu Irena, która wita Asteriksa i Obeliksa z uprzejmym uśmiechem.
+Drzwi otwierają się. Pojawia się młoda urzędniczka, która wita Asteriksa i Obeliksa z uprzejmym uśmiechem.
 
-Irena: W czym mogę pomóc?
+Urzędniczka: W czym mogę pomóc?
 
 [zapytaj Irene o niebieski forumularz]
 
-Irena: Niebieski formularz? To nie tutaj. Okienko 35, czwarte piętro.
+Irena: Proszę o to fioletowy formularz. Teraz proszę udać się na piąte piętro, schody K, korytarz W, okienko numer 42.'
 
 Przy okienku siedzi urzędniczka z plakietką „Zosia”. Asterix i Obelix podchodzą ostrożnie - już wiedzą, że każde okienko może być pułapką.
 
 [zapytaj Zosię o niebieski formularz]
 
-Zosia: Proszę, oto fioletowy formularz. Teraz proszę udać się na piąte piętro, schody K, korytarz W, okienko numer 42.
+Zosia: Proszę, oto niebieski formularz. Urząd zaraz się zamyka, ale możecie spróbować udać się do okienka nr. 78, schody K, korytarz W.
 
-[idź do okienka nr. 42]
+...
 
 Asterix i Obelix błąkają się po urzędzie bez końca. Formularz prowadzi do formularza, ten do kolejnego - i tak w nieskończoność.
 W końcu Obelix nie wytrzymuje. Zaczyna biegać, krzyczeć, podskakiwać - chłop po prostu zwariował. Jego masa robi swoje - tu przewrócił donicę, tam urwał framugę, gdzie indziej przestawił szafę razem z urzędnikiem. Nadzieja odeszła.
