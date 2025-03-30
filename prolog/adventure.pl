@@ -32,12 +32,14 @@ connection(okienko8_po_otwarciu, okienko35).
 connection(okienko35, okienko42).
 
 /* Special pick rule that indicates that the game is nearly ending */
+
 take(niebieski_formularz) :-
     i_am_at(Place),
     at(niebieski_formularz, Place),
     retract(at(niebieski_formularz, Place)),
     assert(holding(niebieski_formularz)),
     write('Urzędniczka: Panowie właśnie wybija 16, więc urząd się zamyka teraz, zapraszamy jutro w celu dokończenia formalności.'), nl,
+    write('Asterix: Ehhh....'), nl, nl,
     write('Asterix i Obelix błąkają się po urzędzie bez końca. Formularz prowadzi do formularza, ten do kolejnego - i tak w nieskończoność.'), nl,
     write('W końcu Obelix nie wytrzymuje. Zaczyna chodzić w kółko, wymachując rękami, krzycząc i z każdym krokiem rośnie jego frustracja.'), nl,
     write('Obelix: Nigdy stąd nie wyjdziemy, Asteriksie... Tu chyba nie ma nadziei, a formularz za formularzem...'), nl,
@@ -51,6 +53,7 @@ take(niebieski_formularz) :-
     write('Obelix: Eee... formularze. Znowu formularze... Cały ten urząd to jedno wielkie zamieszanie!'), nl,
     write('Asterix: Spokojnie, Obelix. Wiesz, jak to bywa... biurokracja...'), nl,
     write('Ochroniarz: Biurokracja, mówicie... No cóż, w takim razie życzę powodzenia, panowie. W urzędzie wszystko ma swój czas... a wasz czas skończył się na dziś.'), nl,
+    write('[Możesz rozejrzeć się poleceniem "look."]'), nl,
     retract(i_am_at(Place)),
     assert(i_am_at(przed_urzędem)),
     !.
@@ -156,7 +159,7 @@ subject(urzędnik, okienko1,
 
 conversation_result(urzędnik, okienko1) :-
     write('Asterix: Chyba kogoś przeszkodziliśmy...'), nl,
-    write('[Nowa lokacja odblokowana: "szóste_piętro"'), nl.
+    write('[Nowa lokacja odblokowana: "szóste_piętro"]'), nl.
 
 
 subject(urzędniczka, a38,
