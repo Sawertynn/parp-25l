@@ -7,7 +7,7 @@
 :- discontiguous shout_response/3.
 :- discontiguous shout_result/2.
 
-i_am_at(okienko42). /* tutaj mozesz sobie zmianc */
+i_am_at(urząd).
 person_at(sekretarz, urząd).
 person_at(urzędnik, dziwne_biuro).
 person_at(urzędniczka, parter).
@@ -51,7 +51,6 @@ take(niebieski_formularz) :-
     write('Obelix: Eee... formularze. Znowu formularze... Cały ten urząd to jedno wielkie zamieszanie!'), nl,
     write('Asterix: Spokojnie, Obelix. Wiesz, jak to bywa... biurokracja...'), nl,
     write('Ochroniarz: Biurokracja, mówicie... No cóż, w takim razie życzę powodzenia, panowie. W urzędzie wszystko ma swój czas... a wasz czas skończył się na dziś.'), nl,
-    write('[Nowa lokacja odblokowana: "przed_urzędem". Możesz się rozjrzeć poleceniem "look."'), nl,
     retract(i_am_at(Place)),
     assert(i_am_at(przed_urzędem)),
     !.
@@ -284,7 +283,7 @@ talk(PersonAlias) :-
     resolve_real_person(PersonAlias, RealPerson),
     person_at(RealPerson, Place),
     i_am_at(Place),
-    write('Możesz zapytać '), write(RealPerson), write(' o:'),
+    write('Możesz zapytać '), write(PersonAlias), write(' o:'),
     nl,
     fail.
 
@@ -328,7 +327,7 @@ ask(PersonAlias, Subject) :-
     resolve_real_person(PersonAlias, RealPerson),
     person_at(RealPerson, Place),
     i_am_at(Place),
-    write(RealPerson), write(' nie wie nic o '), write(Subject),
+    write(PersonAlias), write(' nie wie nic o '), write(Subject),
     nl,
     !.
 
