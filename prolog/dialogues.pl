@@ -167,7 +167,7 @@ conversation_result(urzędniczka77, a38) :-
     write('Obelix (z niedowierzaniem): To już?'), nl,
     write('Asterix: Tak. Chyba naprawdę to mamy.'), nl,
     write('Obelix: Mogę teraz zjeść dzika?'), nl,
-    write('["a38" jest dostępny do wzięcia przez polecenie "take(a38)"]'), nl,
+    write('["a38" jest dostępny do wzięcia przez polecenie "take(a38)."]'), nl,
     !.
 
 conversation_result(urzędniczka77, a38) :-

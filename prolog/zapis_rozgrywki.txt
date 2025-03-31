@@ -11,6 +11,7 @@ Wchodzisz do urzędu. Zapach pergaminu, starych sandałów i beznadziei wita ci�
 Przy drzwiach siedzi sekretarz, który wygląda jakby nigdy nie mrugnął od objęcia stanowiska.
 Sekretarz: "Czego tam?"
 
+
 true.
 
 ?- talk(sekretarz).
@@ -24,9 +25,16 @@ Asterix: Asterix: Co? Nie, chcemy rejestrować okrętu... On chyba jest głuchy
 Sekretarz: CO!?
 true.
 
+?- ask(sekretarz, a38).
+Sekretarz: Zarejestrować okręt tak? Nie, źle was skierowano. Musicie zawrócić do kapitana portu.
+Asterix: Asterix: Co? Nie, chcemy rejestrować okrętu... On chyba jest głuchy
+Sekretarz: CO!?
+true.
+
 ?- shout(sekretarz, a38).
 Krzyczysz do sekretarz: "a38!!"
-Sekretarz: NIE KRZYCZ TUTAJ DOBRZE? CO ZA WYCHOWANIE! NA JOWISZA ZA KOGO WY SIE UWAŻACIE. Poszukajcie okienka nr. 1. Korytarzem w lewo, ostatnie drzwi na prawo.
+Sekretarz: NIE KRZYCZ TUTAJ DOBRZE? CO ZA WYCHOWANIE! NA JOWISZA ZA KOGO WY SIE UWAŻACIE.
+Sekretarz: Poszukajcie okienka nr. 1. Korytarzem w lewo, ostatnie drzwi na prawo.
 Możesz teraz przejść do okienka nr 1. [nazwa: okienko1]
 true.
 
@@ -52,10 +60,6 @@ true.
 ?- talk(urzędnik).
 Możesz zapytać urzędnik o:
 okienko1
-true.
-
-?- go(okienko1).
-Nie możesz pójść tą drogą...
 true.
 
 ?- ask(urzędnik, okienko1).
@@ -150,6 +154,10 @@ okienko2
 a38
 true.
 
+?- ask(prefekt, okiekno2).
+prefekt nie wie nic o okiekno2
+true.
+
 ?- ask(prefekt, okienko2).
 Prefekt: Numer 2? Zaraz... gdzie ono się teraz znajduje?
 Portier: Gdy widziałem je po raz ostatni, Panie Prefekcie, było na trzecim piętrze, korytarz szósty. Łatwo trafić.
@@ -222,8 +230,62 @@ true.
 
 ?- talk(urzędniczka).
 Możesz zapytać urzędniczka o:
+[Okienko zostało otwarte]
+Drzwi otwierają się. Pojawia się młoda urzędniczka,
+która wita Asteriksa i Obeliksa z uprzejmym uśmiechem.
+Urzędniczka: Dzień dobry! W czym mogę pomóc?
+
+
+true.
+
+?- talk(urzędniczka).
+Możesz zapytać urzędniczka o:
+Drzwi otwierają się. Pojawia się młoda urzędniczka,
+która wita Asteriksa i Obeliksa z uprzejmym uśmiechem.
+Urzędniczka: Dzień dobry! W czym mogę pomóc?
+
+
+true.
+
+?- talk(urzędniczka).
+Możesz zapytać urzędniczka o:
+która wita Asteriksa i Obeliksa z uprzejmym uśmiechem.
+Urzędniczka: Dzień dobry! W czym mogę pomóc?
+
+
+true.
+
+?- talk(urzędniczka).
+Możesz zapytać urzędniczka o:
+Urzędniczka: Dzień dobry! W czym mogę pomóc?
+
+
+true.
+
+?- talk(urzędniczka).
+Możesz zapytać urzędniczka o:
+
+true.
+
+?- talk(urzędniczka).
+Możesz zapytać urzędniczka o:
+true.
+
+?- talk(urzędniczka).
+Możesz zapytać urzędniczka o:
 niebieski_formularz
 true.
+
+?- talk(urzędniczka).
+Możesz zapytać urzędniczka o:
+niebieski_formularz
+true.
+Możesz zapytać urzędniczka o:
+niebieski_formularz
+true.
+niebieski_formularz
+true.
+
 
 ?- ask(urzędniczka, niebieski_formularz).
 Urzędniczka: Niebieski formularz? To nie tutaj. Okienko 35, czwarte piętro.
@@ -255,6 +317,8 @@ true.
 
 ?- take(fioletowy_formularz).
 OK.
+Urzędniczka: Do zobaczenia!
+
 true.
 
 ?- go(okienko42).
@@ -282,6 +346,7 @@ Urzędniczka kładzie przed nimi niebieski formularz. Wydaje się... zwyczajny.
 true.
 
 ?- take(niebieski_formularz).
+OK.
 Urzędniczka: Panowie właśnie wybija 16, więc urząd się zamyka teraz, zapraszamy jutro w celu dokończenia formalności.
 Asterix: Ehhh....
 
@@ -291,7 +356,7 @@ Obelix: Nigdy stąd nie wyjdziemy, Asteriksie... Tu chyba nie ma nadziei, a form
 Asterix: Spokojnie, Obelix. Może coś się jeszcze uda załatwić...
 
 Nagle pojawia się ochrona. Zauważyli hałas i zaczynają podejście do Galów.
-Ochroniarz: Panowie, spokojnie... W urzędzie nie krzyczymy. Macie zakaz wstępu do tego budynku na razie.
+Ochroniarz: Panowie, spokojnie... W urzędzie nie krzyczymy.
 Bez zbędnych słów wyprowadzają Asteriksa i Obeliksa na zewnątrz.
 Asterix i Obelix stoją teraz przed urzędowym budynkiem, nie wiedząc, co zrobić dalej.
 Ochroniarz: A tak w ogóle, jaki był powód tej awantury?
@@ -299,6 +364,7 @@ Obelix: Eee... formularze. Znowu formularze... Cały ten urząd to jedno wielkie
 Asterix: Spokojnie, Obelix. Wiesz, jak to bywa... biurokracja...
 Ochroniarz: Biurokracja, mówicie... No cóż, w takim razie życzę powodzenia, panowie. W urzędzie wszystko ma swój czas... a wasz czas skończył się na dziś.
 [Możesz rozejrzeć się poleceniem "look."]
+
 true.
 
 ?- take(niebieski_formularz).
@@ -308,12 +374,120 @@ true.
 ?- look.
 Asterix i Obelix stoją przed zamkniętym urzędem. Obelix siedzi na schodach i patrzy w niebo, mamrocząc coś o dziczyźnie.
 Asterix tylko wzdycha i wyciąga z sakiewki bilet powrotny do wioski.
-Asterix: "Wiesz co, Obeliksie? Może lepiej pokonać Rzym siłą. To przynajmniej jest prostsze."
-Obelix: "I bez schodów..."
-
-Gra dobiegła końca. [Wpisz komendę halt., aby zakończyć]
+Asterix: Wiesz co, Obeliksie? Może lepiej pokonać Rzym siłą. To przynajmniej jest prostsze.
+Obelix: I bez schodów...
+[Możesz poczekać na ponowne otwarcie urzędu poleceniem "wait."]
+[Możesz wrócić do wioski poleceniem "go(wioska)."]
 
 
 true.
 
-?-
+?- wait.
+Asterix i Obelix postanawiają nie tracić więcej nerwów.
+Udają się do pobliskiego baru "Pod Rzymską Pieczęcią", gdzie jedzą kolację i popijają galijskim cydrem.
+Wieczór mija na wspominkach, narzekaniu i... kolejnym dzbanie cydru.
+Obelix: No! To się nazywa urządzenie się.
+Następnego ranka wychodzą z baru i patrzą na wschodzące słońce.
+Asterix: Wygląda na to, że urząd znowu otwarty...
+[Możesz teraz wrócić do urzędu poleceniem "go(urząd)."]
+true.
+
+?- go(urząd).
+Wchodzisz do urzędu. Zapach pergaminu, starych sandałów i beznadziei wita cię jak stary znajomy.
+Przy drzwiach siedzi sekretarz, który wygląda jakby nigdy nie mrugnął od objęcia stanowiska.
+Sekretarz: "Czego tam?"
+
+
+true.
+
+?- talk(sekretarz).
+Możesz zapytać sekretarz o:
+a38
+true.
+
+?- ask(sekretarz, a38).
+Sekretarz: Zarejestrować okręt tak? Nie, źle was skierowano. Musicie zawrócić do kapitana portu.
+Asterix: Asterix: Co? Nie, chcemy rejestrować okrętu... On chyba jest głuchy
+Sekretarz: CO!?
+true.
+
+?- shout(sekretarz, a38).
+Krzyczysz do sekretarz: "a38!!"
+Sekretarz: NIE KRZYCZ TUTAJ DOBRZE? CO ZA WYCHOWANIE! NA JOWISZA ZA KOGO WY SIE UWAŻACIE.
+Sekretarz: Aaaa, to wy z tymi formularzami...
+Sekretarz: No dobrze. Skoro macie i niebieski, i fioletowy...
+Sekretarz: Udajcie się do okienka 77. Piętro 2, korytarz L, wejście K. Ale cicho!
+[Nowa lokacja odblokowana: "okienko77"]
+true.
+
+?- go(okienko77).
+Po niezliczonych schodach, korytarzach i nieporozumieniach, Asterix i Obelix stają w końcu przed legendarnym okienkiem 77.
+Drzwi są lekko uchylone, jakby czekały właśnie na nich.
+W środku panuje niespodziewany spokój. Za biurkiem siedzi starsza pani urzędniczka, z twarzą wyrażającą absolutny spokój i... zrozumienie?
+
+
+true.
+
+?- talk(urzędniczka).
+Możesz zapytać urzędniczka o:
+a38
+true.
+
+?- ask(urzędniczka, a38).
+Urzędniczka: A38? Oczywiście, moi drodzy. Macie formularze?
+Asterix i Obelix bez słowa podają niebieski i fioletowy pergamin.
+Urzędniczka przybija pieczątkę z godłem Cesarstwa, owija wszystko w czerwoną wstążkę i kładzie A38 na biurku.
+Urzędniczka: Gratuluję.
+Obelix (z niedowierzaniem): To już?
+Asterix: Tak. Chyba naprawdę to mamy.
+Obelix: Mogę teraz zjeść dzika?
+["a38" jest dostępny do wzięcia przez polecenie "take(a38)."]
+true.
+
+?- take(a38).
+OK.Obelix: Mogę teraz zjeść dzika?
+Asterix: Nie, Obelixie. Teraz pora pójść do kwestora i oddać mu to przeklęte zaświadczenie.
+[Możesz wrócić do kwestora poleceniem "go(gabinet_kwestora)."]
+
+true.
+
+?- take(a38).
+Już to trzymasz!
+true.
+
+?- drop(a38).
+OK.
+true.
+
+?- take(a38).
+OK.Obelix: Mogę teraz zjeść dzika?
+Asterix: Nie, Obelixie. Teraz pora pójść do kwestora i oddać mu to przeklęte zaświadczenie.
+[Możesz wrócić do kwestora poleceniem "go(gabinet_kwestora)."]
+
+true.
+
+?- go(gabinet_kwestora).
+Gabinet kwestora pachnie papirusami i świeżo zmieloną kawą.
+Kwestor siedzi za wielkim biurkiem i unosi wzrok, gdy wchodzą Asterix i Obelix.
+Kwestor: Wróciliście. Udało się zdobyć A38?
+Asterix: Tak jest!
+Kwestor: Jeśli rzeczywiście go macie, pokażcie mi ten dokument.
+[Możesz go położyć na biurku poleceniem "drop"]
+
+true.
+
+?- drop(a38).
+OK.Asterix kładzie dokument A38 na biurku przed kwestorem.
+Kwestor bierze formularz, przygląda się mu uważnie, po czym kiwa z uznaniem głową.
+Kwestor: Imponujące. Niewielu przeszło tę ścieżkę bez rozlewu krwi. Gratulacje, Galowie.
+Kwestor: Gotowi na kolejne zadanie?
+Asterix: Jeśli nie wymaga odwiedzin w żadnym urzędzie... to chyba tak.
+Obelix: Zdecydowanie tak.
+
+[Zaświadczenie A38 dostarczone. Jedna z prób zakończona]
+
+Gra dobiegła końca. [Wpisz komendę halt., aby zakończyć]
+
+true.
+
+?- halt.

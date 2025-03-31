@@ -1,6 +1,5 @@
 
-
-i_am_at(przed_urzędem).
+i_am_at(urząd).
 person_at(sekretarz, urząd).
 person_at(urzędnik, dziwne_biuro).
 person_at(urzędniczka, parter).
@@ -29,5 +28,4 @@ connection(portiernia, trzecie_piętro).
 connection(trzecie_piętro, okienko8).
 connection(okienko8_po_otwarciu, okienko35).
 connection(okienko35, okienko42).
-
 connection(przed_urzędem, wioska). % wioska jest terminalną lokacją, zakończenie nr. 1

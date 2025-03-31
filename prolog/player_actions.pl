@@ -27,7 +27,7 @@ after_take(niebieski_formularz) :-
     write('Obelix: Nigdy stąd nie wyjdziemy, Asteriksie... Tu chyba nie ma nadziei, a formularz za formularzem...'), nl,
     write('Asterix: Spokojnie, Obelix. Może coś się jeszcze uda załatwić...'), nl, nl,
     write('Nagle pojawia się ochrona. Zauważyli hałas i zaczynają podejście do Galów.'), nl,
-    write('Ochroniarz: Panowie, spokojnie... W urzędzie nie krzyczymy. Macie zakaz wstępu do tego budynku na razie.'), nl,
+    write('Ochroniarz: Panowie, spokojnie... W urzędzie nie krzyczymy.'), nl,
     write('Bez zbędnych słów wyprowadzają Asteriksa i Obeliksa na zewnątrz.'), nl,
     write('Asterix i Obelix stoją teraz przed urzędowym budynkiem, nie wiedząc, co zrobić dalej.'), nl,
     write('Ochroniarz: A tak w ogóle, jaki był powód tej awantury?'), nl,
@@ -40,6 +40,7 @@ after_take(niebieski_formularz) :-
     !.
 
 after_take(fioletowy_formularz) :-
+    nl,
     write('Urzędniczka: Do zobaczenia!'), nl,
     !.
 
@@ -81,7 +82,6 @@ after_drop(a38) :-
 
 after_drop(_).
 
-
 /* This rule tells how to move to a given place. */
 
 go(Place) :-
@@ -103,8 +103,7 @@ look :-
         notice_objects_at(Place),
         nl.
 
-/* These rules set up a loop to mention all the objects
-   in your vicinity. */
+/* These rules set up a loop to mention all the objects in your vicinity. */
 
 notice_objects_at(Place) :-
         at(X, Place),
@@ -112,6 +111,3 @@ notice_objects_at(Place) :-
         fail.
 
 notice_objects_at(_).
-
-
-
