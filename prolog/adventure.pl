@@ -7,7 +7,11 @@
 :- discontiguous shout_response/3.
 :- discontiguous shout_result/2.
 
-i_am_at(okienko35).
+/* this is just for testing, delete this later! */
+holding(fioletowy_formularz).
+holding(niebieski_formularz).
+
+i_am_at(przed_urzędem).
 person_at(sekretarz, urząd).
 person_at(urzędnik, dziwne_biuro).
 person_at(urzędniczka, parter).
@@ -18,9 +22,13 @@ person_at(urzędniczka3, trzecie_piętro).
 person_at(urzędniczka4, okienko8_po_otwarciu).
 person_at(urzędniczka4_5, okienko35).
 person_at(urzędniczka5, okienko42).
+person_at(urzędniczka77, okienko77).
+person_at(kwestor, gabinet_kwestora).
 
 connection(urząd, sekretariat).
 connection(urząd, okienko1).
+connection(urząd, okienko77). % przejscie warunkowe prowadzące drugiego zakończenia
+connection(okienko77, gabinet_kwestora). % przejscie warunkowe prowadzące drugiego zakończenia
 connection(okienko1, dziwne_biuro).
 connection(dziwne_biuro, szóste_piętro).
 connection(szóste_piętro, parter).
@@ -31,7 +39,8 @@ connection(trzecie_piętro, okienko8).
 connection(okienko8_po_otwarciu, okienko35).
 connection(okienko35, okienko42).
 
-connection(przed_urzędem, wioska).
+connection(przed_urzędem, wioska). % wioska jest terminalną lokacją
+connection(przed_urzędem, urząd).
 
 /* These rules describe how to pick up an object. */
 
@@ -71,7 +80,18 @@ after_take(niebieski_formularz) :-
     write('Ochroniarz: Biurokracja, mówicie... No cóż, w takim razie życzę powodzenia, panowie. W urzędzie wszystko ma swój czas... a wasz czas skończył się na dziś.'), nl,
     write('[Możesz rozejrzeć się poleceniem "look."]'), nl,
     retract(i_am_at(_)),
-    assert(i_am_at(przed_urzędem)).
+    assert(i_am_at(przed_urzędem)),
+    !.
+
+after_take(fioletowy_formularz) :-
+    write('Urzędniczka: Do zobaczenia!'), nl,
+    !.
+
+after_take(a38) :-
+    write('Obelix: Mogę teraz zjeść dzika?'), nl,
+    write('Asterix: Nie, Obelixie. Teraz pora pójść do kwestora i oddać mu to przeklęte zaświadczenie.'), nl,
+    write('[Możesz wrócić do kwestora poleceniem "go(gabinet_kwestora)."]'), nl,
+    !.
 
 after_take(_).
 
@@ -83,12 +103,27 @@ drop(X) :-
         retract(holding(X)),
         assert(at(X, Place)),
         write('OK.'),
+        after_drop(X),
         !, nl.
 
 drop(_) :-
         write('Nie posiadasz tego przedmiotu...'),
         nl.
 
+after_drop(a38) :-
+    i_am_at(gabinet_kwestora),
+    write('Asterix kładzie dokument A38 na biurku przed kwestorem.'), nl,
+    write('Kwestor bierze formularz, przygląda się mu uważnie, po czym kiwa z uznaniem głową.'), nl,
+    write('Kwestor: Imponujące. Niewielu przeszło tę ścieżkę bez rozlewu krwi. Gratulacje, Galowie.'), nl,
+    write('Kwestor: Gotowi na kolejne zadanie?'), nl,
+    write('Asterix: Jeśli nie wymaga odwiedzin w żadnym urzędzie... to chyba tak.'), nl,
+    write('Obelix: Zdecydowanie tak.'), nl,
+    nl,
+    write('[Zaświadczenie A38 dostarczone. Jedna z prób zakończona]'), nl,
+    finish,
+    !.
+
+after_drop(_).
 
 /* This rule tells how to move in a given direction. */
 
@@ -128,7 +163,7 @@ notice_objects_at(_).
 resolve_real_person(urzędniczka, Real) :-
     i_am_at(Place),
     person_at(Real, Place),
-    member(Real, [urzędniczka, urzędniczka2, urzędniczka3, urzędniczka4, urzędniczka4_5, urzędniczka5]), !.
+    member(Real, [urzędniczka, urzędniczka2, urzędniczka3, urzędniczka4, urzędniczka4_5, urzędniczka5, urzędniczka77]), !.
 
 resolve_real_person(Name, Name).
 
@@ -138,18 +173,26 @@ subject(sekretarz, a38,
     'Sekretarz: Zarejestrować okręt tak? Nie, źle was skierowano. Musicie zawrócić do kapitana portu.').
 
 conversation_result(sekretarz, a38) :-
-    connection(urząd, sekretariat),
     write('Asterix: Asterix: Co? Nie, chcemy rejestrować okrętu... On chyba jest głuchy'), nl,
     write('Sekretarz: CO!?'), nl.
 
 shout_response(sekretarz, a38,
-    'Sekretarz: NIE KRZYCZ TUTAJ DOBRZE? CO ZA WYCHOWANIE! NA JOWISZA ZA KOGO WY SIE UWAŻACIE. Poszukajcie okienka nr. 1. Korytarzem w lewo, ostatnie drzwi na prawo.').
+    'Sekretarz: NIE KRZYCZ TUTAJ DOBRZE? CO ZA WYCHOWANIE! NA JOWISZA ZA KOGO WY SIE UWAŻACIE.').
 
 shout_result(sekretarz, a38) :-
-    connection(urząd, sekretariat),
-    write('Możesz teraz przejść do okienka nr 1. [nazwa: okienko1]'), nl.
+    holding(niebieski_formularz),
+    holding(fioletowy_formularz),
+    write('Sekretarz: Aaaa, to wy z tymi formularzami...'), nl,
+    write('Sekretarz: No dobrze. Skoro macie i niebieski, i fioletowy...'), nl,
+    write('Sekretarz: Udajcie się do okienka 77. Piętro 2, korytarz L, wejście K. Ale cicho!'), nl,
+    write('[Nowa lokacja odblokowana: "okienko77"]'), nl,
+    !.
 
 
+shout_result(sekretarz, a38) :-
+    write('Sekretarz: Poszukajcie okienka nr. 1. Korytarzem w lewo, ostatnie drzwi na prawo.'), nl,
+    write('Możesz teraz przejść do okienka nr 1. [nazwa: okienko1]'), nl,
+    !.
 
 subject(urzędnik, okienko1,
     'Urzędnik: Sprawdźcie plan. Szóste piętro. I proszę zamknąć za sobą drzwi. Co za bezczelność... Proszę dalej, panienko.').
@@ -277,6 +320,39 @@ conversation_result(urzędniczka5, niebieski_formularz) :-
     write('Urzędniczka: Przecież już wam go podałam, leży tu.'), nl.
 
 
+subject(urzędniczka77, a38,
+    'Urzędniczka: A38? Oczywiście, moi drodzy. Macie formularze?').
+
+conversation_result(urzędniczka77, a38) :-
+    holding(niebieski_formularz),
+    holding(fioletowy_formularz),
+    \+ at(a38, okienko77),
+    assert(at(a38, okienko77)),
+    write('Asterix i Obelix bez słowa podają niebieski i fioletowy pergamin.'), nl,
+    write('Urzędniczka przybija pieczątkę z godłem Cesarstwa, owija wszystko w czerwoną wstążkę i kładzie A38 na biurku.'), nl,
+    write('Urzędniczka: Gratuluję.'), nl,
+    write('Obelix (z niedowierzaniem): To już?'), nl,
+    write('Asterix: Tak. Chyba naprawdę to mamy.'), nl,
+    write('Obelix: Mogę teraz zjeść dzika?'), nl,
+    write('["a38" jest dostępny do wzięcia przez polecenie "take(a38)"]'), nl,
+    !.
+
+conversation_result(urzędniczka77, a38) :-
+    at(a38, okienko77),
+    write('Urzędniczka: A38 leży tu na biurku. Proszę zabrać.'), nl,
+    !.
+
+conversation_result(urzędniczka77, a38) :-
+    \+ holding(niebieski_formularz),
+    write('Urzędniczka: Przykro mi, potrzebuję niebieskiego formularza.'), nl,
+    !.
+
+conversation_result(urzędniczka77, a38) :-
+    \+ holding(fioletowy_formularz),
+    write('Urzędniczka: Przykro mi, potrzebuję fioletowego formularza.'), nl,
+    !.
+
+
 /* These rules are for asking a person about some subject */
 
 talk(PersonAlias) :-
@@ -362,6 +438,17 @@ wait :-
     look, !.
 
 wait :-
+    i_am_at(przed_urzędem),
+    write('Asterix i Obelix postanawiają nie tracić więcej nerwów.'), nl,
+    write('Udają się do pobliskiego baru "Pod Rzymską Pieczęcią", gdzie jedzą kolację i popijają galijskim cydrem.'), nl,
+    write('Wieczór mija na wspominkach, narzekaniu i... kolejnym dzbanie cydru.'), nl,
+    write('Obelix: No! To się nazywa urządzenie się.'), nl,
+    write('Następnego ranka wychodzą z baru i patrzą na wschodzące słońce.'), nl,
+    write('Asterix: Wygląda na to, że urząd znowu otwarty...'), nl,
+    write('[Możesz teraz wrócić do urzędu poleceniem "go(urząd)."]'), nl,
+    !.
+
+wait :-
     i_am_at(Place),
     write('Asterix i Obelix siadają gdzieś w kącie w miejscu: '), write(Place), write('.'), nl,
     write('Nie mają nawet na co czekać, ale przynajmniej mogą chwilę odpocząć.'), nl,
@@ -407,10 +494,10 @@ introduction :-
     write('Pokonali dzikie bestie, przechytrzyli hipnotyzera i najedli się u kucharza olimpijskiego.'), nl, nl,
     write('Teraz przygotowują się na kolejne wyzwanie. Tym razem jednak nie czeka ich walka na arenie,'), nl,
     write('lecz coś znacznie gorszego... biurokracja.'), nl, nl,
-    write('Urzędnik: Waszym kolejnym zadaniem będzie zdobycie zaświadczenia A38,'), nl,
+    write('Kwestor: Waszym kolejnym zadaniem będzie zdobycie zaświadczenia A38,'), nl,
     write('które pozwoli wam uczestniczyć w następnej próbie.'), nl,
     write('Asterix: Aaaa, chodzi o zwykłą administracyjną formalność?'), nl,
-    write('Urzędnik: Tak jest, administracyjna, formalność, musicie poprosić o zaświadczenie A38'), nl, nl,
+    write('Kwestor: Tak jest, administracyjna, formalność, musicie poprosić o zaświadczenie A38'), nl, nl,
     write('Asterix i Obelix udają się do urzędu. Wchodzą do budynku...'), nl, nl,
     write('[Wpisz instructions. aby zobaczyć dostępne komendy]'), nl.
 
@@ -438,7 +525,6 @@ describe(okienko1) :-
     write('Wygląda na to, że sekretarz pomylił kierunki. Znowu.'), nl,
     nl,
     write('[Nowa lokacja odblokowana: "dziwne_biuro"]').
-
 
 describe(dziwne_biuro) :-
     write('Za drzwiami nie ma biurka ani okienka, jak można by się spodziewać.'), nl,
@@ -505,12 +591,34 @@ describe(okienko42) :-
 describe(przed_urzędem) :-
     write('Asterix i Obelix stoją przed zamkniętym urzędem. Obelix siedzi na schodach i patrzy w niebo, mamrocząc coś o dziczyźnie.'), nl,
     write('Asterix tylko wzdycha i wyciąga z sakiewki bilet powrotny do wioski.'), nl,
-    write('Asterix: "Wiesz co, Obeliksie? Może lepiej pokonać Rzym siłą. To przynajmniej jest prostsze."'), nl,
-    write('Obelix: "I bez schodów..."'), nl,
+    write('Asterix: Wiesz co, Obeliksie? Może lepiej pokonać Rzym siłą. To przynajmniej jest prostsze.'), nl,
+    write('Obelix: I bez schodów...'), nl,
     write('[Możesz poczekać na ponowne otwarcie urzędu poleceniem "wait."]'), nl,
     write('[Możesz wrócić do wioski poleceniem "go(wioska)."]'), nl.
 
 describe(wioska) :-
     write('Galijska wioska. Spokój, zapach dziczyzny i zero formularzy. Obelix rozsiada się przy ogniu, a Asterix w końcu się uśmiecha.'), nl,
-    write('Obelix: "Wiedziałem, że to był dobry pomysł!"'), nl,
+    write('Obelix: Wiedziałem, że to był dobry pomysł!'), nl,
     finish.
+
+describe(okienko77) :-
+    write('Po niezliczonych schodach, korytarzach i nieporozumieniach, Asterix i Obelix stają w końcu przed legendarnym okienkiem 77.'), nl,
+    write('Drzwi są lekko uchylone, jakby czekały właśnie na nich.'), nl,
+    write('W środku panuje niespodziewany spokój. Za biurkiem siedzi starsza pani urzędniczka, z twarzą wyrażającą absolutny spokój i... zrozumienie?'), nl.
+
+describe(gabinet_kwestora) :-
+    holding(a38),
+    write('Gabinet kwestora pachnie papirusami i świeżo zmieloną kawą.'), nl,
+    write('Kwestor siedzi za wielkim biurkiem i unosi wzrok, gdy wchodzą Asterix i Obelix.'), nl,
+    write('Kwestor: Wróciliście. Udało się zdobyć A38?'), nl,
+    write('Asterix: Tak jest!'), nl,
+    write('Kwestor: Jeśli rzeczywiście go macie, pokażcie mi ten dokument.'), nl,
+    write('[Możesz go położyć na biurku poleceniem "drop"]'), nl.
+
+describe(gabinet_kwestora) :-
+    write('Gabinet kwestora pachnie papirusami i świeżo zmieloną kawą.'), nl,
+    write('Kwestor siedzi za wielkim biurkiem i unosi wzrok, gdy wchodzą Asterix i Obelix.'), nl,
+    write('Kwestor: Wróciliście. Ale gdzie A38?'), nl,
+    write('Asterix: Hmm... Jeszcze nie dotarliśmy do samego końca.'), nl,
+    write('Kwestor: Cóż, nie poddawajcie się. Biurokracja nie zna litości.'), nl,
+    write('[Musisz najpierw zdobyć A38, by zakończyć zadanie.]'), nl.
