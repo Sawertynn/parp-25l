@@ -100,7 +100,8 @@ describe(gabinet_kwestora) :-
     write('Kwestor: Wróciliście. Udało się zdobyć A38?'), nl,
     write('Asterix: Tak jest!'), nl,
     write('Kwestor: Jeśli rzeczywiście go macie, pokażcie mi ten dokument.'), nl,
-    write('[Możesz go położyć na biurku poleceniem "drop"]'), nl.
+    write('[Możesz go położyć na biurku poleceniem "drop"]'), nl,
+    !.
 
 describe(gabinet_kwestora) :-
     write('Gabinet kwestora pachnie papirusami i świeżo zmieloną kawą.'), nl,

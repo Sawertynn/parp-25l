@@ -6,11 +6,29 @@ Please run ?- license. for legal details.
 For online help and background, visit https://www.swi-prolog.org
 For built-in help, use ?- help(Topic). or ?- apropos(Word).
 
+?- instructions.
+
+Używaj standardowej składni Prologa do wpisywania poleceń.
+Dostępne polecenia:
+start.               -- rozpocznij grę.
+go(Miejsce).         -- przejdź do wskazanego miejsca.
+look.                -- rozejrzyj się dookoła.
+take(Przedmiot).     -- podnieś przedmiot.
+drop(Przedmiot).     -- upuść przedmiot.
+talk(Postać).        -- zobacz, o co możesz zapytać daną postać.
+ask(Postać, Temat).  -- zapytaj postać o dany temat.
+shout(Postać, Temat).-- krzyknij coś na dany temat.
+notice_objects_at(Miejsce). -- pokaż, co znajduje się w danym miejscu.
+instructions.        -- pokaż tę pomoc jeszcze raz.
+wait.                -- zaczekaj chwilę.
+halt.                -- zakończ grę.
+
+true.
+
 ?- look.
 Wchodzisz do urzędu. Zapach pergaminu, starych sandałów i beznadziei wita cię jak stary znajomy.
 Przy drzwiach siedzi sekretarz, który wygląda jakby nigdy nie mrugnął od objęcia stanowiska.
 Sekretarz: "Czego tam?"
-
 
 true.
 
@@ -424,7 +442,6 @@ true.
 Po niezliczonych schodach, korytarzach i nieporozumieniach, Asterix i Obelix stają w końcu przed legendarnym okienkiem 77.
 Drzwi są lekko uchylone, jakby czekały właśnie na nich.
 W środku panuje niespodziewany spokój. Za biurkiem siedzi starsza pani urzędniczka, z twarzą wyrażającą absolutny spokój i... zrozumienie?
-
 
 true.
 
