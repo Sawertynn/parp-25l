@@ -7,7 +7,7 @@
 :- discontiguous shout_response/3.
 :- discontiguous shout_result/2.
 
-i_am_at(urząd).
+i_am_at(okienko35).
 person_at(sekretarz, urząd).
 person_at(urzędnik, dziwne_biuro).
 person_at(urzędniczka, parter).
@@ -31,32 +31,7 @@ connection(trzecie_piętro, okienko8).
 connection(okienko8_po_otwarciu, okienko35).
 connection(okienko35, okienko42).
 
-/* Special pick rule that indicates that the game is nearly ending */
-
-take(niebieski_formularz) :-
-    i_am_at(Place),
-    at(niebieski_formularz, Place),
-    retract(at(niebieski_formularz, Place)),
-    assert(holding(niebieski_formularz)),
-    write('Urzędniczka: Panowie właśnie wybija 16, więc urząd się zamyka teraz, zapraszamy jutro w celu dokończenia formalności.'), nl,
-    write('Asterix: Ehhh....'), nl, nl,
-    write('Asterix i Obelix błąkają się po urzędzie bez końca. Formularz prowadzi do formularza, ten do kolejnego - i tak w nieskończoność.'), nl,
-    write('W końcu Obelix nie wytrzymuje. Zaczyna chodzić w kółko, wymachując rękami, krzycząc i z każdym krokiem rośnie jego frustracja.'), nl,
-    write('Obelix: Nigdy stąd nie wyjdziemy, Asteriksie... Tu chyba nie ma nadziei, a formularz za formularzem...'), nl,
-    write('Asterix: Spokojnie, Obelix. Może coś się jeszcze uda załatwić...'), nl,
-    nl,
-    write('Nagle pojawia się ochrona. Zauważyli hałas i zaczynają podejście do Galów.'), nl,
-    write('Ochroniarz: Panowie, spokojnie... W urzędzie nie krzyczymy. Macie zakaz wstępu do tego budynku na razie.'), nl,
-    write('Bez zbędnych słów wyprowadzają Asteriksa i Obeliksa na zewnątrz.'), nl,
-    write('Asterix i Obelix stoją teraz przed urzędowym budynkiem, nie wiedząc, co zrobić dalej.'), nl,
-    write('Ochroniarz: A tak w ogóle, jaki był powód tej awantury?'), nl,
-    write('Obelix: Eee... formularze. Znowu formularze... Cały ten urząd to jedno wielkie zamieszanie!'), nl,
-    write('Asterix: Spokojnie, Obelix. Wiesz, jak to bywa... biurokracja...'), nl,
-    write('Ochroniarz: Biurokracja, mówicie... No cóż, w takim razie życzę powodzenia, panowie. W urzędzie wszystko ma swój czas... a wasz czas skończył się na dziś.'), nl,
-    write('[Możesz rozejrzeć się poleceniem "look."]'), nl,
-    retract(i_am_at(Place)),
-    assert(i_am_at(przed_urzędem)),
-    !.
+connection(przed_urzędem, wioska).
 
 /* These rules describe how to pick up an object. */
 
@@ -71,12 +46,34 @@ take(X) :-
         retract(at(X, Place)),
         assert(holding(X)),
         write('OK.'),
+        after_take(X),
         !, nl.
 
 take(_) :-
         write('Przedmiot nie jest w zasięgu twojego wzroku...'),
         nl.
 
+after_take(niebieski_formularz) :-
+    nl,
+    write('Urzędniczka: Panowie właśnie wybija 16, więc urząd się zamyka teraz, zapraszamy jutro w celu dokończenia formalności.'), nl,
+    write('Asterix: Ehhh....'), nl, nl,
+    write('Asterix i Obelix błąkają się po urzędzie bez końca. Formularz prowadzi do formularza, ten do kolejnego - i tak w nieskończoność.'), nl,
+    write('W końcu Obelix nie wytrzymuje. Zaczyna chodzić w kółko, wymachując rękami, krzycząc i z każdym krokiem rośnie jego frustracja.'), nl,
+    write('Obelix: Nigdy stąd nie wyjdziemy, Asteriksie... Tu chyba nie ma nadziei, a formularz za formularzem...'), nl,
+    write('Asterix: Spokojnie, Obelix. Może coś się jeszcze uda załatwić...'), nl, nl,
+    write('Nagle pojawia się ochrona. Zauważyli hałas i zaczynają podejście do Galów.'), nl,
+    write('Ochroniarz: Panowie, spokojnie... W urzędzie nie krzyczymy. Macie zakaz wstępu do tego budynku na razie.'), nl,
+    write('Bez zbędnych słów wyprowadzają Asteriksa i Obeliksa na zewnątrz.'), nl,
+    write('Asterix i Obelix stoją teraz przed urzędowym budynkiem, nie wiedząc, co zrobić dalej.'), nl,
+    write('Ochroniarz: A tak w ogóle, jaki był powód tej awantury?'), nl,
+    write('Obelix: Eee... formularze. Znowu formularze... Cały ten urząd to jedno wielkie zamieszanie!'), nl,
+    write('Asterix: Spokojnie, Obelix. Wiesz, jak to bywa... biurokracja...'), nl,
+    write('Ochroniarz: Biurokracja, mówicie... No cóż, w takim razie życzę powodzenia, panowie. W urzędzie wszystko ma swój czas... a wasz czas skończył się na dziś.'), nl,
+    write('[Możesz rozejrzeć się poleceniem "look."]'), nl,
+    retract(i_am_at(_)),
+    assert(i_am_at(przed_urzędem)).
+
+after_take(_).
 
 /* These rules describe how to put down an object. */
 
@@ -243,6 +240,11 @@ conversation_result(urzędniczka4, niebieski_formularz) :-
 subject(urzędniczka4_5, niebieski_formularz, '').
 
 conversation_result(urzędniczka4_5, niebieski_formularz) :-
+    holding(fioletowy_formularz),
+    write('Urzędniczka: Przecież macie już fioletowy formularz w ręku! Nie wiem nic o niebieskim formularzu. Dajcie mi spokój.'), nl,
+    write('Urzędniczka: Idźcie do okienka 42, bo urząd się zaraz zamknie!'), nl.
+
+conversation_result(urzędniczka4_5, niebieski_formularz) :-
     \+ at(fioletowy_formularz, okienko35),
     assert(at(fioletowy_formularz, okienko35)),
     write('Urzędniczka: Proszę, oto fioletowy formularz. Teraz proszę udać się na piąte piętro, schody K, korytarz W, okienko numer 42.'), nl,
@@ -250,11 +252,6 @@ conversation_result(urzędniczka4_5, niebieski_formularz) :-
     write('Obelix: Cicho, mamy jakiś formularz. Bierz i idziemy.'), nl,
     write('["fioletowy_formularz" jest dostepny do wzięcia przez polecenie "take"]'), nl,
     write('[Nowa lokacja odblokowana: "okienko42"]'), nl.
-
-conversation_result(urzędniczka4_5, niebieski_formularz) :-
-    holding(fioletowy_formularz),  % Jeśli gracz trzyma formularz
-    write('Urzędniczka: Przecież macie już fioletowy formularz w ręku! Nie wiem nic o niebieskim formularzu. Dajcie mi spokój.'), nl,
-    write('Urzędniczka: Idźcie do okienka 42, bo urząd się zaraz zamknie!'), nl.
 
 conversation_result(urzędniczka4_5, niebieski_formularz) :-
     at(fioletowy_formularz, okienko42),  % Jeśli formularz leży na okienku
@@ -510,4 +507,10 @@ describe(przed_urzędem) :-
     write('Asterix tylko wzdycha i wyciąga z sakiewki bilet powrotny do wioski.'), nl,
     write('Asterix: "Wiesz co, Obeliksie? Może lepiej pokonać Rzym siłą. To przynajmniej jest prostsze."'), nl,
     write('Obelix: "I bez schodów..."'), nl,
+    write('[Możesz poczekać na ponowne otwarcie urzędu poleceniem "wait."]'), nl,
+    write('[Możesz wrócić do wioski poleceniem "go(wioska)."]'), nl.
+
+describe(wioska) :-
+    write('Galijska wioska. Spokój, zapach dziczyzny i zero formularzy. Obelix rozsiada się przy ogniu, a Asterix w końcu się uśmiecha.'), nl,
+    write('Obelix: "Wiedziałem, że to był dobry pomysł!"'), nl,
     finish.
