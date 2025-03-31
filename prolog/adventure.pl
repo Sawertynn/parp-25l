@@ -7,11 +7,8 @@
 :- discontiguous shout_response/3.
 :- discontiguous shout_result/2.
 
-/* this is just for testing, delete this later! */
-holding(fioletowy_formularz).
-holding(niebieski_formularz).
 
-i_am_at(przed_urzędem).
+i_am_at(urząd).
 person_at(sekretarz, urząd).
 person_at(urzędnik, dziwne_biuro).
 person_at(urzędniczka, parter).
@@ -27,8 +24,10 @@ person_at(kwestor, gabinet_kwestora).
 
 connection(urząd, sekretariat).
 connection(urząd, okienko1).
-connection(urząd, okienko77). % przejscie warunkowe prowadzące drugiego zakończenia
-connection(okienko77, gabinet_kwestora). % przejscie warunkowe prowadzące drugiego zakończenia
+connection(urząd, okienko77) :-
+    holding(niebieski_formularz),
+    holding(fioletowy_formularz).
+connection(okienko77, gabinet_kwestora). % gabinet kwestora jest terminalną lokacją, zakończenie nr. 2
 connection(okienko1, dziwne_biuro).
 connection(dziwne_biuro, szóste_piętro).
 connection(szóste_piętro, parter).
@@ -39,7 +38,7 @@ connection(trzecie_piętro, okienko8).
 connection(okienko8_po_otwarciu, okienko35).
 connection(okienko35, okienko42).
 
-connection(przed_urzędem, wioska). % wioska jest terminalną lokacją
+connection(przed_urzędem, wioska). % wioska jest terminalną lokacją, zakończenie nr. 1
 connection(przed_urzędem, urząd).
 
 /* These rules describe how to pick up an object. */
