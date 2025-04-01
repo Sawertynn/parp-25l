@@ -59,7 +59,7 @@ drop(X) :-
         i_am_at(Place),
         retract(holding(X)),
         assert(at(X, Place)),
-        write('OK.'),
+        write('OK.'), nl,
         after_drop(X),
         !, nl.
 

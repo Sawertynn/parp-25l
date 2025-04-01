@@ -79,6 +79,14 @@ shout(PersonAlias, Subject) :-
     shout_result(RealPerson, Subject),
     !.
 
+shout(PersonAlias, _) :-
+    resolve_real_person(PersonAlias, RealPerson),
+    person_at(RealPerson, Place),
+    i_am_at(Place),
+    write('Krzyczysz do '), write(PersonAlias), nl,
+    write(PersonAlias), write(': "Co za maniery! Nie będę z panem tak rozmawiał!"'), nl,
+    !.
+
 shout(_, _) :-
     write('Krzyczysz w pustkę... Nikt cię nie słyszy.'), nl.
 
