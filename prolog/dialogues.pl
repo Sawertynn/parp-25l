@@ -3,6 +3,8 @@
 :- discontiguous shout_response/3.
 :- discontiguous shout_result/2.
 
+/* SEKRETARZ */
+
 subject(sekretarz, a38,
     'Sekretarz: Zarejestrować okręt tak? Nie, źle was skierowano. Musicie zawrócić do kapitana portu.').
 
@@ -27,6 +29,8 @@ shout_result(sekretarz, a38) :-
     write('Możesz teraz przejść do okienka nr 1. [nazwa: okienko1]'), nl,
     !.
 
+/* URZĘDNIK */
+
 subject(urzędnik, okienko1,
     'Urzędnik: Sprawdźcie plan. Szóste piętro. I proszę zamknąć za sobą drzwi. Co za bezczelność... Proszę dalej, panienko.').
 
@@ -34,6 +38,7 @@ conversation_result(urzędnik, okienko1) :-
     write('Asterix: Chyba kogoś przeszkodziliśmy...'), nl,
     write('[Nowa lokacja odblokowana: "szóste_piętro"]'), nl.
 
+/* URZĘDNICZKA */
 
 subject(urzędniczka, a38,
     'Urzędniczka: A38? Nie, źle was poinformowano. Musicie iść do okienka nr. 2.').
@@ -43,6 +48,8 @@ conversation_result(urzędniczka, a38) :-
     write('[Nowa lokacja odblokowana: "okienko2"]'), nl.
 
 
+/* URZĘDNICZKA2 */
+
 subject(urzędniczka2, a38,
     'Urzędniczka: Numer 2? Hm... Nie, to nie tutaj. Tutaj jest okienko numer. 4. To obok to numer 8. Jeśli bardzo państwu zależy, proszę popytać portiera.').
 
@@ -51,6 +58,7 @@ conversation_result(urzędniczka2, a38) :-
     write('Obelix: A może by tak rzucić to wszystko i wrócić do dzików?'), nl,
     write('[Nowa lokacja odblokowana: "portiernia"]'), nl.
 
+/* PORTIER */
 
 subject(portier, okienko2, 'Portier: CO?').
 
@@ -64,13 +72,13 @@ shout_result(portier, okienko2) :-
     write('Prefekt: No, no… tylko spokojnie. Tutaj przecież ludzie pracują.'), nl,
     write('Prefekt: Przyjacielu, powiedz — czego potrzebujesz?'), nl.
 
+/* PREFEKT */
 
 subject(prefekt, okienko2,
     'Prefekt: Numer 2? Zaraz... gdzie ono się teraz znajduje?\nPortier: Gdy widziałem je po raz ostatni, Panie Prefekcie, było na trzecim piętrze, korytarz szósty. Łatwo trafić.\nPrefekt: No, widzicie Panowie? Teraz już wszystko jasne. I po co to całe zamieszanie?').
 
 conversation_result(prefekt, okienko2) :-
     write('[Nowa lokacja odblokowana: "trzecie_piętro"]'), nl.
-
 
 subject(prefekt, a38, 'Asterix: Prefekt, czy wie Pan, gdzie znajduje się formularz A38?').
 
@@ -81,6 +89,7 @@ conversation_result(prefekt, a38) :-
     write('Asterix: Zaczynam się zastanawiać, czy ten formularz w ogóle istnieje.'), nl,
     write('Obelix: A ja zaczynam podejrzewać, że nie zdążymy dziś na obiad...'), nl.
 
+/* URZĘDNICZKA3 */
 
 subject(urzędniczka3, a38,
     'Urzędniczka: Nie widzi Pan, że jestem zajęta? Proszę poczekać.').
@@ -88,13 +97,11 @@ subject(urzędniczka3, a38,
 conversation_result(urzędniczka3, a38) :-
     write('Urzędniczki wracają do rozmowy o znajomej i jej domniemanych aferach, zupełnie ignorując obecność Galów.'), nl.
 
-
 shout_response(urzędniczka3, a38,
     'Urzędniczka: Och, ci ludzie są naprawdę niemożliwi. Krzyczeć w biurze? To przecież skandal!\nZaświadczenie A38, tak? A czy ma pan niebieski formularz?').
 
 shout_result(urzędniczka3, a38) :-
     write('[Możesz teraz zapytać o "niebieski_formularz"]'), nl.
-
 
 subject(urzędniczka3, niebieski_formularz,
     'Urzędniczka: W celu uzyskania zaświadczenia A38 należy najpierw przedstawić niebieski formularz. Proszę udać się do okienka nr 8.').
@@ -103,15 +110,23 @@ conversation_result(urzędniczka3, niebieski_formularz) :-
     write('Asterix: Och... Przecież już tam byliśmy...'), nl,
     write('[Nowa lokacja odblokowana: "okienko8"]'), nl.
 
+/* URZĘDNICZKA4 */
 
-subject(urzędniczka4, niebieski_formularz,
-    'Urzędniczka: Niebieski formularz? To nie tutaj. Okienko 35, czwarte piętro.').
+subject(urzędniczka4, niebieski_formularz, '').
 
 conversation_result(urzędniczka4, niebieski_formularz) :-
+    \+ opened(okienko8),
+    write('Nikogo nie ma po drugiej stronie. Może urzędniczka wróci po przerwie?'), nl,
+    write('[Możesz skorzystać z polecenia "wait"]'), nl.
+
+conversation_result(urzędniczka4, niebieski_formularz) :-
+    opened(okienko8),
+    write('Urzędniczka: Niebieski formularz? To nie tutaj. Okienko 35, czwarte piętro.'), nl,
     write('Asterix: Ciekawe, ile w tym budynku jest pięter...'), nl,
     write('Obelix: Mam nadzieję, że na czwartym piętrze mają coś do jedzenia.'), nl,
     write('[Nowa lokacja odblokowana: "okienko35"]'), nl.
 
+/* URZĘDNICZKA4_5 */
 
 subject(urzędniczka4_5, niebieski_formularz, '').
 
@@ -134,6 +149,7 @@ conversation_result(urzędniczka4_5, niebieski_formularz) :-
     write('Urzędniczka: Przecież ten formularz już tu leży! Macie go w zasięgu ręki. Dajcie mi spokój z tym niebieskim formularzem.'), nl,
     write('Urzędniczka: Idźcie do okienka 42, bo urząd zaraz zamyka drzwi!'), nl.
 
+/* URZĘDNICZKA5 */
 
 subject(urzędniczka5, niebieski_formularz, '').
 
@@ -152,6 +168,7 @@ conversation_result(urzędniczka5, niebieski_formularz) :-
     at(niebieski_formularz, okienko42),
     write('Urzędniczka: Przecież już wam go podałam, leży tu.'), nl.
 
+/* URZĘDNICZKA7 */
 
 subject(urzędniczka77, a38,
     'Urzędniczka: A38? Oczywiście, moi drodzy. Macie formularze?').

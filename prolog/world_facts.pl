@@ -7,7 +7,7 @@ person_at(urzędniczka2, okienko2).
 person_at(portier, portiernia).
 person_at(prefekt, portiernia).
 person_at(urzędniczka3, trzecie_piętro).
-person_at(urzędniczka4, okienko8_po_otwarciu).
+person_at(urzędniczka4, okienko8) :- opened(okienko8).
 person_at(urzędniczka4_5, okienko35).
 person_at(urzędniczka5, okienko42).
 person_at(urzędniczka77, okienko77).
@@ -26,6 +26,7 @@ connection(parter, okienko2).
 connection(okienko2, portiernia).
 connection(portiernia, trzecie_piętro).
 connection(trzecie_piętro, okienko8).
-connection(okienko8_po_otwarciu, okienko35).
+connection(okienko8, okienko35) :- opened(okienko8).
 connection(okienko35, okienko42).
+connection(przed_urzędem, urząd) :- opened(urząd).
 connection(przed_urzędem, wioska). % wioska jest terminalną lokacją, zakończenie nr. 1

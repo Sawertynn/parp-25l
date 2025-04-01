@@ -6,6 +6,29 @@ Please run ?- license. for legal details.
 For online help and background, visit https://www.swi-prolog.org
 For built-in help, use ?- help(Topic). or ?- apropos(Word).
 
+?- start.
+
+W ramach legendarnych 12 prac, które mają udowodnić wyższość Galów nad Rzymianami,
+Asterix i Obelix mają już za sobą sześć zadań.
+Pokonali dzikie bestie, przechytrzyli hipnotyzera i najedli się u kucharza olimpijskiego.
+
+Teraz przygotowują się na kolejne wyzwanie. Tym razem jednak nie czeka ich walka na arenie,
+lecz coś znacznie gorszego... biurokracja.
+
+Kwestor: Waszym kolejnym zadaniem będzie zdobycie zaświadczenia A38,
+które pozwoli wam uczestniczyć w następnej próbie.
+Asterix: Aaaa, chodzi o zwykłą administracyjną formalność?
+Kwestor: Tak jest, administracyjna, formalność, musicie poprosić o zaświadczenie A38
+
+Asterix i Obelix udają się do urzędu. Wchodzą do budynku...
+
+[Wpisz instructions. aby zobaczyć dostępne komendy]
+Wchodzisz do urzędu. Zapach pergaminu, starych sandałów i beznadziei wita cię jak stary znajomy.
+Przy drzwiach siedzi sekretarz, który wygląda jakby nigdy nie mrugnął od objęcia stanowiska.
+Sekretarz: "Czego tam?"
+
+true.
+
 ?- instructions.
 
 Używaj standardowej składni Prologa do wpisywania poleceń.

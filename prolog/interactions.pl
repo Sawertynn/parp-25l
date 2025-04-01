@@ -86,19 +86,19 @@ shout(_, _) :-
 
 wait :-
     i_am_at(okienko8),
+    assert(opened(okienko8)),
     write('Asterix i Obelix siadają na ławce pod okienkiem nr 8 i cierpliwie czekają.'), nl,
     write('Czas mija. Przerwa trwa dalej. Kartka na drzwiach wisi nieporuszona.'), nl,
     write('Obelix: Myślisz, że te "15 minut" to w rzymskich godzinach?'), nl,
     write('Asterix: Może mają inny kalendarz...'), nl,
     write('[Okienko zostało otwarte]'), nl,
-    retract(i_am_at(okienko8)),
-    assert(i_am_at(okienko8_po_otwarciu)),
-    look, !.
+    look,
+    !.
 
 wait :-
     i_am_at(przed_urzędem),
-    \+ connection(przed_urzędem, urząd),
-    assert(connection(przed_urzędem, urząd)), % odblokowujemy przejscie
+    \+ opened(urząd),
+    assert(opened(urząd)),
     write('Asterix i Obelix postanawiają nie tracić więcej nerwów.'), nl,
     write('Udają się do pobliskiego baru "Pod Rzymską Pieczęcią", gdzie jedzą kolację i popijają galijskim cydrem.'), nl,
     write('Wieczór mija na wspominkach, narzekaniu i... kolejnym dzbanie cydru.'), nl,

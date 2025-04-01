@@ -4,7 +4,6 @@ describe(urząd) :-
     write('Przy drzwiach siedzi sekretarz, który wygląda jakby nigdy nie mrugnął od objęcia stanowiska.'), nl,
     write('Sekretarz: "Czego tam?"'), nl.
 
-
 describe(okienko1) :-
     write('Asterix i Obelix idą korytarzem, zgodnie z instrukcjami sekretarza: w lewo, ostatnie drzwi na prawo.'), nl,
     write('Problem w tym, że... po prawej stronie nie ma żadnych drzwi.'), nl,
@@ -53,14 +52,16 @@ describe(trzecie_piętro) :-
     write('Jedna z nich rzuca krótkie spojrzenie w ich stronę, po czym wraca do plotek.'), nl.
 
 describe(okienko8) :-
-    write('Okienko numer 8 jest zamknięte.'), nl,
-    write('Na drzwiach wisi krzywo przyklejona kartka: "Przerwa obiadowa - wracam za 15 minut".'), nl,
-    write('Niestety, nie wiadomo od kiedy...'), nl.
-
-describe(okienko8_po_otwarciu) :-
-    write('Drzwi otwierają się. Pojawia się młoda urzędniczka,'), nl,
+    opened(okienko8),
+    write('Drzwi są otwarte. Pojawia się młoda urzędniczka,'), nl,
     write('która wita Asteriksa i Obeliksa z uprzejmym uśmiechem.'), nl,
-    write('Urzędniczka: Dzień dobry! W czym mogę pomóc?'), nl.
+    write('Urzędniczka: "Dzień dobry! W czym mogę pomóc?"'), nl.
+
+describe(okienko8) :-
+    \+ opened(okienko8),
+    write('Okienko numer 8 jest zamknięte.'), nl,
+    write('Na drzwiach wisi krzywo przyklejona kartka: "Przerwa obiadowa – wracam za 15 minut".'), nl,
+    write('Niestety, nie wiadomo od kiedy...'), nl.
 
 describe(okienko35) :-
     write('Przy okienku siedzi urzędniczka z kamienną twarzą, przeglądająca stos pergaminów.'), nl,
