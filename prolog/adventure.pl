@@ -10,6 +10,8 @@
 :- ['player_actions.pl'].
 :- ['interactions.pl'].
 
+:- initialization(start).
+
 
 finish :-
         nl,
@@ -18,5 +20,6 @@ finish :-
         halt.
 
 start :-
-        introduction,
-        look.
+        introduction, nl,
+        write('[Wpisz instructions. aby zobaczyć dostępne komendy]'), nl,
+		write('[Wpisz look. aby dowiedzieć się gdzie jesteś]'), nl, nl.

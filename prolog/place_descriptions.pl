@@ -2,7 +2,9 @@
 describe(urząd) :-
     write('Wchodzisz do urzędu. Zapach pergaminu, starych sandałów i beznadziei wita cię jak stary znajomy.'), nl,
     write('Przy drzwiach siedzi sekretarz, który wygląda jakby nigdy nie mrugnął od objęcia stanowiska.'), nl,
-    write('Sekretarz: "Czego tam?"'), nl.
+    write('Sekretarz: "Czego tam?"'), nl,
+	write('[Możesz spawdzić o czym możesz z nim porozmawiać - talk(sekretarz). ]'), nl,
+	write('[Jeśli znasz już temat, zapytaj - ask(sekretarz, hej). ]'), nl.
 
 describe(okienko1) :-
     write('Asterix i Obelix idą korytarzem, zgodnie z instrukcjami sekretarza: w lewo, ostatnie drzwi na prawo.'), nl,

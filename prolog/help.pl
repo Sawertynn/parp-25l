@@ -11,7 +11,6 @@ instructions :-
     write('talk(Postać).        -- zobacz, o co możesz zapytać daną postać.'), nl,
     write('ask(Postać, Temat).  -- zapytaj postać o dany temat.'), nl,
     write('shout(Postać, Temat).-- krzyknij coś na dany temat.'), nl,
-    write('notice_objects_at(Miejsce). -- pokaż, co znajduje się w danym miejscu.'), nl,
     write('instructions.        -- pokaż tę pomoc jeszcze raz.'), nl,
     write('wait.                -- zaczekaj chwilę.'), nl,
     write('halt.                -- zakończ grę.'), nl,
@@ -29,5 +28,4 @@ introduction :-
     write('które pozwoli wam uczestniczyć w następnej próbie.'), nl,
     write('Asterix: Aaaa, chodzi o zwykłą administracyjną formalność?'), nl,
     write('Kwestor: Tak jest, administracyjna, formalność, musicie poprosić o zaświadczenie A38'), nl, nl,
-    write('Asterix i Obelix udają się do urzędu. Wchodzą do budynku...'), nl, nl,
-    write('[Wpisz instructions. aby zobaczyć dostępne komendy]'), nl.
+    write('Asterix i Obelix udają się do urzędu. Wchodzą do budynku...'), nl.

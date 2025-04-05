@@ -10,7 +10,9 @@ subject(sekretarz, a38,
 
 conversation_result(sekretarz, a38) :-
     write('Asterix: Asterix: Co? Nie, chcemy rejestrować okrętu... On chyba jest głuchy'), nl,
-    write('Sekretarz: CO!?'), nl.
+    write('Sekretarz: CO!?'), nl,
+	write('Obelix: Może trzeba na niego krzyknąć?'), nl,
+	write('[Możesz wykrzyczeć coś do kogoś - shout(sekretarz, a38). '], nl.
 
 shout_response(sekretarz, a38,
     'Sekretarz: NIE KRZYCZ TUTAJ DOBRZE? CO ZA WYCHOWANIE! NA JOWISZA ZA KOGO WY SIE UWAŻACIE.').
@@ -26,7 +28,8 @@ shout_result(sekretarz, a38) :-
 
 shout_result(sekretarz, a38) :-
     write('Sekretarz: Poszukajcie okienka nr. 1. Korytarzem w lewo, ostatnie drzwi na prawo.'), nl,
-    write('Możesz teraz przejść do okienka nr 1. [nazwa: okienko1]'), nl,
+    write('[Nowa lokacja odblokowana: "okienko1"]'), nl,
+	write('[Możesz udać się do innego miejsca - go(okienko1). '], nl,
     !.
 
 /* URZĘDNIK */
