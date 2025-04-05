@@ -13,10 +13,22 @@ person_at(urzędniczka5, okienko42).
 person_at(urzędniczka77, okienko77).
 person_at(kwestor, gabinet_kwestora).
 
+current_time(8 * 60). % czas jest w minutach jest zaczynamy o godzinie 8:00 urząd jest otwarty do 16:00;
+opened(urząd).
+
 connection(urząd, okienko1).
-connection(urząd, gabinet_kwestora).
+connection(urząd, dziwne_biuro).
+connection(urząd, szóste_piętro).
+connection(urząd, parter).
+connection(urząd, okienko2).
+connection(urząd, portiernia).
+connection(urząd, trzecie_piętro).
+connection(urząd, okienko8).
+connection(urząd, okienko35).
+connection(urząd, okienko42).
 connection(urząd, okienko77).
-connection(okienko77, gabinet_kwestora). % gabinet kwestora jest terminalną lokacją, zakończenie nr. 2
+connection(urząd, gabinet_kwestora).
+
 connection(okienko1, dziwne_biuro).
 connection(dziwne_biuro, szóste_piętro).
 connection(szóste_piętro, parter).
@@ -24,10 +36,14 @@ connection(parter, okienko2).
 connection(okienko2, portiernia).
 connection(portiernia, trzecie_piętro).
 connection(trzecie_piętro, okienko8).
-connection(okienko8, okienko35) :- opened(okienko8).
+connection(okienko8, okienko35).
 connection(okienko35, okienko42).
+
 connection(przed_urzędem, urząd) :- opened(urząd).
 connection(przed_urzędem, wioska). % wioska jest terminalną lokacją, zakończenie nr. 1
 
+connection(okienko77, gabinet_kwestora). % gabinet kwestora jest terminalną lokacją, zakończenie nr. 2
+
 connection(gabinet_kwestora, urząd).
 connection(okienko77, urząd).
+connection(okienko42, urząd).

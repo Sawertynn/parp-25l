@@ -155,6 +155,13 @@ Obelix: I bez schodów...
 
 [exit]
 
+## Rozgryka w skrócie
+urząd -> okienko1 -> dziwne_bióro -> szóste_piętro -> parter -> okienko2 -> portiernia -> trzecie_piętro -> okienko8 ->[wait]-> okienko35(fioletowy_formularz) -> okienko42(niebieski_formularz) -> okienko77(a38) -> gabinet_kwestora [End2]
+
+Gdy doja 16:00 nasi bohaterowie muszą opuścić urząd i znajdą się przed urzędem
+przed_urzędem -> wioska [End1]
+przed_urzędem ->[wait] -> urząd
+
 ## Bibliografia
 
 - https://www.youtube.com/watch?v=ioktQPgoKNE

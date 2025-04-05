@@ -1,6 +1,6 @@
 /* Game A38 */
 
-:- dynamic i_am_at/1, at/2, holding/1, opened/1.
+:- dynamic i_am_at/1, at/2, holding/1, opened/1, current_time/1.
 :- retractall(at(_, _)), retractall(i_am_at(_)), retractall(opened(_)).
 
 :- ['place_descriptions.pl'].

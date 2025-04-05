@@ -18,30 +18,16 @@ take(_) :-
         write('Przedmiot nie jest w zasięgu twojego wzroku...'),
         nl.
 
-after_take(niebieski_formularz) :-
-    nl,
-    write('Urzędniczka: Panowie właśnie wybija 16, więc urząd się zamyka teraz, zapraszamy jutro w celu dokończenia formalności.'), nl,
-    write('Asterix: Ehhh....'), nl, nl,
-    write('Asterix i Obelix błąkają się po urzędzie bez końca. Formularz prowadzi do formularza, ten do kolejnego - i tak w nieskończoność.'), nl,
-    write('W końcu Obelix nie wytrzymuje. Zaczyna chodzić w kółko, wymachując rękami, krzycząc i z każdym krokiem rośnie jego frustracja.'), nl,
-    write('Obelix: Nigdy stąd nie wyjdziemy, Asteriksie... Tu chyba nie ma nadziei, a formularz za formularzem...'), nl,
-    write('Asterix: Spokojnie, Obelix. Może coś się jeszcze uda załatwić...'), nl, nl,
-    write('Nagle pojawia się ochrona. Zauważyli hałas i zaczynają podejście do Galów.'), nl,
-    write('Ochroniarz: Panowie, spokojnie... W urzędzie nie krzyczymy.'), nl,
-    write('Bez zbędnych słów wyprowadzają Asteriksa i Obeliksa na zewnątrz.'), nl,
-    write('Asterix i Obelix stoją teraz przed urzędowym budynkiem, nie wiedząc, co zrobić dalej.'), nl,
-    write('Ochroniarz: A tak w ogóle, jaki był powód tej awantury?'), nl,
-    write('Obelix: Eee... formularze. Znowu formularze... Cały ten urząd to jedno wielkie zamieszanie!'), nl,
-    write('Asterix: Spokojnie, Obelix. Wiesz, jak to bywa... biurokracja...'), nl,
-    write('Ochroniarz: Biurokracja, mówicie... No cóż, w takim razie życzę powodzenia, panowie. W urzędzie wszystko ma swój czas... a wasz czas skończył się na dziś.'), nl,
-    write('[Możesz rozejrzeć się poleceniem "look."]'), nl,
-    retract(i_am_at(_)),
-    assert(i_am_at(przed_urzędem)),
-    !.
-
 after_take(fioletowy_formularz) :-
     nl,
     write('Urzędniczka: Do zobaczenia!'), nl,
+    !.
+	
+after_take(niebieski_formularz) :-
+    nl,
+	write('Asterix: Dziękuję.'), nl,
+	write('Obelix: I o ten świstek tylko zachodu??'), nl,
+	write('Asterix: Obelixie na teutadesa, grzeczniej bo sprawisz pani przykrość i będziemy musieli tu siedzieć jeszcze dłużej...'), nl,
     !.
 
 after_take(a38) :-
@@ -89,10 +75,12 @@ go(Place) :-
         connection(Here, Place),
         retract(i_am_at(Here)),
         assert(i_am_at(Place)),
+		use_time(60),
         !, look.
 
 go(_) :-
-        write('Nie możesz pójść tą drogą...').
+        write('Bohaterowie nie mogą pujść tą drogą, ale i tak krążą i szukają.'),
+		use_time(30).
 
 /* This rule tells how to look about you. */
 

@@ -5,14 +5,25 @@
 
 /* SEKRETARZ */
 
-subject(sekretarz, a38,
-    'Sekretarz: Zarejestrować okręt tak? Nie, źle was skierowano. Musicie zawrócić do kapitana portu.').
+subject(sekretarz, a38, '').
 
 conversation_result(sekretarz, a38) :-
+	current_time(T),
+    T =< 8 * 60,
+	write('Sekretarz: Zarejestrować okręt tak? Nie, źle was skierowano. Musicie zawrócić do kapitana portu.'), nl,
     write('Asterix: Asterix: Co? Nie, chcemy rejestrować okrętu... On chyba jest głuchy'), nl,
     write('Sekretarz: CO!?'), nl,
 	write('Obelix: Może trzeba na niego krzyknąć?'), nl,
-	write('[Możesz wykrzyczeć coś do kogoś - shout(sekretarz, a38). ]'), nl.
+	write('Asterix: To by było niemiłe...'), nl, nl,
+	write('Asterix: Bohaterowie przemyśleli sprawę'), nl,
+	use_time(10),
+	write('[Możesz wykrzyczeć coś do kogoś - shout(sekretarz, a38). ]'), nl, !.
+
+conversation_result(sekretarz, a38) :-
+	write('Sekretarz: Już mówiłem rejestracja okrętu u kapitana portu.'), nl,
+    write('Asterix: Jakiego okrę... aaaaa on jest głuchy'), nl,
+    write('Sekretarz: CO!?'), nl,
+	write('Obelix: Krzyknąć znowu?'), nl, !.
 
 shout_response(sekretarz, a38,
     'Sekretarz: NIE KRZYCZ TUTAJ DOBRZE? CO ZA WYCHOWANIE! NA JOWISZA ZA KOGO WY SIE UWAŻACIE.').
@@ -159,7 +170,7 @@ subject(urzędniczka5, niebieski_formularz, '').
 conversation_result(urzędniczka5, niebieski_formularz) :-
     \+ at(niebieski_formularz, okienko42),
     assert(at(niebieski_formularz, okienko42)),
-    write('Urzędniczka: Aaaa, formularz A38? Oczywiście. To jest ten niebieski. Proszę bardzo — do odbioru.'), nl,
+    write('Urzędniczka: Ten niebieski. Proszę bardzo — do odbioru.'), nl,
     write('Urzędniczka kładzie przed nimi niebieski formularz. Wydaje się... zwyczajny.'), nl,
     write('["niebieski_formularz" jest dostępny do wzięcia przez polecenie "take"]'), nl.
 
@@ -170,6 +181,24 @@ conversation_result(urzędniczka5, niebieski_formularz) :-
 conversation_result(urzędniczka5, niebieski_formularz) :-
     at(niebieski_formularz, okienko42),
     write('Urzędniczka: Przecież już wam go podałam, leży tu.'), nl.
+	
+subject(urzędniczka5, a38, '').
+
+conversation_result(urzędniczka5, a38) :-
+    holding(niebieski_formularz),
+    write('Urzędniczka: a38... Ostatno coś się zmieniło i nie jestem pewna.'), nl,
+	write('Urzędniczka: Może w sekretariacie będą wiedzieć'), nl,
+	write('[Możesz wrócić do sekretariatu poleceniem "go(urząd)." ]'), nl,
+    !.
+	
+conversation_result(urzędniczka5, a38) :-
+    at(niebieski_formularz, okienko42),
+    write('Urzędniczka: Weźcie najpier niebieski formularz.'), nl.
+
+conversation_result(urzędniczka5, a38) :-
+    write('Urzędniczka: Najpier będziecie potrzebować niebieskiego formularza'), nl,
+    !.
+
 
 /* URZĘDNICZKA7 */
 
