@@ -13,11 +13,9 @@ person_at(urzędniczka5, okienko42).
 person_at(urzędniczka77, okienko77).
 person_at(kwestor, gabinet_kwestora).
 
-connection(urząd, sekretariat).
 connection(urząd, okienko1).
-connection(urząd, okienko77) :-
-    holding(niebieski_formularz),
-    holding(fioletowy_formularz).
+connection(urząd, gabinet_kwestora).
+connection(urząd, okienko77).
 connection(okienko77, gabinet_kwestora). % gabinet kwestora jest terminalną lokacją, zakończenie nr. 2
 connection(okienko1, dziwne_biuro).
 connection(dziwne_biuro, szóste_piętro).
@@ -30,3 +28,6 @@ connection(okienko8, okienko35) :- opened(okienko8).
 connection(okienko35, okienko42).
 connection(przed_urzędem, urząd) :- opened(urząd).
 connection(przed_urzędem, wioska). % wioska jest terminalną lokacją, zakończenie nr. 1
+
+connection(gabinet_kwestora, urząd).
+connection(okienko77, urząd).

@@ -112,4 +112,5 @@ describe(gabinet_kwestora) :-
     write('Kwestor: Wróciliście. Ale gdzie A38?'), nl,
     write('Asterix: Hmm... Jeszcze nie dotarliśmy do samego końca.'), nl,
     write('Kwestor: Cóż, nie poddawajcie się. Biurokracja nie zna litości.'), nl,
-    write('[Musisz najpierw zdobyć A38, by zakończyć zadanie.]'), nl.
+    write('[Musisz najpierw zdobyć A38, by zakończyć zadanie.]'), nl,
+	write('[Możesz wrócić do sekretariatu poleceniem "go(urząd)." ]'), nl.
