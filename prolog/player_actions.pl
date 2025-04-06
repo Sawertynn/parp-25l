@@ -79,7 +79,7 @@ go(Place) :-
         !, look.
 
 go(_) :-
-        write('Bohaterowie nie mogą pujść tą drogą, ale i tak krążą i szukają.'),
+        write('Bohaterowie nie mogą pójść tą drogą, ale i tak krążą i szukają.'),
 		use_time(30).
 
 /* This rule tells how to look about you. */

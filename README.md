@@ -8,152 +8,463 @@
 - Haskell: 11. maja
 - Smalltalk: 1. czerwca
 
-## Fabuła (zarys - będzie dostosowana w trakcie implementacji)
+## Fabuła
 
-[start rozgrywki]
-
-W ramach legendarnych 12 prac, które mają udowodnić wyższość Galów nad Rzymianami, Asterix i Obelix mają już za sobą sześć zadań.
+[start]
+W ramach legendarnych 12 prac, które mają udowodnić wyższość Galów nad Rzymianami,
+Asterix i Obelix mają już za sobą sześć zadań.
 Pokonali dzikie bestie, przechytrzyli hipnotyzera i najedli się u kucharza olimpijskiego.
 
-Teraz przygotowują się na kolejne wyzwanie. Tym razem jednak nie czeka ich walka na arenie, lecz coś znacznie gorszego... biurokracja.
+Teraz przygotowują się na kolejne wyzwanie. Tym razem jednak nie czeka ich walka na arenie,
+lecz coś znacznie gorszego... biurokracja.
 
-Urzędnik: Waszym kolejnym zadaniem będzie zdobycie zaświadczenia A38, które pozwali wam uczestniczyć w następnej próbie.
+Kwestor: Waszym kolejnym zadaniem będzie zdobycie zaświadczenia A38,
+które pozwoli wam uczestniczyć w następnej próbie.
 Asterix: Aaaa, chodzi o zwykłą administracyjną formalność?
-Urzędnik: Tak jest, administracyjna, formalność, musicie poprosić o zaświadczenie A38
+Kwestor: Tak jest, administracyjna, formalność, musicie poprosić o zaświadczenie A38
 
-Asterix i Obelix udają się do urzędu. Wchodzą do budynku i stają naprzeciw sekretarza, który wita ich:
-Sekretarz: Czego tam?
+Asterix i Obelix udają się do urzędu. Wchodzą do budynku...
 
-[zapytaj sekretarza o A38]
+[look]
+Wchodzisz do urzędu. Zapach pergaminu, starych sandałów i beznadziei wita cię jak stary znajomy. Przy drzwiach siedzi sekretarz, który wygląda jakby nigdy nie mrugnął od objęcia stanowiska.
+Sekretarz: "Czego tam?"
 
+[talk(sekretarz)]
+(Możesz zapytać sekretarz o: a38)
+
+[ask(sekretarz, a38)]
 Sekretarz: Zarejestrować okręt tak? Nie, źle was skierowano. Musicie zawrócić do kapitana portu.
-Asterix: Co? Nie chcemy rejestrować okrętu...
+Asterix: Co? Nie, nie chcemy rejestrować okrętu... On chyba jest głuchy.
+Sekretarz: CO!?
+Obelix: Może trzeba na niego krzyknąć?
+Asterix: To by było niemiłe...
 
-[zapytaj ponownie sekretarza o A38]
+(Możesz wykrzyczeć coś do kogoś - shout(sekretarz, a38])
 
-Sekretarz: Port! Znajdziecie go w mieście. Jest nad brzegem morza.
-Asterix: Nie, chcemy zaświadczenie A38.
-Sekretarz CO?
+[shout(sekretarz, a38)]
+Krzyczysz do sekretarz: "a38!!"
+Sekretarz: NIE KRZYCZ TUTAJ DOBRZE? CO ZA WYCHOWANIE! NA JOWISZA ZA KOGO WY SIE UWAŻACIE.
+Sekretarz: Poszukajcie okienka nr. 1. Korytarzem w lewo, ostatnie drzwi na prawo.
 
-[krzyknij A38]
+(Nowa lokacja odblokowana: okienko1)
 
-Sekretarz: NIE KRZYCZ TUTAJ DOBRZE? CO ZA WYCHOWANIE! NA JOWISZA ZA KOGO WY SIE UWAŻACIE. Poszukajcie okienka nr. 1. Korytarzem w lewo, ostatnie drzwi na prawo.
+[go(okienko1)]
+(Trwało to 60 minut, jest około godziny 9)
 
-[idź do okienka nr. 1]
+Asterix i Obelix idą korytarzem... Problem w tym, że po prawej stronie nie ma żadnych drzwi.
+Po lewej stronie — jedyne wejście, lekko uchylone.
 
-Asterix i Obelix podążają za wskazówkami sekretarza, lecz szybko orientują się, że po prawej stronie... nie ma żadnych drzwi. W zamian dostrzegają inne, po lewej. Wygląda na to, że sekretarz się pomylił.
+(Nowa lokacja odblokowana: dziwne_biuro)
 
-[idź do drzwi po lewej stronie]
+[go(dziwne_biuro)]
+(Trwało to 60 minut, jest około godziny 10)
 
-W pomieszczeniu oczom Asteriksa i Obeliksa ukazuje się niecodzienny widok - urzędnik na huśtawce, w towarzystwie młodej damy. Po chwili dostrzega nieproszonych gości i zastyga w pół ruchu.
-Urzędnik: KTO WAM POZWOLIŁ WEJŚĆ DO MEGO BIURA?
+Za drzwiami nie ma biurka ani okienka. Zamiast tego – huśtawka. Urzędnik w togach i dama w tunice przerywają rozmowę.
 
-[zapytaj o okienko nr. 1]
+Urzędnik (oburzony): "KTO WAM POZWOLIŁ WEJŚĆ DO MEGO BIURA?!"
 
-Urzędnik: Sprawdźcie plan. Szóste piętro. I proszę zamknąć za sobą drzwi. Co za bezczelność...
-Proszę dalej, panienko.
+[talk(urzędnik)]
+(Możesz zapytać urzędnik o: okienko1)
 
-[idź na szóste piętro]
+[ask(urzędnik, okienko1)]
+Urzędnik: Sprawdźcie plan. Szóste piętro. I proszę zamknąć za sobą drzwi.
 
-Asterix i Obelix ledwo żywi wchodzą na szóste piętro, dysząc ciężko po niezliczonych schodach. Po drodze robią kilka przerw – na oddech, narzekanie i rozważenie powrotu do wioski.
-W końcu ich oczom ukazuje się plan budynku... i wtedy uświadamiają sobie coś niepokojącego.
-Okienko nr 1 znajduje się na parterze. Po prawej stronie od wejścia.
+(Nowa lokacja odblokowana: szóste_piętro)
 
-[idź na parter]
+[go(szóste_piętro)]
+(Trwało to 60 minut, jest około godziny 11)
 
-Dochodzą do okienkaa nr. 1 i zastają tam panią urzędniczkę.
-Urzędniczka: W jakiej sprawie?
+Asterix i Obelix odkrywają, że okienko nr 1 znajduje się… na parterze, po prawej stronie od wejścia.
 
-[zapytaj urzędniczkę o A38]
+(Nowy lokacja odblokowana: parter)
 
+[go(parter)]
+(Trwało to 60 minut, jest około godziny 12)
+
+Za skromnym okienkiem nr 1 urzędniczka pyta: "W jakiej sprawie?"
+
+[talk(urzędniczka)]
+(Możesz zapytać urzędniczka o: a38)
+
+[ask(urzędniczka, a38)]
 Urzędniczka: A38? Nie, źle was poinformowano. Musicie iść do okienka nr. 2.
 
-[zapytaj o okienko nr. 2]
+(Nowa lokacja odblokowana: okienko2)
 
-Urzędniczka: Numer 2? Hm... Nie, to nie tutaj. To obok to numer 8. Jeśli bardzo państwu zależy, proszę popytać portiera.
+[go(okienko2)]
+(Trwało to 60 minut, jest około godziny 13)
 
-[idź do portiera]
+Numer przekreślony, naklejony „4”. Obok „8”. Urzędniczka rzuca złowrogie spojrzenie.
 
-Asterix i Obelix docierają do portiera - starego i wyraźnie zmęczonego mężczyzny, który z trudem otwiera oczy i wygląda, jakby ledwo dostrzegał otoczenie.
+[talk(urzędniczka)]
+(Możesz zapytać urzędniczka o: a38)
 
-[zapytaj portiera o okienko nr. 2]
+[ask(urzędniczka, a38)]
+Urzędniczka: Numer 2? Nie, to nie tutaj. Tu jest 4. Obok 8. Proszę zapytać portiera.
 
+(Nowa lokacja odblokowana: portiernia)
+
+[go(portiernia)]
+(Trwało to 60 minut, jest około godziny 14)
+
+(Portier wygląda jakby nie pamiętał, po co tu jest.)
+
+[talk(portier)]
+(Możesz zapytać portier o: okienko2)
+
+[ask(portier, okienko2)]
 Portier: CO?
+Asterix: Chyba potrzebujemy formularza A39, żeby nas ktoś usłyszał.
 
-[krzyknij okienko nr. 2]
+[shout(portier, okienko2)]
+Portier: COOOOO?!?!?!
+Prefekt (przypadkiem słyszy): No, no… spokojnie. Tutaj ludzie pracują.
 
-Rozmowę przypadkiem usłyszał przechodzący obok prefekt.
+(Prefekt oferuje pomoc.)
 
-Prefekt: No, no... tylko spokojnie. Tutaj przecież ludzie pracują. Przyjacielu, powiedz — czego potrzebujesz?
+[talk(prefekt)]
+(Możesz zapytać prefekt o: okienko2, a38)
 
-[zapytaj prefekta o okienko nr. 2]
+[ask(prefekt, okienko2)]
+Prefekt: Numer 2? Portier widział je ostatnio na trzecim piętrze, korytarz szósty.
 
-Prefekt: Numer 2? Zaraz... gdzie ono się teraz znajduje?
-Portier: Gdy widziałem je po raz ostatni, Panie Prefekcie, było na trzecim piętrze, korytarz szósty. Łatwo trafić.
-Prefekt: No, widzicie Panowie? Teraz już wszystko jasne. I po co te nerwy?
+(Nowa lokacja odblokowana: trzecie_piętro)
 
-[idź do okienka nr. 2]
+[ask(prefekt, a38)]
+Prefekt: A38? O nie, znowu ten koszmar... Proszę pytać na trzecim piętrze.
 
-Asterix i Obelix docierają do okienka numer 2, ale urzędniczki nawet nie zwracają na nich uwagi. Pochłonięte są rozmową o znajomej, która kupiła fenicki materiał, żeby się wyróżnić - mimo że nie stać jej nawet na własnego niewolnika.
+[go(trzecie_piętro)]
+(Trwało to 60 minut, jest około godziny 15)
 
-[zapytaj urzędniczkę o A38]
+(Na końcu korytarza — okienko nr 2. Urzędniczki plotkują.)
 
-Urzędniczka: Nie widzi Pan, że jestem zajęta? Proszę poczekać.
+[talk(urzędniczka)]
+(Możesz zapytać urzędniczka o: a38, niebieski_formularz)
 
-Urzędniczki wracają do rozmowy o znajomej i jej domniemanych aferach, zupełnie ignorując obecność Galów.
+[ask(urzędniczka, a38)]
+Urzędniczka: Nie widzi pan, że jestem zajęta? Proszę poczekać.
 
-[krzyknij A38]
+[shout(urzędniczka, a38)]
+Urzędniczka: Skandal! Zaświadczenie A38? A czy ma pan niebieski formularz?
 
-Urzędniczka: Och, ci ludzie są naprawdę niemożliwi. Krzyczeć w biurze? To przecież skandal!
-Zaświadczenie A38, tak? A czy ma pan niebieski formularz?
+[ask(urzędniczka, niebieski_formularz)]
+Urzędniczka: Proszę udać się do okienka nr 8.
 
-[zapytaj o niebieski formularz]
+(Nowa lokacja odblokowana: okienko8)
 
-Urzędniczka: W celu uzyskania zaświadczenia A38 należy najpierw przedstawić niebieski formularz. Proszę udać się do okienka nr 8.
-Asterix: Och... Przecież już tam byłem...
-
-[idź do okienka nr 8]
-
-Okienko numer 8 jest zamknięte. Na drzwiach wisi krzywo przyklejona kartka: „Przerwa obiadowa - wracam za 15 minut”. Niestety, nie wiadomo od kiedy.
-
-[zaczekaj na otwarcie okienka]
-
-Drzwi otwierają się. Pojawia się młoda urzędniczka, która wita Asteriksa i Obeliksa z uprzejmym uśmiechem.
-
-Urzędniczka: W czym mogę pomóc?
-
-[zapytaj Irene o niebieski forumularz]
-
-Irena: Proszę o to fioletowy formularz. Teraz proszę udać się na piąte piętro, schody K, korytarz W, okienko numer 42.'
-
-Przy okienku siedzi urzędniczka z plakietką „Zosia”. Asterix i Obelix podchodzą ostrożnie - już wiedzą, że każde okienko może być pułapką.
-
-[zapytaj Zosię o niebieski formularz]
-
-Zosia: Proszę, oto niebieski formularz. Urząd zaraz się zamyka, ale możecie spróbować udać się do okienka nr. 78, schody K, korytarz W.
-
-...
+[go(okienko8)]
+(Mineła 16:00, urząd się zamyka)
+Asterix: Ehhh....
 
 Asterix i Obelix błąkają się po urzędzie bez końca. Formularz prowadzi do formularza, ten do kolejnego - i tak w nieskończoność.
-W końcu Obelix nie wytrzymuje. Zaczyna biegać, krzyczeć, podskakiwać - chłop po prostu zwariował. Jego masa robi swoje - tu przewrócił donicę, tam urwał framugę, gdzie indziej przestawił szafę razem z urzędnikiem. Nadzieja odeszła.
+W końcu Obelix nie wytrzymuje. Zaczyna chodzić w kółko, wymachując rękami, krzycząc i z każdym krokiem rośnie jego frustracja.
+Obelix: Nigdy stąd nie wyjdziemy, Asteriksie... Tu chyba nie ma nadziei, a formularz za formularzem...
+Asterix: Spokojnie, Obelix. Może coś się jeszcze uda załatwić...
 
-Obelix: Nigdy stąd nie wyjdziemy, Asteriksie... Tu nawet magiczny napój by nie pomógł.
+Nagle pojawia się ochrona. Zauważyli hałas i zaczynają podejście do Galów.
+Ochroniarz: Panowie, spokojnie... W urzędzie nie krzyczymy.
+Bez zbędnych słów wyprowadzają Asteriksa i Obeliksa na zewnątrz.
+Asterix i Obelix stoją teraz przed urzędowym budynkiem, nie wiedząc, co zrobić dalej.
+Ochroniarz: A tak w ogóle, jaki był powód tej awantury?
+Obelix: Eee... formularze. Znowu formularze... Cały ten urząd to jedno wielkie zamieszanie!
+Asterix: Spokojnie, Obelix. Wiesz, jak to bywa... biurokracja...
+Ochroniarz: Biurokracja, mówicie... No cóż, w takim razie życzę powodzenia, panowie. W urzędzie wszystko ma swój czas... a wasz czas skończył się na dziś.
 
-Po chwili pojawia się ochrona. Bez zbędnych słów wyprowadza Galów z budynku.
-
-Ochroniarz: Rysopis już został sporządzony. Macie zakaz wstępu do tego urzędu. Czy macie coś na swoją obronę?
-
-[zapytaj o A38]
-
-Drzwi zamykają się z hukiem. Cisza.
-
-Asterix i Obelix stoją przed zamkniętym urzędem. Obelix siedzi na schodach i patrzy w niebo, mamrocząc coś o dziczyźnie. Asterix tylko wzdycha i wyciąga z sakiewki bilet powrotny do wioski.
-
-Asterix:Wiesz co, Obeliksie? Może lepiej pokonać Rzym siłą. To przynajmniej jest prostsze.
-
+[look]
+Asterix i Obelix stoją przed zamkniętym urzędem. Obelix siedzi na schodach i patrzy w niebo, mamrocząc coś o dziczyźnie.
+Asterix tylko wzdycha i wyciąga z sakiewki bilet powrotny do wioski.
+Asterix: Wiesz co, Obeliksie? Może lepiej pokonać Rzym siłą. To przynajmniej jest prostsze.
 Obelix: I bez schodów...
 
-[exit]
+[wait]
+Asterix i Obelix postanawiają nie tracić więcej nerwów.
+Udają się do pobliskiego baru "Pod Rzymską Pieczęcią", gdzie jedzą kolację i popijają galijskim cydrem.
+Wieczór mija na wspominkach, narzekaniu i... kolejnym dzbanie cydru.
+Obelix: No! To się nazywa urządzenie się.
+Następnego ranka wychodzą z baru i patrzą na wschodzące słońce.
+Asterix: Wybiła 8:00, wygląda na to, że urząd znowu otwarty...
+
+[go(urząd)]
+(Trwało to 60 minut, jest około godiny 9)
+
+Wchodzisz do urzędu. Zapach pergaminu, starych sandałów i beznadziei wita cię jak stary znajomy.
+Przy drzwiach siedzi sekretarz, który wygląda jakby nigdy nie mrugnął od objęcia stanowiska.
+Sekretarz: "Czego tam?"
+
+[go(okienko8)]
+(Trwało to 60 minut, jest około godiny 10)
+
+Okienko numer 8 jest zamknięte.
+Na drzwiach wisi krzywo przyklejona kartka: "Przerwa obiadowa – wracam za 15 minut".
+Niestety, nie wiadomo od kiedy...
+
+
+[wait]
+Asterix i Obelix siadają na ławce pod okienkiem nr 8 i cierpliwie czekają.
+Czas mija. Przerwa trwa dalej. Kartka na drzwiach wisi nieporuszona.
+Obelix: Myślisz, że te "15 minut" to w rzymskich godzinach?
+Asterix: Może mają inny kalendarz...
+
+(Trwało to 45 minut, jest około godiny 10)
+
+Drzwi są otwarte. Pojawia się młoda urzędniczka,
+która wita Asteriksa i Obeliksa z uprzejmym uśmiechem.
+Urzędniczka: "Dzień dobry! W czym mogę pomóc?"
+
+[ask(urzędniczka, niebieski_formularz)]
+Urzędniczka: Niebieski formularz? To nie tutaj. Okienko 35, czwarte piętro.
+Asterix: Ciekawe, ile w tym budynku jest pięter...
+Obelix: Mam nadzieję, że na czwartym piętrze mają coś do jedzenia.
+(Nowa lokacja odblokowana: "okienko35")
+
+[go(okienko35)]
+(Trwało to 60 minut, jest około godiny 11)
+
+Przy okienku siedzi urzędniczka z kamienną twarzą, przeglądająca stos pergaminów.
+Asterix i Obelix podchodzą ostrożnie — już wiedzą, że każde okienko może być pułapką.
+
+[talk(urzędniczka)]
+Możesz zapytać urzędniczka o:
+niebieski_formularz
+
+[ask(urzędniczka, niebieski_formularz)]
+
+Urzędniczka: Proszę, oto fioletowy formularz. Teraz proszę udać się na piąte piętro, schody K, korytarz W, okienko numer 42.
+Asterix: Fioletowy? Przecież pytaliśmy o niebieski...
+Obelix: Cicho, mamy jakiś formularz. Bierz i idziemy.
+(Nowa lokacja odblokowana: "okienko42")
+
+[take(fioletowy_formularz)]
+Urzędniczka: Do zobaczenia!
+
+[go(okienko42)]
+(Trwało to 60 minut, jest około godiny 12)
+
+Na końcu korytarza widać jasne światło...
+...a nad okienkiem widnieje tabliczka: "NIEBIESKIE FORMULARZE DO A38".
+Asterix i Obelix przystają, przecierają oczy i nie dowierzają.
+Obelix: Asterix... czy my... czy my dobrze widzimy?
+Asterix: Tak, Obelixie. To chyba naprawdę ono.
+Za okienkiem siedzi uprzejma pani, która spogląda na nich z uśmiechem.
+Urzędniczka: "Dzień dobry! W czym mogę pomóc?"
+
+[ask(urzędniczka, niebieski_formularz)]
+
+Urzędniczka: Aaaa, formularz A38? Oczywiście. To jest ten niebieski. Proszę bardzo — do odbioru.
+Urzędniczka kładzie przed nimi niebieski formularz. Wydaje się... zwyczajny.
+
+[take(niebieski_formularz)]]
+Asterix: Dziękuję.
+Obelix: I o ten świstek tylko zachodu??
+Asterix: Obelixie na teutadesa, grzeczniej bo sprawisz pani przykrość i będziemy musieli tu siedzieć jeszcze dłużej...
+
+[take(niebieski_formularz)]
+Już to trzymasz!
+
+[ask(urzędniczka, a38)]
+
+Urzędniczka: a38... Ostatno coś się zmieniło i nie jestem pewna.
+Urzędniczka: Może w sekretariacie będą wiedzieć
+
+[go(urząd)]
+(Trwało to 60 minut, jest około godiny 13)
+
+Wchodzisz do urzędu. Zapach pergaminu, starych sandałów i beznadziei wita cię jak stary znajomy.
+Przy drzwiach siedzi sekretarz, który wygląda jakby nigdy nie mrugnął od objęcia stanowiska.
+Sekretarz: "Czego tam?"
+
+[ask(sekretarz, a38)]
+Sekretarz: Już mówiłem rejestracja okrętu u kapitana portu.
+Asterix: Jakiego okrę... aaaaa on jest głuchy
+Sekretarz: CO!?
+Obelix: Krzyknąć znowu?
+
+[shout(sekretarz, a38)]
+Krzyczysz do sekretarz: "a38!!"
+Sekretarz: NIE KRZYCZ TUTAJ DOBRZE? CO ZA WYCHOWANIE! NA JOWISZA ZA KOGO WY SIE UWAŻACIE.
+Sekretarz: Aaaa, to wy z tymi formularzami...
+Sekretarz: No dobrze. Skoro macie i niebieski, i fioletowy...
+Sekretarz: Udajcie się do okienka 77. Piętro 2, korytarz L, wejście K. Ale cicho!
+(Nowa lokacja odblokowana: "okienko77")
+
+[go(okienko77)]
+Po niezliczonych schodach, korytarzach i nieporozumieniach, Asterix i Obelix stają w końcu przed legendarnym okienkiem 77.
+Drzwi są lekko uchylone, jakby czekały właśnie na nich.
+
+[go(okienko8)]
+(Mineła 16:00, urząd się zamyka)
+Asterix: Ehhh....
+
+Asterix i Obelix błąkają się po urzędzie bez końca. Formularz prowadzi do formularza, ten do kolejnego - i tak w nieskończoność.
+W końcu Obelix nie wytrzymuje. Zaczyna chodzić w kółko, wymachując rękami, krzycząc i z każdym krokiem rośnie jego frustracja.
+Obelix: Nigdy stąd nie wyjdziemy, Asteriksie... Tu chyba nie ma nadziei, a formularz za formularzem...
+Asterix: Spokojnie, Obelix. Może coś się jeszcze uda załatwić...
+
+Nagle pojawia się ochrona. Zauważyli hałas i zaczynają podejście do Galów.
+Ochroniarz: Panowie, spokojnie... W urzędzie nie krzyczymy.
+Bez zbędnych słów wyprowadzają Asteriksa i Obeliksa na zewnątrz.
+Asterix i Obelix stoją teraz przed urzędowym budynkiem, nie wiedząc, co zrobić dalej.
+Ochroniarz: A tak w ogóle, jaki był powód tej awantury?
+Obelix: Eee... formularze. Znowu formularze... Cały ten urząd to jedno wielkie zamieszanie!
+Asterix: Spokojnie, Obelix. Wiesz, jak to bywa... biurokracja...
+Ochroniarz: Biurokracja, mówicie... No cóż, w takim razie życzę powodzenia, panowie. W urzędzie wszystko ma swój czas... a wasz czas skończył się na dziś.
+
+[look]
+Asterix i Obelix stoją przed zamkniętym urzędem. Obelix siedzi na schodach i patrzy w niebo, mamrocząc coś o dziczyźnie.
+Asterix tylko wzdycha i wyciąga z sakiewki bilet powrotny do wioski.
+Asterix: Wiesz co, Obeliksie? Może lepiej pokonać Rzym siłą. To przynajmniej jest prostsze.
+Obelix: I bez schodów...
+(Możesz poczekać na ponowne otwarcie urzędu poleceniem "wait.")
+(Możesz wrócić do wioski poleceniem "go(wioska)]")
+
+[wait]
+Asterix i Obelix postanawiają nie tracić więcej nerwów.
+Udają się do pobliskiego baru "Pod Rzymską Pieczęcią", gdzie jedzą kolację i popijają galijskim cydrem.
+Wieczór mija na wspominkach, narzekaniu i... kolejnym dzbanie cydru.
+Obelix: No! To się nazywa urządzenie się.
+Następnego ranka wychodzą z baru i patrzą na wschodzące słońce.
+Asterix: Wybiła 8:00, wygląda na to, że urząd znowu otwarty...
+(Możesz teraz wrócić do urzędu poleceniem "go(urząd)]")
+
+
+[go(urząd)]
+(Trwało to 60 minut, jest około godiny 9)
+
+Wchodzisz do urzędu. Zapach pergaminu, starych sandałów i beznadziei wita cię jak stary znajomy.
+Przy drzwiach siedzi sekretarz, który wygląda jakby nigdy nie mrugnął od objęcia stanowiska.
+Sekretarz: "Czego tam?"
+
+
+[go(okienko8)]
+(Trwało to 60 minut, jest około godiny 10)
+
+Okienko numer 8 jest zamknięte.
+Na drzwiach wisi krzywo przyklejona kartka: "Przerwa obiadowa – wracam za 15 minut".
+Niestety, nie wiadomo od kiedy...
+
+[wait]
+Asterix i Obelix siadają na ławce pod okienkiem nr 8 i cierpliwie czekają.
+Czas mija. Przerwa trwa dalej. Kartka na drzwiach wisi nieporuszona.
+Obelix: Myślisz, że te "15 minut" to w rzymskich godzinach?
+Asterix: Może mają inny kalendarz...
+
+(Trwało to 45 minut, jest około godiny 10)
+
+(Okienko zostało otwarte)
+Drzwi są otwarte. Pojawia się młoda urzędniczka,
+która wita Asteriksa i Obeliksa z uprzejmym uśmiechem.
+Urzędniczka: "Dzień dobry! W czym mogę pomóc?"
+
+[talk(urzędniczka)]
+Możesz zapytać urzędniczka o:
+niebieski_formularz
+
+
+[ask(urzędniczka, niebieski_formularz)]
+Urzędniczka: Niebieski formularz? To nie tutaj. Okienko 35, czwarte piętro.
+Asterix: Ciekawe, ile w tym budynku jest pięter...
+Obelix: Mam nadzieję, że na czwartym piętrze mają coś do jedzenia.
+(Nowa lokacja odblokowana: "okienko35")
+
+[go(okienko35)]
+(Trwało to 60 minut, jest około godiny 11)
+
+Przy okienku siedzi urzędniczka z kamienną twarzą, przeglądająca stos pergaminów.
+Asterix i Obelix podchodzą ostrożnie — już wiedzą, że każde okienko może być pułapką.
+
+[ask(urzędniczka, niebieski_formularz)]
+
+Urzędniczka: Proszę, oto fioletowy formularz. Teraz proszę udać się na piąte piętro, schody K, korytarz W, okienko numer 42.
+Asterix: Fioletowy? Przecież pytaliśmy o niebieski...
+Obelix: Cicho, mamy jakiś formularz. Bierz i idziemy.
+(Nowa lokacja odblokowana: "okienko42")
+
+[take(fioletowy_formularz)]
+Urzędniczka: Do zobaczenia!
+
+[go(okienko42)]
+(Trwało to 60 minut, jest około godiny 12)
+
+Na końcu korytarza widać jasne światło...
+...a nad okienkiem widnieje tabliczka: "NIEBIESKIE FORMULARZE DO A38".
+Asterix i Obelix przystają, przecierają oczy i nie dowierzają.
+Obelix: Asterix... czy my... czy my dobrze widzimy?
+Asterix: Tak, Obelixie. To chyba naprawdę ono.
+Za okienkiem siedzi uprzejma pani, która spogląda na nich z uśmiechem.
+Urzędniczka: "Dzień dobry! W czym mogę pomóc?"
+
+[ask(urzędniczka, niebieski_formularz)]
+Urzędniczka: Aaaa, formularz A38? Oczywiście. To jest ten niebieski. Proszę bardzo — do odbioru.
+Urzędniczka kładzie przed nimi niebieski formularz. Wydaje się... zwyczajny.
+
+[take(niebieski_formularz)]
+Asterix: Dziękuję.
+Obelix: I o ten świstek tylko zachodu??
+Asterix: Obelixie na teutadesa, grzeczniej bo sprawisz pani przykrość i będziemy musieli tu siedzieć jeszcze dłużej...
+
+[take(niebieski_formularz)]
+Już to trzymasz!
+
+[ask(urzędniczka, a38)]
+Urzędniczka: a38... Ostatno coś się zmieniło i nie jestem pewna.
+Urzędniczka: Może w sekretariacie będą wiedzieć
+
+[go(urząd)]
+(Trwało to 60 minut, jest około godiny 13)
+Wchodzisz do urzędu. Zapach pergaminu, starych sandałów i beznadziei wita cię jak stary znajomy.
+Przy drzwiach siedzi sekretarz, który wygląda jakby nigdy nie mrugnął od objęcia stanowiska.
+Sekretarz: "Czego tam?"
+
+[ask(sekretarz, a38)]
+Sekretarz: Już mówiłem rejestracja okrętu u kapitana portu.
+Asterix: Jakiego okrę... aaaaa on jest głuchy
+Sekretarz: CO!?
+Obelix: Krzyknąć znowu?
+
+[shout(sekretarz, a38)]
+Krzyczysz do sekretarz: "a38!!"
+Sekretarz: NIE KRZYCZ TUTAJ DOBRZE? CO ZA WYCHOWANIE! NA JOWISZA ZA KOGO WY SIE UWAŻACIE.
+Sekretarz: Aaaa, to wy z tymi formularzami...
+Sekretarz: No dobrze. Skoro macie i niebieski, i fioletowy...
+Sekretarz: Udajcie się do okienka 77. Piętro 2, korytarz L, wejście K. Ale cicho!
+(Nowa lokacja odblokowana: "okienko77")
+
+[go(okienko77)]
+Po niezliczonych schodach, korytarzach i nieporozumieniach, Asterix i Obelix stają w końcu przed legendarnym okienkiem 77.
+Drzwi są lekko uchylone, jakby czekały właśnie na nich.
+W środku panuje niespodziewany spokój. Za biurkiem siedzi starsza pani urzędniczka, z twarzą wyrażającą absolutny spokój i... zrozumienie?
+
+[ask(urzędniczka, a38)]
+Urzędniczka: A38? Oczywiście, moi drodzy. Macie formularze?
+Asterix i Obelix bez słowa podają niebieski i fioletowy pergamin.
+Urzędniczka przybija pieczątkę z godłem Cesarstwa, owija wszystko w czerwoną wstążkę i kładzie A38 na biurku.
+Urzędniczka: Gratuluję.
+Obelix (z niedowierzaniem): To już?
+Asterix: Tak. Chyba naprawdę to mamy.
+Obelix: Mogę teraz zjeść dzika?
+
+[take(a38)]
+OK.Obelix: Mogę teraz zjeść dzika?
+Asterix: Nie, Obelixie. Teraz pora pójść do kwestora i oddać mu to przeklęte zaświadczenie.
+
+[go(gabinet_kwestora)]
+Gabinet kwestora pachnie papirusami i świeżo zmieloną kawą.
+Kwestor siedzi za wielkim biurkiem i unosi wzrok, gdy wchodzą Asterix i Obelix.
+Kwestor: Wróciliście. Udało się zdobyć A38?
+Asterix: Tak jest!
+Kwestor: Jeśli rzeczywiście go macie, pokażcie mi ten dokument.
+
+[drop(a38)]
+OK.Asterix kładzie dokument A38 na biurku przed kwestorem.
+Kwestor bierze formularz, przygląda się mu uważnie, po czym kiwa z uznaniem głową.
+Kwestor: Imponujące. Niewielu przeszło tę ścieżkę bez rozlewu krwi. Gratulacje, Galowie.
+Kwestor: Gotowi na kolejne zadanie?
+Asterix: Jeśli nie wymaga odwiedzin w żadnym urzędzie... to chyba tak.
+Obelix: Zdecydowanie tak.
+
+[Zaświadczenie A38 dostarczone. Jedna z prób zakończona]
+
+[Gra dobiegła końca]
 
 ## Rozgryka w skrócie
 urząd -> okienko1 -> dziwne_bióro -> szóste_piętro -> parter -> okienko2 -> portiernia -> trzecie_piętro -> okienko8 ->[wait]-> okienko35(fioletowy_formularz) -> okienko42(niebieski_formularz) -> okienko77(a38) -> gabinet_kwestora [End2]
@@ -163,5 +474,4 @@ przed_urzędem -> wioska [End1]
 przed_urzędem ->[wait] -> urząd
 
 ## Bibliografia
-
 - https://www.youtube.com/watch?v=ioktQPgoKNE
