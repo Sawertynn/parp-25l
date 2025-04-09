@@ -1,6 +1,10 @@
 module Main where
 
+import Actions
 import Help
+import Dialogues
+import Interactions
+import Places
 
 
 
