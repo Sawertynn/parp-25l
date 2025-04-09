@@ -14,9 +14,10 @@ introductionText = [
     "Asterix i Obelix udają się do urzędu. Wchodzą do budynku..."
     ]
 
+#!TODO - update instructions
 instructionsText = [
     "",
-    "Używaj standardowej składni Prologa do wpisywania poleceń.",
+    "Używaj standardowej składni Haskella do wpisywania poleceń.",
     "Dostępne polecenia:",
     "start.               -- rozpocznij grę.",
     "go(Miejsce).         -- przejdź do wskazanego miejsca.",
@@ -37,8 +38,3 @@ printInstructions = putStr (unlines instructionsText)
 
 printIntroduction :: IO ()
 printIntroduction = putStr (unlines introductionText)
-
-
--- introduction :: IO ()
--- introduction = do
---     print "lengthy introduction"
