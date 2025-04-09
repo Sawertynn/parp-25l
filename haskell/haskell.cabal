@@ -14,7 +14,7 @@ extra-doc-files:    CHANGELOG.md
 executable adventure
     main-is:          Main.hs
     -- other-extensions:
-    other-modules:    Help, Actions, Dialogues, Interactions, Places
+    other-modules:    Help, Actions, Dialogues, Interactions, Places, Utils
     build-depends:    base ^>=4.17.2.1,
                       random ^>=1.2
     hs-source-dirs:   src
