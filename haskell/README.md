@@ -17,6 +17,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 3 Dodać potrzebne polecenia do zmiennej PATH:
 - jednorazowo: polecenie `source /root/.ghcup/env`
 - na stałe: dodać polecenie wyżej do pliku ~/.bashrc (lub odpowiedniego pliku .rc dla używanej powłoki)
+    - i polecenie `source ~/.bashrc` aby działało od razu
 
 # Budowa i uruchomienie
 
