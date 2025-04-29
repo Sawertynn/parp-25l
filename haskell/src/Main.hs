@@ -1,7 +1,6 @@
 module Main where
 
 import Actions
-import Help
 import Dialogues
 import Interactions
 import Place
@@ -25,50 +24,45 @@ gameLoop state = do
     putStrLn ""
     case words (cmd) of
       ["instructions"] -> do
-        printInstructions
-        gameLoop state
+        printInstructions state >>= gameLoop
 
       ["start"] -> do
-        printIntroduction
-        gameLoop state
-
-      -- ["drop", object] -> do
-      --   let newState = dropItem state object
-      --   printDrop state object
-      --   gameLoop newState
-
-      -- ["take", object] -> do
-      --   let newState = takeItem state object
-      --   printTake state newState object
-      --   gameLoop newState
+        printIntroduction state >>= gameLoop
 
       ["look"] -> do
-        descLocation state
-        gameLoop state
+        descPlace state >>= gameLoop
 
-      ["go", location] -> do
-        let result = goToPlace state location
-        case result of
-          Ok newState -> do
-            descLocation newState
-            gameLoop newState
-          AlreadyThere st -> do
-            putStrLn "Już tu jesteś"
-            gameLoop st
-          PlaceNotFound st -> do
-            putStrLn "Nie ma takiego miejsca"
-            gameLoop st
+      ["go", place] -> do
+        goPlace state place >>= gameLoop
+
+      -- TODO
+      -- ["drop", itemName] -> do
+      --   dropItem state itemName >>= gameLoop
+
+      -- TODO
+      -- ["take", itemName] -> do
+      --   takeItem state itemName >>= gameLoop
+
+      -- TODO
+      -- ["talk", personName] -> do
+      --   talkPerson state personName >>= gameLoop
+
+      -- TODO
+      -- ["ask", personName, topicName] -> do
+      --   askPerson state personName topicName >>= gameLoop
+
+      -- TODO
+      -- ["shout", personName, topicName] -> do
+      --   shoutPerson state personName topicName >>= gameLoop
 
       ["quit"] -> do
         putStrLn "Do zobaczenia!"
 
       _ -> do
-        print "Nieznane polecenie.\n"
+        putStrLn "Nieznane polecenie."
         gameLoop state
 
 
 main :: IO ()
 main = do
-    printInstructions
-
-    gameLoop initialState
+    printInstructions initialState >>= gameLoop 

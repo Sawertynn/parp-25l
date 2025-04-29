@@ -4,7 +4,9 @@ Linux:
 
 0 Zainstalować potrzebne pakiety
 
-`sudo apt install build-essential curl libffi-dev libffi8 libgmp-dev libgmp10 libncurses-dev libncurses5 libtinfo5 pkg-config`
+`sudo apt install libgmp-dev`
+* dla czystego kontenera mogą być dodatkow potrzbne* `build-essential`, `curl`, `libffi-dev`, `libffi8`, `libgmp-dev`, `libgmp10`, `libncurses-dev`, `pkg-config`
+
 
 1 Wpisać polecenie 
 ```
