@@ -1,11 +1,11 @@
 module State where
 
 import Place
-import Object
+import Item
 
 data State = State {
     i_am_at :: Place,
-    holding :: [Object]
+    holding :: [Item]
 } deriving (Eq, Show)
 
 initialState :: State

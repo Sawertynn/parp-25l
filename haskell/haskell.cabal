@@ -8,7 +8,7 @@ build-type:         Simple
 executable adventure
     main-is:          Main.hs
     -- other-extensions:
-    other-modules:    Actions, Dialogues, Interactions, Place, Utils, Object, State
+    other-modules:    Actions, Dialogues, ItemInteractions, WaitInteractions, Place, Utils, Item, State
     build-depends:    base >=4.17.2.1,
                       random >=1.2
     hs-source-dirs:   src

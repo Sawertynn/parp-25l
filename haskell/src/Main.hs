@@ -2,7 +2,6 @@ module Main where
 
 import Actions
 import Dialogues
-import Interactions
 import Place
 import Utils
 import State
@@ -34,6 +33,9 @@ gameLoop state = do
 
       ["go", place] -> do
         goPlace state place >>= gameLoop
+
+      ["go"] -> do
+        printInstructions state >>= gameLoop
 
       -- TODO
       -- ["drop", itemName] -> do
