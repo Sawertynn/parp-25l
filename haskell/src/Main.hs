@@ -18,24 +18,27 @@ readCommand = do
 
 gameLoop :: State -> IO ()
 gameLoop state = do
+    readMessage state
     putStrLn ""
     cmd <- readCommand
     putStrLn ""
     case words (cmd) of
       ["instructions"] -> do
-        printInstructions state >>= gameLoop
+        -- printInstructions state >>= gameLoop
+        gameLoop (printInstructions state)
+
 
       ["start"] -> do
-        printIntroduction state >>= gameLoop
+        gameLoop (printIntroduction state) 
 
       ["look"] -> do
-        descPlace state >>= gameLoop
+        gameLoop (descPlace state) 
 
       ["go", place] -> do
-        goPlace state place >>= gameLoop
+        gameLoop (goPlace state place)
 
       ["go"] -> do
-        printInstructions state >>= gameLoop
+        gameLoop (printInstructions state)
 
       -- TODO
       -- ["drop", itemName] -> do
@@ -61,10 +64,10 @@ gameLoop state = do
         putStrLn "Do zobaczenia!"
 
       _ -> do
-        putStrLn "Nieznane polecenie."
-        gameLoop state
+        -- putStrLn "Nieznane polecenie."
+        gameLoop state { message = ["Nieznane polecenie"] }
 
 
 main :: IO ()
 main = do
-    printInstructions initialState >>= gameLoop 
+    gameLoop(printInstructions initialState) 

@@ -24,10 +24,9 @@ instructionsText = [
     "quit                 -- zakończ grę.",
     ""
     ]
-printInstructions :: State -> IO State
+printInstructions :: State -> State
 printInstructions state = do
-    putStr (unlines instructionsText)
-    return state
+    state { message = instructionsText }
 
 -- Introductions
 introductionText = [
@@ -43,31 +42,27 @@ introductionText = [
     "Kwestor: Tak jest, administracyjna, formalność, musicie poprosić o zaświadczenie A38'), ",
     "Asterix i Obelix udają się do urzędu. Wchodzą do budynku..."
     ]
-printIntroduction :: State -> IO State
+printIntroduction :: State -> State
 printIntroduction state = do
-    putStr (unlines introductionText)
-    return state
+    state { message = introductionText }
 
 -- Places
-descPlace :: State -> IO State
+descPlace :: State -> State
 descPlace state = do 
     let description = pl_description (i_am_at state)
-    putStr description
-    return state
+    state { message = [description] }
     
 
-goPlace :: State -> String -> IO State
+goPlace :: State -> String -> State
 goPlace state placeName = 
     case findByName placeName allPlaces of
         Just place -> 
             if i_am_at state == place
                 then do
-                    putStrLn "Już tu jesteś"
-                    return state
-                else descPlace (state { i_am_at = place })
+                    state { message = ["Już tu jesteś"] }
+                else descPlace (state { i_am_at = place})
         Nothing -> do
-            putStrLn "Nie ma takiego miejsca"
-            return state
+            state { message = ["Nie ma takiego miejsca"] }
 
 -- Objects
 -- TODO
