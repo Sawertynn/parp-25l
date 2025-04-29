@@ -8,18 +8,11 @@ import Data.List (find)
 -- Places
 descPlace :: Place -> IO()
 descPlace place = do
-    print place
+    putStrLn (pl_description place)
 
 descLocation :: State -> IO()
 descLocation state = do
     descPlace (i_am_at state)
-
-
-data MoveResult
-    = Ok State            -- Successfully moved, with new State
-    | AlreadyThere State      -- Player is already at the location
-    | PlaceNotFound State     -- No such place exists
-    deriving (Show)
 
 goToPlace :: State -> String -> MoveResult
 goToPlace state placeName = 

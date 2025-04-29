@@ -2,6 +2,12 @@
 
 ## Tytuł gry: A38
 
+## Zespół nr 12
+
+- Abramowski Sebastian
+- Kurzela Tomasz
+- Stanoch Aleksander
+
 ## Terminy
 
 - Prolog: 6. kwietnia

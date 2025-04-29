@@ -28,7 +28,7 @@ gameLoop state = do
         printInstructions
         gameLoop state
 
-      ["introduction"] -> do
+      ["start"] -> do
         printIntroduction
         gameLoop state
 
@@ -69,7 +69,6 @@ gameLoop state = do
 
 main :: IO ()
 main = do
-    printIntroduction
     printInstructions
 
     gameLoop initialState
