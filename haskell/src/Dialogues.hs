@@ -30,6 +30,7 @@ doNothing = id
 
 allDialogues :: [Dialogue]
 allDialogues = [
+    -- Sekretarz
     Dialogue {
         di_personName = "sekretarz",
         di_placeName = "urząd",
