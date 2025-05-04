@@ -22,9 +22,7 @@ gameLoop state = do
     putStrLn ""
     case words (cmd) of
       ["instructions"] -> do
-        -- printInstructions state >>= gameLoop
         gameLoop (printInstructions state)
-
 
       ["start"] -> do
         gameLoop (printIntroduction state) 
@@ -44,17 +42,14 @@ gameLoop state = do
       ["take", itemName] -> do
         gameLoop (takeItem state itemName)
 
-      -- TODO
-      -- ["talk", personName] -> do
-      --   talkPerson state personName >>= gameLoop
+      ["talk", personName] -> do
+        gameLoop (talkPerson state personName)
 
-      -- TODO
-      -- ["ask", personName, topicName] -> do
-      --   askPerson state personName topicName >>= gameLoop
+      ["ask", personName, topicName] -> do
+        gameLoop (askPerson state personName topicName)
 
-      -- TODO
-      -- ["shout", personName, topicName] -> do
-      --   shoutPerson state personName topicName >>= gameLoop
+      ["shout", personName, topicName] -> do
+        gameLoop (shoutPerson state personName topicName)
 
       ["quit"] -> do
         putStrLn "Do zobaczenia!"

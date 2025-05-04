@@ -3,6 +3,7 @@ module Actions where
 import Place
 import State
 import Item
+import Dialogues
 
 import Data.List (find)
 import qualified Data.Map as Map
@@ -59,15 +60,20 @@ descPlace state =
 
 look :: State -> State
 look state =
-    let place     = i_am_at state
+    let place = i_am_at state
         placeName = pl_name place
-        desc      = pl_description place
+        desc = pl_description place
         itemsHere = Map.findWithDefault [] placeName (itemsAt state)
-        itemsMsg  = if not (null itemsHere)
-                    then "Widzisz tu:" : map (\i -> "- " ++ it_name i ++ ": " ++ it_description i) itemsHere
-                    else [""]
-        fullMsg = desc : itemsMsg
+        itemsMsg = if not (null itemsHere)
+                   then "Widzisz tu przedmioty:" : map (\i -> "- " ++ it_name i ++ ": " ++ it_description i) itemsHere
+                   else []
+        persons = personsAtPlace state
+        personsMsg = if not (null persons)
+                     then "Są tu osoby:" : map ("- " ++) persons
+                     else []
+        fullMsg = [desc] ++ itemsMsg ++ personsMsg
     in state { message = fullMsg }
+
 
 
 
@@ -117,3 +123,45 @@ takeItem state itemName =
     
 
 -- Talk
+talkPerson :: State -> String -> State
+talkPerson state personName =
+    let place = i_am_at state
+        placeName = pl_name place
+        topics = [ di_topicName d | d <- allDialogues
+                                  , di_personName d == personName
+                                  , di_placeName d == placeName
+                                  , di_type d == Ask
+                                  , di_condition d state ]
+        msg = if null topics
+              then ["Nie ma tu takiej osoby, rozejrzyj się poleceniem \"look\""]
+              else ("Tematy do rozmowy z " ++ personName ++ ":") : map ("- " ++) topics
+    in state { message = msg }
+
+
+handleDialogue :: State -> String -> String -> DialogueType -> [String] -> State
+handleDialogue state personName topicName typ fallbackMessage =
+    let placeName = pl_name (i_am_at state)
+        personDialogues = filter (\d ->
+            di_placeName d == placeName &&
+            di_personName d == personName &&
+            di_type d == typ
+            ) allDialogues
+    in if null personDialogues
+        then state { message = ["Nie ma tu takiej osoby."] }
+        else
+            let topicDialogues = filter (\d -> di_topicName d == topicName) personDialogues
+            in if null topicDialogues
+                then state { message = ["Osoba nic nie wie o " ++ topicName] }
+                else case find (\d -> di_condition d state) topicDialogues of
+                        Just d  -> (di_effect d state) { message = di_content d }
+                        Nothing -> state { message = fallbackMessage }
+
+
+askPerson :: State -> String -> String -> State
+askPerson state personName topicName =
+    handleDialogue state personName topicName Ask ["Nie możesz teraz poruszyć tego tematu."]
+
+shoutPerson :: State -> String -> String -> State
+shoutPerson state personName topicName =
+    handleDialogue state personName topicName Shout ["To krzyczenie nic nie daje."]
+
