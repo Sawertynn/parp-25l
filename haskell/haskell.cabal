@@ -10,6 +10,7 @@ executable adventure
     -- other-extensions:
     other-modules:    Actions, Dialogues, ItemInteractions, WaitInteractions, Place, Utils, Item, State
     build-depends:    base >=4.17.2.1,
-                      random >=1.2
+                      random >=1.2,
+                      containers
     hs-source-dirs:   src
     default-language: Haskell2010

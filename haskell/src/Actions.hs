@@ -2,8 +2,10 @@ module Actions where
 
 import Place
 import State
+import Item
 
 import Data.List (find)
+import qualified Data.Map as Map
 
 
 -- Actions
@@ -25,7 +27,7 @@ instructionsText = [
     ""
     ]
 printInstructions :: State -> State
-printInstructions state = do
+printInstructions state =
     state { message = instructionsText }
 
 -- Introductions
@@ -40,29 +42,78 @@ introductionText = [
     "które pozwoli wam uczestniczyć w następnej próbie.",
     "Asterix: Aaaa, chodzi o zwykłą administracyjną formalność?",
     "Kwestor: Tak jest, administracyjna, formalność, musicie poprosić o zaświadczenie A38'), ",
-    "Asterix i Obelix udają się do urzędu. Wchodzą do budynku..."
+    "Asterix i Obelix udają się do urzędu. Wchodzą do budynku...",
+    "",
+    "[Możesz rozejrzeć się poleceniem \"look\"]"
     ]
 printIntroduction :: State -> State
-printIntroduction state = do
+printIntroduction state =
     state { message = introductionText }
 
 -- Places
 descPlace :: State -> State
-descPlace state = do 
+descPlace state = 
     let description = pl_description (i_am_at state)
-    state { message = [description] }
+    in state { message = [description] }
     
+
+look :: State -> State
+look state =
+    let place     = i_am_at state
+        placeName = pl_name place
+        desc      = pl_description place
+        itemsHere = Map.findWithDefault [] placeName (itemsAt state)
+        itemsMsg  = if not (null itemsHere)
+                    then "Widzisz tu:" : map (\i -> "- " ++ it_name i ++ ": " ++ it_description i) itemsHere
+                    else [""]
+        fullMsg = desc : itemsMsg
+    in state { message = fullMsg }
+
+
 
 goPlace :: State -> String -> State
 goPlace state placeName = 
     case findByName placeName allPlaces of
         Just place -> 
             if i_am_at state == place
-                then do
-                    state { message = ["Już tu jesteś"] }
-                else descPlace (state { i_am_at = place})
-        Nothing -> do
+            then state { message = ["Już tu jesteś"] }
+            else descPlace (state { i_am_at = place})
+        Nothing ->
             state { message = ["Nie ma takiego miejsca"] }
 
--- Objects
--- TODO
+-- Items
+dropItem :: State -> String -> State
+dropItem state itemName =
+    case findItemByName itemName (holding state) of
+        Nothing -> state { message = ["Nie masz takiego przedmiotu"] }
+        Just item ->
+            let placeName = pl_name (i_am_at state)
+                updatedHolding = filter (\i -> it_name i /= itemName) (holding state)
+                updatedItemsAt = Map.insertWith (++) placeName [item] (itemsAt state)
+            in state {
+                holding = updatedHolding,
+                itemsAt = updatedItemsAt,
+                message = ["Upuściłeś " ++ itemName]
+            }
+
+
+
+takeItem :: State -> String -> State
+takeItem state itemName =
+    let placeName = pl_name (i_am_at state)
+        itemsHere = Map.findWithDefault [] placeName (itemsAt state)
+    in case findItemByName itemName itemsHere of
+        Nothing -> state { message = ["Nie ma tu takiego przedmiotu"] }
+        Just item ->
+            let updatedItemsHere = filter (\i -> it_name i /= itemName) itemsHere
+                updatedItemsAt = Map.insert placeName updatedItemsHere (itemsAt state)
+                updatedHolding = item : holding state
+            in state {
+                holding = updatedHolding,
+                itemsAt = updatedItemsAt,
+                message = ["Podniosłeś " ++ itemName]
+            }
+
+    
+
+-- Talk
