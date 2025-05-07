@@ -51,9 +51,8 @@ gameLoop state = do
       ["shout", personName, topicName] -> do
         gameLoop (shoutPerson state personName topicName)
 
-      -- TODO
-      -- ["wait"] -> do
-      --   gameLoop (wait state)
+      ["wait"] -> do
+        gameLoop (wait state)
 
       ["quit"] -> do
         putStrLn "Do zobaczenia!"

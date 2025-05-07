@@ -62,6 +62,31 @@ allPlaces = [
         \Za ladą siedzi portier - stary, znużony mężczyzna, którego powieki wydają się ważyć więcej niż cały Rzym.\n\
         \Spogląda na nich nieobecnym wzrokiem, jakby wciąż próbował przypomnieć sobie, co tu właściwie robi.\n\
         \Portier: ...?"
+    },
+    Place {
+        pl_name = "trzecie_piętro",
+        pl_description = "Asterix i Obelix docierają w końcu na trzecie piętro.\n\
+        \Na końcu długiego korytarza znajduje się okienko numer 2.\n\
+        \Za szybą siedzą dwie urzędniczki, pochłonięte ożywioną rozmową.\n\
+        \Jedna z nich rzuca krótkie spojrzenie w ich stronę, po czym wraca do plotek."
+    },
+    Place {
+        pl_name = "okienko8",
+        pl_description = "Okienko numer 8 jest zamknięte.\n\
+            \Na drzwiach wisi krzywo przyklejona kartka: \"Przerwa obiadowa – wracam za 15 minut\".\n\
+            \Niestety, nie wiadomo od kiedy..."
+    },
+    Place {
+        pl_name = "otwarte_okienko8",
+        pl_description = "Drzwi są otwarte. Pojawia się młoda urzędniczka,\n\
+            \która wita Asteriksa i Obeliksa z uprzejmym uśmiechem.\n\
+            \Urzędniczka: \"Dzień dobry! W czym mogę pomóc?\""
+    },
+    Place {
+        pl_name = "okienko35",
+        pl_description =
+            "Przy okienku siedzi urzędniczka z kamienną twarzą, przeglądająca stos pergaminów.\n\
+            \Asterix i Obelix podchodzą ostrożnie — już wiedzą, że każde okienko może być pułapką."
     }]
 
 

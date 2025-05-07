@@ -53,10 +53,10 @@ printIntroduction state =
 
 -- Places
 descPlace :: State -> State
-descPlace state = 
+descPlace state =
     let description = pl_description (i_am_at state)
     in state { message = [description] }
-    
+
 
 look :: State -> State
 look state =
@@ -78,9 +78,9 @@ look state =
 
 
 goPlace :: State -> String -> State
-goPlace state placeName = 
+goPlace state placeName =
     case findByName placeName allPlaces of
-        Just place -> 
+        Just place ->
             if i_am_at state == place
             then state { message = ["Już tu jesteś"] }
             else descPlace (state { i_am_at = place})
@@ -120,7 +120,7 @@ takeItem state itemName =
                 message = ["Podniosłeś " ++ itemName]
             }
 
-    
+
 
 -- Talk
 talkPerson :: State -> String -> State
@@ -165,3 +165,12 @@ shoutPerson :: State -> String -> String -> State
 shoutPerson state personName topicName =
     handleDialogue state personName topicName Shout ["To krzyczenie nic nie daje."]
 
+wait :: State -> State
+wait state
+  | pl_name (i_am_at state) == "okienko8" = newState
+  | otherwise = state
+  where
+    newState = updated { message = [baseMessage ++ "\n\n" ++ desc] }
+    updated = goPlace state "otwarte_okienko8"
+    baseMessage = "Mija chwila w niezręcznej ciszy. Nagle drzwi skrzypią, a zza nich wyłania się młoda urzędniczka."
+    desc = pl_description (i_am_at updated)

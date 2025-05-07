@@ -117,6 +117,115 @@ allDialogues = [
             "Obelix: A może by tak rzucić to wszystko i wrócić do dzików?",
             "[Nowa lokacja odblokowana: \"portiernia\"]"
         ]
+    },
+    Dialogue {
+        di_personName = "portier",
+        di_placeName = "portiernia",
+        di_type = Ask,
+        di_topicName = "okienko2",
+        di_condition = alwaysTrue,
+        di_effect = doNothing,
+        di_content = [
+            "Portier: CO?",
+            "Asterix: Chyba potrzebujemy formularza A39, żeby nas ktoś usłyszał."
+        ]
+    },
+    Dialogue {
+        di_personName = "portier",
+        di_placeName = "portiernia",
+        di_type = Shout,
+        di_topicName = "okienko2",
+        di_condition = alwaysTrue,
+        di_effect = doNothing,
+        di_content = [
+            "Portier: COOOOO?!?!?!",
+            "Rozmowę przypadkiem usłyszał przechodzący obok prefekt.",
+            "Prefekt: No, no… tylko spokojnie. Tutaj przecież ludzie pracują.",
+            "Prefekt: Przyjacielu, powiedz — czego potrzebujesz?"
+        ]
+    },
+    Dialogue {
+        di_personName = "prefekt",
+        di_placeName = "portiernia",
+        di_type = Ask,
+        di_topicName = "okienko2",
+        di_condition = alwaysTrue,
+        di_effect = doNothing,
+        di_content = [
+            "Prefekt: Numer 2? Zaraz... gdzie ono się teraz znajduje?",
+            "Portier: Gdy widziałem je po raz ostatni, Panie Prefekcie, było na trzecim piętrze, korytarz szósty. Łatwo trafić.",
+            "Prefekt: No, widzicie Panowie? Teraz już wszystko jasne. I po co to całe zamieszanie?",
+            "[Nowa lokacja odblokowana: \"trzecie_piętro\"]"
+        ]
+    },
+    Dialogue {
+        di_personName = "prefekt",
+        di_placeName = "portiernia",
+        di_type = Ask,
+        di_topicName = "a38",
+        di_condition = alwaysTrue,
+        di_effect = doNothing,
+        di_content = [
+            "Asterix: Prefekt, czy wie Pan, gdzie znajduje się formularz A38?",
+            "Prefekt: A38? O nie, znowu ten koszmar...",
+            "Prefekt: Proszę wybaczyć, ale kawa mi stygnie, a formularze to nie moja działka.",
+            "Prefekt: Na trzecim piętrze na pewno ktoś będzie wiedział więcej. Jeśli jeszcze pamiętają.",
+            "Asterix: Zaczynam się zastanawiać, czy ten formularz w ogóle istnieje.",
+            "Obelix: A ja zaczynam podejrzewać, że nie zdążymy dziś na obiad..."
+        ]
+    },
+    Dialogue {
+        di_personName = "urzędniczka",
+        di_placeName = "trzecie_piętro",
+        di_type = Ask,
+        di_topicName = "a38",
+        di_condition = alwaysTrue,
+        di_effect = doNothing,
+        di_content = [
+            "Urzędniczka: Nie widzi Pan, że jestem zajęta? Proszę poczekać.",
+            "Urzędniczki wracają do rozmowy o znajomej i jej domniemanych aferach, zupełnie ignorując obecność Galów."
+        ]
+    },
+    Dialogue {
+        di_personName = "urzędniczka",
+        di_placeName = "trzecie_piętro",
+        di_type = Shout,
+        di_topicName = "a38",
+        di_condition = alwaysTrue,
+        di_effect = doNothing,
+        di_content = [
+            "Urzędniczka: Och, ci ludzie są naprawdę niemożliwi. Krzyczeć w biurze? To przecież skandal!",
+            "Urzędniczka: Zaświadczenie A38, tak? A czy ma pan niebieski formularz?",
+            "[Możesz teraz zapytać o niebieski_formularz]"
+        ]
+    },
+    Dialogue {
+        di_personName = "urzędniczka",
+        di_placeName = "trzecie_piętro",
+        di_type = Ask,
+        di_topicName = "niebieski_formularz",
+        di_condition = alwaysTrue,
+        di_effect = doNothing,
+        di_content = [
+            "Urzędniczka: W celu uzyskania zaświadczenia A38 należy najpierw przedstawić niebieski formularz.",
+            "Urzędniczka: Proszę udać się do okienka nr 8.",
+            "Asterix: Och... Przecież już tam byliśmy...",
+            "[Nowa lokacja odblokowana: \"okienko8\"]"
+        ]
+    },
+    Dialogue {
+        di_personName = "urzędniczka",
+        di_placeName = "otwarte_okienko8",
+        di_type = Ask,
+        di_topicName = "niebieski_formularz",
+        di_condition = alwaysTrue,
+        di_effect = doNothing,
+        di_content = [
+            "Urzędniczka: Niebieski formularz? To nie tutaj. Okienko 35, czwarte piętro.",
+            "Asterix: Ciekawe, ile w tym budynku jest pięter...",
+            "Obelix: Mam nadzieję, że na czwartym piętrze mają coś do jedzenia.",
+            "[Nowa lokacja odblokowana: \"okienko35\"]"
+        ]
     }]
 
 
