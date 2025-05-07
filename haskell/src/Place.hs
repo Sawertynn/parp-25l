@@ -73,7 +73,7 @@ allPlaces = [
     Place {
         pl_name = "okienko8",
         pl_description = "Okienko numer 8 jest zamknięte.\n\
-            \Na drzwiach wisi krzywo przyklejona kartka: \"Przerwa obiadowa – wracam za 15 minut\".\n\
+            \Na drzwiach wisi krzywo przyklejona kartka: \"Przerwa obiadowa - wracam za 15 minut\".\n\
             \Niestety, nie wiadomo od kiedy..."
     },
     Place {

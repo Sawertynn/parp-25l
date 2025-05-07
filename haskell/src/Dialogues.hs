@@ -353,7 +353,7 @@ allDialogues = [
             "Urzędniczka: Przykro mi, potrzebuję niebieskiego formularza.",
             "Obelix: Skąd mamy wziąć ten niebieski bulbularz?",
             "Urzędniczka: Może na trzecim piętrze coś będą wiedzieć",
-            "*Możesz wrócić na trzecię piętro poleceniem \"go trzecie piętro\"*"
+            "*Możesz wrócić na trzecię piętro poleceniem \"go trzecie_piętro\"*"
         ]
     },
     Dialogue {
@@ -367,7 +367,7 @@ allDialogues = [
             "Urzędniczka: Przykro mi, potrzebuję fioletowego formularza.",
             "Obelix: Skąd mamy wziąć ten fioletowego bulbularz?",
             "Urzędniczka: Może na trzecim piętrze będą coś wiedzieć",
-            "*Możesz wrócić na trzecię piętro poleceniem \"go trzecie piętro\"*"
+            "*Możesz wrócić na trzecię piętro poleceniem \"go trzecie_piętro\"*"
         ]
     }]
 
