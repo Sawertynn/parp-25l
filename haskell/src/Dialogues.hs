@@ -3,9 +3,11 @@ module Dialogues where
 import State
 import Place
 import Item
+import ItemsActions
 
 import Data.List (nub, find)
 import Data.Maybe (isJust)
+import qualified Data.Map as Map
 
 data DialogueType = Ask | Shout
     deriving (Eq, Show)
@@ -226,6 +228,43 @@ allDialogues = [
             "Obelix: Mam nadzieję, że na czwartym piętrze mają coś do jedzenia.",
             "[Nowa lokacja odblokowana: \"okienko35\"]"
         ]
+    },
+    Dialogue {
+        di_personName = "urzędniczka",
+        di_placeName = "okienko35",
+        di_type = Ask,
+        di_topicName = "niebieski_formularz",
+        di_condition = \state -> areItemsInHolding ["fioletowy_formularz"] state,
+        di_effect = doNothing,
+        di_content = [
+            "Urzędniczka: Przecież macie już fioletowy formularz w ręku! Nie wiem nic o niebieskim formularzu. Dajcie mi spokój.",
+            "Urzędniczka: Idźcie do okienka 42, bo urząd się zaraz zamknie!"
+        ]
+    },
+    Dialogue {
+        di_personName = "urzędniczka",
+        di_placeName = "okienko35",
+        di_type = Ask,
+        di_topicName = "niebieski_formularz",
+        di_condition = \state -> not (areItemsInHolding ["fioletowy_formularz"] state) && not (isItemHere "fioletowy_formularz" state),
+        di_effect = \state -> putItemHere fioletowy_formularz state,
+        di_content = [
+            "Urzędniczka: Dobrze, już wam go kładę. Macie ten fioletowy formularz w zasięgu ręki.",
+            "Urzędniczka: Podnieście go i przestańcie zawracać głowę z tym niebieskim formularzem.",
+            "Urzędniczka: Idźcie do okienka 42, bo urząd zaraz zamyka drzwi!"
+        ]
+    },
+    Dialogue {
+        di_personName = "urzędniczka",
+        di_placeName = "okienko35",
+        di_type = Ask,
+        di_topicName = "niebieski_formularz",
+        di_condition = \state -> isItemHere "fioletowy_formularz" state,
+        di_effect = doNothing,
+        di_content = [
+            "Urzędniczka: Przecież fioletowy formularz już tu leży! Macie go w zasięgu ręki. Dajcie mi spokój z tym niebieskim formularzem.",
+            "Urzędniczka: Idźcie do okienka 42, bo urząd zaraz zamyka drzwi!"
+        ]
     }]
 
 
@@ -247,3 +286,10 @@ personsAtPlace state =
 areItemsInHolding :: [String] -> State -> Bool
 areItemsInHolding itemNames state =
     all (\itemName -> isJust (findItemByName itemName (holding state))) itemNames
+
+isItemHere :: String -> State -> Bool
+isItemHere itemName state =
+    let placeName = pl_name (i_am_at state)
+    in case Map.lookup placeName (itemsAt state) of
+        Nothing -> False
+        Just items -> any (\item -> it_name item == itemName) items

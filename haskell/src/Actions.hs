@@ -75,8 +75,6 @@ look state =
     in state { message = fullMsg }
 
 
-
-
 goPlace :: State -> String -> State
 goPlace state placeName =
     case findByName placeName allPlaces of
@@ -86,41 +84,6 @@ goPlace state placeName =
             else descPlace (state { i_am_at = place})
         Nothing ->
             state { message = ["Nie ma takiego miejsca"] }
-
--- Items
-dropItem :: State -> String -> State
-dropItem state itemName =
-    case findItemByName itemName (holding state) of
-        Nothing -> state { message = ["Nie masz takiego przedmiotu"] }
-        Just item ->
-            let placeName = pl_name (i_am_at state)
-                updatedHolding = filter (\i -> it_name i /= itemName) (holding state)
-                updatedItemsAt = Map.insertWith (++) placeName [item] (itemsAt state)
-            in state {
-                holding = updatedHolding,
-                itemsAt = updatedItemsAt,
-                message = ["Upuściłeś " ++ itemName]
-            }
-
-
-
-takeItem :: State -> String -> State
-takeItem state itemName =
-    let placeName = pl_name (i_am_at state)
-        itemsHere = Map.findWithDefault [] placeName (itemsAt state)
-    in case findItemByName itemName itemsHere of
-        Nothing -> state { message = ["Nie ma tu takiego przedmiotu"] }
-        Just item ->
-            let updatedItemsHere = filter (\i -> it_name i /= itemName) itemsHere
-                updatedItemsAt = Map.insert placeName updatedItemsHere (itemsAt state)
-                updatedHolding = item : holding state
-            in state {
-                holding = updatedHolding,
-                itemsAt = updatedItemsAt,
-                message = ["Podniosłeś " ++ itemName]
-            }
-
-
 
 -- Talk
 talkPerson :: State -> String -> State
