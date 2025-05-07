@@ -15,8 +15,8 @@ allPlaces = [
         pl_description = "Wchodzisz do urzędu. Zapach pergaminu, starych sandałów i beznadziei wita cię jak stary znajomy.\n\
         \Przy drzwiach siedzi sekretarz, który wygląda jakby nigdy nie mrugnął od objęcia stanowiska.\n\
         \Sekretarz: \"Czego tam?\"\n\n\
-        \[Możesz spawdzić o czym możesz z nim porozmawiać - talk(sekretarz).]\n\
-        \[Jeśli znasz już temat, zapytaj - ask(sekretarz, hej).]\n"
+        \[Możesz spawdzić o czym możesz z nim porozmawiać - talk sekretarz]\n\
+        \[Jeśli znasz już temat, zapytaj - ask sekretarz temat]\n"
         },
     Place {
         pl_name = "okienko1",
@@ -32,8 +32,37 @@ allPlaces = [
         \Zamiast tego - huśtawka. Na niej urzędnik w togach, obok dama w czerwonej tunice, zajęci rozmową.\n\
         \Gdy Asterix i Obelix wchodzą, oboje zamierają.\n\
         \Urzędnik (oburzony): \"KTO WAM POZWOLIŁ WEJŚĆ DO MEGO BIURA?!\""
-        }
-    ]
+        },
+    Place {
+        pl_name = "szóste_piętro",
+        pl_description = "Asterix i Obelix ledwo żywi docierają na szóste piętro po niezliczonych schodach.\n\
+        \Po drodze robią kilka przerw - na oddech, narzekanie i rozważenie powrotu do wioski.\n\
+        \Na ścianie wisi plan budynku...\n\
+        \...i wtedy uświadamiają sobie coś niepokojącego.\n\
+        \Okienko nr 1 znajduje się na parterze. Po prawej stronie od wejścia.\n\n\
+        \[Nowa lokacja odblokowana: \"parter\"]"
+    },
+    Place {
+        pl_name = "parter",
+        pl_description = "Asterix i Obelix schodzą na parter, zgodnie z planem budynku.\n\
+        \Po prawej stronie od wejścia znajduje się coś, co najwyraźniej umknęło ich uwadze wcześniej:\n\
+        \skromne okienko z numerem \"1\", ledwo widoczne między doniczką a stojakiem na papirusy.\n\
+        \Za szybą siedzi urzędniczka z lekko znudzoną miną.\n\
+        \Urzędniczka: \"W jakiej sprawie?\""
+    },
+    Place {
+        pl_name = "okienko2",
+        pl_description = "Asterix i Obelix docierają do okienka nr 2... a przynajmniej tak im się wydaje.\n\
+        \Numer ledwo widoczny, przekreślony i poprawiony kilka razy. Pod spodem naklejony \"4\".\n\
+        \Za szybą siedzi urzędniczka, która rzuca im krótkie, złowrogie spojrzenie."
+    },
+    Place {
+        pl_name = "portiernia",
+        pl_description = "Asterix i Obelix docierają do portierni - małego pomieszczenia z drewnianą ladą i zapachem mokrej tuniki.\n\
+        \Za ladą siedzi portier - stary, znużony mężczyzna, którego powieki wydają się ważyć więcej niż cały Rzym.\n\
+        \Spogląda na nich nieobecnym wzrokiem, jakby wciąż próbował przypomnieć sobie, co tu właściwie robi.\n\
+        \Portier: ...?"
+    }]
 
 
 findByName :: String -> [Place] -> Maybe Place

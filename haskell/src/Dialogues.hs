@@ -40,47 +40,84 @@ allDialogues = [
         di_effect = doNothing,
         di_content = [
             "Sekretarz: Zarejestrować okręt tak? Nie, źle was skierowano. Musicie zawrócić do kapitana portu.",
-            "Asterix: Asterix: Co? Nie, chcemy rejestrować okrętu... On chyba jest głuchy",
+            "Asterix: Co? Nie, nie chcemy rejestrować okrętu... On chyba jest głuchy.",
             "Sekretarz: CO!?",
             "Obelix: Może trzeba na niego krzyknąć?",
             "Asterix: To by było niemiłe...",
             "",
-            "Mieneła chwila, bohaterowie przemyśleli sprawę",
-            "",
-            "[Możesz wykrzyczeć coś do kogoś - shout(sekretarz, a38).]"
-            ]
-        },
-        Dialogue {
-            di_personName = "sekretarz",
-            di_placeName = "urząd",
-            di_type = Shout,
-            di_topicName = "a38",
-            di_condition = \state -> areItemsInHolding ["niebieski_formularz", "fioletowy_formularz"] state,
-            di_effect = doNothing,
-            di_content = [
-                "Sekretarz: Sekretarz: Aaaa, to wy z tymi formularzami...",
-                "Sekretarz: Sekretarz: No dobrze. Skoro macie i niebieski, i fioletowy...",
-                "Sekretarz: Udajcie się do okienka 77. Piętro 2, korytarz L, wejście K. Ale cicho!'",
-                "",
-                "[Nowa lokacja odblokowana: \"okienko77\"]"
-            ]
-        },
-        Dialogue {
-            di_personName = "sekretarz",
-            di_placeName = "urząd",
-            di_type = Shout,
-            di_topicName = "a38",
-            di_condition = alwaysTrue,
-            di_effect = doNothing,
-            di_content = [
-                "Sekretarz: NIE KRZYCZ TUTAJ DOBRZE? CO ZA WYCHOWANIE! NA JOWISZA ZA KOGO WY SIE UWAŻACIE.",
-                "Sekretarz: Poszukajcie okienka nr. 1. Korytarzem w lewo, ostatnie drzwi na prawo.",
-                "",
-                "[Nowa lokacja odblokowana: \"okienko1\"]",
-                "[Możesz udać się do innego miejsca - go(okienko1).]"
-            ]
-        }
-    ]
+            "Asterix: Bohaterowie przemyśleli sprawę.",
+            "[Możesz wykrzyczeć coś do kogoś - shout sekretarz a38]"
+        ]
+    },
+    Dialogue {
+        di_personName = "sekretarz",
+        di_placeName = "urząd",
+        di_type = Shout,
+        di_topicName = "a38",
+        di_condition = \state -> areItemsInHolding ["niebieski_formularz", "fioletowy_formularz"] state,
+        di_effect = doNothing,
+        di_content = [
+            "Sekretarz: Aaaa, to wy z tymi formularzami...",
+            "Sekretarz: No dobrze. Skoro macie i niebieski, i fioletowy...",
+            "Sekretarz: Udajcie się do okienka 77. Piętro 2, korytarz L, wejście K. Ale cicho!",
+            "[Nowa lokacja odblokowana: \"okienko77\"]"
+        ]
+    },
+    Dialogue {
+        di_personName = "sekretarz",
+        di_placeName = "urząd",
+        di_type = Shout,
+        di_topicName = "a38",
+        di_condition = \state -> not (areItemsInHolding ["niebieski_formularz", "fioletowy_formularz"] state),
+        di_effect = doNothing,
+        di_content = [
+            "Sekretarz: NIE KRZYCZ TUTAJ DOBRZE? CO ZA WYCHOWANIE! NA JOWISZA ZA KOGO WY SIE UWAŻACIE.",
+            "Sekretarz: Poszukajcie okienka nr. 1. Korytarzem w lewo, ostatnie drzwi na prawo.",
+            "[Nowa lokacja odblokowana: \"okienko1\"]",
+            "[Możesz udać się do innego miejsca - go okienko1]"
+        ]
+    },
+    Dialogue {
+        di_personName = "urzędnik",
+        di_placeName = "dziwne_biuro",
+        di_type = Ask,
+        di_topicName = "okienko1",
+        di_condition = alwaysTrue,
+        di_effect = doNothing,
+        di_content = [
+            "Urzędnik: Sprawdźcie plan. Szóste piętro. I proszę zamknąć za sobą drzwi. Co za bezczelność... Proszę dalej, panienko.",
+            "Asterix: Chyba kogoś przeszkodziliśmy...",
+            "[Nowa lokacja odblokowana: \"szóste_piętro\"]"
+        ]
+    },
+    Dialogue {
+        di_personName = "urzędniczka",
+        di_placeName = "parter",
+        di_type = Ask,
+        di_topicName = "a38",
+        di_condition = alwaysTrue,
+        di_effect = doNothing,
+        di_content = [
+            "Urzędniczka: A38? Nie, źle was poinformowano. Musicie iść do okienka nr. 2.",
+            "Asterix: Czyli musimy iść dalej...",
+            "[Nowa lokacja odblokowana: \"okienko2\"]"
+        ]
+    },
+    Dialogue {
+        di_personName = "urzędniczka",
+        di_placeName = "okienko2",
+        di_type = Ask,
+        di_topicName = "a38",
+        di_condition = alwaysTrue,
+        di_effect = doNothing,
+        di_content = [
+            "Urzędniczka: Numer 2? Hm... Nie, to nie tutaj. Tutaj jest okienko numer 4. To obok to numer 8.",
+            "Urzędniczka: Jeśli bardzo państwu zależy, proszę popytać portiera.",
+            "Asterix: Okienko 2, które jest czwórką, a obok ósemka...",
+            "Obelix: A może by tak rzucić to wszystko i wrócić do dzików?",
+            "[Nowa lokacja odblokowana: \"portiernia\"]"
+        ]
+    }]
 
 
 availableDialogues :: State -> [Dialogue] -> [Dialogue]

@@ -25,10 +25,10 @@ gameLoop state = do
         gameLoop (printInstructions state)
 
       ["start"] -> do
-        gameLoop (printIntroduction state) 
+        gameLoop (printIntroduction state)
 
       ["look"] -> do
-        gameLoop (look state) 
+        gameLoop (look state)
 
       ["go", place] -> do
         gameLoop (goPlace state place)
@@ -65,4 +65,4 @@ gameLoop state = do
 
 main :: IO ()
 main = do
-    gameLoop(printInstructions initialState) 
+    gameLoop (printInstructions initialState)

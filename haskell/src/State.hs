@@ -17,7 +17,7 @@ initialState = State {
     i_am_at =  head allPlaces,
     holding = [],
     itemsAt   = Map.fromList [
-        ("urząd", [niebieski_formularz, fioletowy_formularz])
+        ("urząd", [])
     ],
     message = []
 }
