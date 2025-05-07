@@ -48,7 +48,7 @@ allDialogues = [
             "Asterix: To by było niemiłe...",
             "",
             "Asterix: Bohaterowie przemyśleli sprawę.",
-            "[Możesz wykrzyczeć coś do kogoś - shout sekretarz a38]"
+            "*Możesz wykrzyczeć coś do kogoś - shout sekretarz a38*"
         ]
     },
     Dialogue {
@@ -62,7 +62,7 @@ allDialogues = [
             "Sekretarz: Aaaa, to wy z tymi formularzami...",
             "Sekretarz: No dobrze. Skoro macie i niebieski, i fioletowy...",
             "Sekretarz: Udajcie się do okienka 77. Piętro 2, korytarz L, wejście K. Ale cicho!",
-            "[Nowa lokacja odblokowana: \"okienko77\"]"
+            "*Nowa lokacja odblokowana: \"okienko77\"*"
         ]
     },
     Dialogue {
@@ -75,8 +75,8 @@ allDialogues = [
         di_content = [
             "Sekretarz: NIE KRZYCZ TUTAJ DOBRZE? CO ZA WYCHOWANIE! NA JOWISZA ZA KOGO WY SIE UWAŻACIE.",
             "Sekretarz: Poszukajcie okienka nr. 1. Korytarzem w lewo, ostatnie drzwi na prawo.",
-            "[Nowa lokacja odblokowana: \"okienko1\"]",
-            "[Możesz udać się do innego miejsca - go okienko1]"
+            "*Nowa lokacja odblokowana: \"okienko1\"*",
+            "*Możesz udać się do innego miejsca - go okienko1*"
         ]
     },
     Dialogue {
@@ -89,7 +89,7 @@ allDialogues = [
         di_content = [
             "Urzędnik: Sprawdźcie plan. Szóste piętro. I proszę zamknąć za sobą drzwi. Co za bezczelność... Proszę dalej, panienko.",
             "Asterix: Chyba kogoś przeszkodziliśmy...",
-            "[Nowa lokacja odblokowana: \"szóste_piętro\"]"
+            "*Nowa lokacja odblokowana: \"szóste_piętro\"*"
         ]
     },
     Dialogue {
@@ -102,7 +102,7 @@ allDialogues = [
         di_content = [
             "Urzędniczka: A38? Nie, źle was poinformowano. Musicie iść do okienka nr. 2.",
             "Asterix: Czyli musimy iść dalej...",
-            "[Nowa lokacja odblokowana: \"okienko2\"]"
+            "*Nowa lokacja odblokowana: \"okienko2\"*"
         ]
     },
     Dialogue {
@@ -117,7 +117,7 @@ allDialogues = [
             "Urzędniczka: Jeśli bardzo państwu zależy, proszę popytać portiera.",
             "Asterix: Okienko 2, które jest czwórką, a obok ósemka...",
             "Obelix: A może by tak rzucić to wszystko i wrócić do dzików?",
-            "[Nowa lokacja odblokowana: \"portiernia\"]"
+            "*Nowa lokacja odblokowana: \"portiernia\"*"
         ]
     },
     Dialogue {
@@ -157,7 +157,7 @@ allDialogues = [
             "Prefekt: Numer 2? Zaraz... gdzie ono się teraz znajduje?",
             "Portier: Gdy widziałem je po raz ostatni, Panie Prefekcie, było na trzecim piętrze, korytarz szósty. Łatwo trafić.",
             "Prefekt: No, widzicie Panowie? Teraz już wszystko jasne. I po co to całe zamieszanie?",
-            "[Nowa lokacja odblokowana: \"trzecie_piętro\"]"
+            "*Nowa lokacja odblokowana: \"trzecie_piętro\"*"
         ]
     },
     Dialogue {
@@ -198,7 +198,7 @@ allDialogues = [
         di_content = [
             "Urzędniczka: Och, ci ludzie są naprawdę niemożliwi. Krzyczeć w biurze? To przecież skandal!",
             "Urzędniczka: Zaświadczenie A38, tak? A czy ma pan niebieski formularz?",
-            "[Możesz teraz zapytać o niebieski_formularz]"
+            "*Możesz teraz zapytać o niebieski_formularz*"
         ]
     },
     Dialogue {
@@ -212,7 +212,7 @@ allDialogues = [
             "Urzędniczka: W celu uzyskania zaświadczenia A38 należy najpierw przedstawić niebieski formularz.",
             "Urzędniczka: Proszę udać się do okienka nr 8.",
             "Asterix: Och... Przecież już tam byliśmy...",
-            "[Nowa lokacja odblokowana: \"okienko8\"]"
+            "*Nowa lokacja odblokowana: \"okienko8\"*"
         ]
     },
     Dialogue {
@@ -226,7 +226,7 @@ allDialogues = [
             "Urzędniczka: Niebieski formularz? To nie tutaj. Okienko 35, czwarte piętro.",
             "Asterix: Ciekawe, ile w tym budynku jest pięter...",
             "Obelix: Mam nadzieję, że na czwartym piętrze mają coś do jedzenia.",
-            "[Nowa lokacja odblokowana: \"okienko35\"]"
+            "*Nowa lokacja odblokowana: \"okienko35\"*"
         ]
     },
     Dialogue {
@@ -251,7 +251,8 @@ allDialogues = [
         di_content = [
             "Urzędniczka: Dobrze, już wam go kładę. Macie ten fioletowy formularz w zasięgu ręki.",
             "Urzędniczka: Podnieście go i przestańcie zawracać głowę z tym niebieskim formularzem.",
-            "Urzędniczka: Idźcie do okienka 42, bo urząd zaraz zamyka drzwi!"
+            "Urzędniczka: Idźcie do okienka 42, bo urząd zaraz zamyka drzwi!",
+            "*Fioletowy formularz jest dostępny do wzięcia przez polecenie \"take fioletowy_formularz\"*"
         ]
     },
     Dialogue {
@@ -263,7 +264,110 @@ allDialogues = [
         di_effect = doNothing,
         di_content = [
             "Urzędniczka: Przecież fioletowy formularz już tu leży! Macie go w zasięgu ręki. Dajcie mi spokój z tym niebieskim formularzem.",
-            "Urzędniczka: Idźcie do okienka 42, bo urząd zaraz zamyka drzwi!"
+            "Urzędniczka: Idźcie do okienka 42, bo urząd zaraz zamyka drzwi!",
+            "*Nowa lokacja odblokowana: \"okienko42\"*"
+        ]
+    },
+    Dialogue {
+        di_personName = "urzędniczka",
+        di_placeName = "okienko42",
+        di_type = Ask,
+        di_topicName = "a38",
+        di_condition = \state -> not (areItemsInHolding ["fioletowy_formularz"] state),
+        di_effect = doNothing,
+        di_content = [
+            "Urzędniczka: Najpierw będziecie potrzebować fioletowego formularza.",
+            "*Wróćcie do okienka 35 poleceniem \"go okienko35\"*"
+        ]
+    },
+    Dialogue {
+        di_personName = "urzędniczka",
+        di_placeName = "okienko42",
+        di_type = Ask,
+        di_topicName = "a38",
+        di_condition = \state ->
+            areItemsInHolding ["fioletowy_formularz"] state &&
+            not (areItemsInHolding ["niebieski_formularz"] state) &&
+            not (isItemHere "niebieski_formularz" state),
+        di_effect = \state -> putItemHere niebieski_formularz state,
+        di_content = [
+            "Urzędniczka: O, to dobrze - fioletowy formularz macie.",
+            "Urzędniczka: To jeszcze niebieski - proszę bardzo, kładę go tu. Z tymi formularzami możecie już iść dalej.",
+            "Urzędniczka: Okienko 77. Piętro 2, korytarz L, wejście K. Tam powinni wam pomóc.",
+            "*\"niebieski_formularz\" jest dostępny do wzięcia przez polecenie \"take\"*",
+            "*Nowa lokacja odblokowana: \"okienko77\"*"
+        ]
+    },
+    Dialogue {
+        di_personName = "urzędniczka",
+        di_placeName = "okienko42",
+        di_type = Ask,
+        di_topicName = "a38",
+        di_condition = \state ->
+            areItemsInHolding ["fioletowy_formularz"] state &&
+            isItemHere "niebieski_formularz" state,
+        di_effect = doNothing,
+        di_content = [
+            "Urzędniczka: Niebieski formularz już tu leży, proszę go po prostu zabrać."
+        ]
+    },
+    Dialogue {
+        di_personName = "urzędniczka",
+        di_placeName = "okienko77",
+        di_type = Ask,
+        di_topicName = "a38",
+        di_condition = \state ->
+            areItemsInHolding ["niebieski_formularz", "fioletowy_formularz"] state &&
+            not (isItemHere "a38" state),
+        di_effect = \state -> putItemHere a38 state,
+        di_content = [
+            "Asterix i Obelix bez słowa podają niebieski i fioletowy pergamin.",
+            "Urzędniczka przybija pieczątkę z godłem Cesarstwa, owija wszystko w czerwoną wstążkę i kładzie A38 na biurku.",
+            "Urzędniczka: Gratuluję. Kwestor kazał przekazać wam, że będzie czekał na was w jego gabinecie.",
+            "Obelix (z niedowierzaniem): To już?",
+            "Asterix: Tak. Chyba naprawdę to mamy.",
+            "Obelix: Mogę teraz zjeść dzika?",
+            "*\"a38\" jest dostępny do wzięcia przez polecenie \"take a38\"*",
+            "*Nowa lokacja odblokowana: \"gabinet_kwestora\"*"
+        ]
+    },
+    Dialogue {
+        di_personName = "urzędniczka",
+        di_placeName = "okienko77",
+        di_type = Ask,
+        di_topicName = "a38",
+        di_condition = \state -> isItemHere "a38" state,
+        di_effect = doNothing,
+        di_content = [
+            "Urzędniczka: A38 leży tu na biurku. Proszę zabrać."
+        ]
+    },
+    Dialogue {
+        di_personName = "urzędniczka",
+        di_placeName = "okienko77",
+        di_type = Ask,
+        di_topicName = "a38",
+        di_condition = \state -> not (areItemsInHolding ["niebieski_formularz"] state),
+        di_effect = doNothing,
+        di_content = [
+            "Urzędniczka: Przykro mi, potrzebuję niebieskiego formularza.",
+            "Obelix: Skąd mamy wziąć ten niebieski bulbularz?",
+            "Urzędniczka: Może na trzecim piętrze coś będą wiedzieć",
+            "*Możesz wrócić na trzecię piętro poleceniem \"go trzecie piętro\"*"
+        ]
+    },
+    Dialogue {
+        di_personName = "urzędniczka",
+        di_placeName = "okienko77",
+        di_type = Ask,
+        di_topicName = "a38",
+        di_condition = \state -> not (areItemsInHolding ["fioletowy_formularz"] state),
+        di_effect = doNothing,
+        di_content = [
+            "Urzędniczka: Przykro mi, potrzebuję fioletowego formularza.",
+            "Obelix: Skąd mamy wziąć ten fioletowego bulbularz?",
+            "Urzędniczka: Może na trzecim piętrze będą coś wiedzieć",
+            "*Możesz wrócić na trzecię piętro poleceniem \"go trzecie piętro\"*"
         ]
     }]
 

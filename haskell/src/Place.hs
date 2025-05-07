@@ -87,9 +87,37 @@ allPlaces = [
         pl_description =
             "Przy okienku siedzi urzędniczka z kamienną twarzą, przeglądająca stos pergaminów.\n\
             \Asterix i Obelix podchodzą ostrożnie — już wiedzą, że każde okienko może być pułapką."
+    },
+    Place {
+        pl_name = "okienko42",
+        pl_description = "Na końcu korytarza widać jasne światło...\n\
+            \...a nad okienkiem widnieje tabliczka: \"NIEBIESKIE FORMULARZE DO A38\".\n\
+            \Asterix i Obelix przystają, przecierają oczy i nie dowierzają.\n\
+            \Obelix: Asterix... czy my... czy my dobrze widzimy?\n\
+            \Asterix: Tak, Obelixie. To chyba naprawdę ono.\n\
+            \Za okienkiem siedzi uprzejma pani, która spogląda na nich z uśmiechem.\n\
+            \Urzędniczka: \"Dzień dobry! W czym mogę pomóc?\""
+    },
+    Place {
+        pl_name = "okienko77",
+        pl_description = "Po niezliczonych schodach, korytarzach i nieporozumieniach,\n\
+            \Asterix i Obelix stają w końcu przed legendarnym okienkiem 77.\n\
+            \Drzwi są lekko uchylone, jakby czekały właśnie na nich.\n\
+            \W środku panuje niespodziewany spokój.\n\
+            \Za biurkiem siedzi starsza pani urzędniczka, z twarzą wyrażającą absolutny spokój i... zrozumienie?"
+    },
+    Place {
+        pl_name = "gabinet_kwestora",
+        pl_description =
+            "Gabinet kwestora pachnie papirusami i świeżo zmieloną kawą.\n\
+            \Kwestor siedzi za wielkim biurkiem i spogląda na Asteriksa i Obeliksa z zaciekawieniem.\n\
+            \Kwestor: Wróciliście. Czy udało wam się zdobyć formularz A38?\n\
+            \Asterix: Cóż... to zależy, co pan rozumie przez \"zdobyć\".\n\
+            \Kwestor: Jeśli naprawdę go macie, proszę go położyć na biurku.\n\
+            \\n\
+            \[Użyj komendy: drop a38]"
     }]
 
 
 findByName :: String -> [Place] -> Maybe Place
 findByName targetName = find (\p -> pl_name p == targetName)
-

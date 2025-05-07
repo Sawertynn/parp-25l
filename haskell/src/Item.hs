@@ -20,7 +20,7 @@ fioletowy_formularz = Item {
 
 a38 = Item {
     it_name = "a38",
-    it_description = "zaświadczenie, potrzebne do ukończenia zadania"
+    it_description = "zaświadczenie, potrzebne do ukończenia zadania, trzeba go dostarczyć do gabinetu kwestora"
 }
 
 findItemByName :: String -> [Item] -> Maybe Item

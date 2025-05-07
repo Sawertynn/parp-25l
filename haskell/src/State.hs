@@ -15,7 +15,7 @@ data State = State {
 initialState :: State
 initialState = State {
     i_am_at =  head allPlaces,
-    holding = [],
+    holding = [fioletowy_formularz, niebieski_formularz],
     itemsAt   = Map.fromList [
         ("urząd", [])
     ],
