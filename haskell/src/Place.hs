@@ -116,6 +116,29 @@ allPlaces = [
             \Kwestor: Jeśli naprawdę go macie, proszę go położyć na biurku.\n\
             \\n\
             \[Użyj komendy: drop a38]"
+    },
+    Place {
+        pl_name = "wioska",
+        pl_description =
+            "Galijska wioska. Cisza, zapach pieczonego dzika i ani śladu urzędników.\n\
+            \Obelix siada przy ogniu, rozciąga nogi i uśmiecha się szeroko.\n\
+            \Asterix zdejmuje sandały i wzdycha z ulgą.\n\
+            \\n\
+            \Obelix: Widzisz? Mówiłem, że trzeba było wrócić wcześniej.\n\
+            \Asterix: Może i tak... Ale przynajmniej mamy święty spokój.\n\
+            \*zakończono - powrót do wioski*"
+    },
+    -- in this place: officeClosed from state should be set to True, then wait command will change it False
+    Place {
+    pl_name = "przed_urzędem",
+    pl_description =
+        "Asterix i Obelix stoją przed zamkniętym urzędem. Obelix siedzi na schodach i patrzy w niebo,\n\
+        \mamrocząc coś o dziczyźnie. Asterix tylko wzdycha i wyciąga z sakiewki bilet powrotny do wioski.\n\
+        \Asterix: Wiesz co, Obeliksie? Może lepiej pokonać Rzym siłą. To przynajmniej jest prostsze.\n\
+        \Obelix: I bez schodów...\n\
+        \\n\
+        \[Możesz poczekać na ponowne otwarcie urzędu poleceniem \"wait\"]\n\
+        \[Możesz wrócić do wioski poleceniem \"go wioska\"]"
     }]
 
 

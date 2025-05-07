@@ -9,17 +9,19 @@ data State = State {
     i_am_at :: Place,
     holding :: [Item],
     itemsAt   :: Map.Map String [Item],
-    message :: [[Char]]
+    message :: [[Char]],
+    officeClosed :: Bool
 } deriving (Eq, Show)
 
 initialState :: State
 initialState = State {
     i_am_at =  head allPlaces,
-    holding = [fioletowy_formularz, niebieski_formularz],
+    holding = [],
     itemsAt   = Map.fromList [
         ("urząd", [])
     ],
-    message = []
+    message = [],
+    officeClosed = False
 }
 
 readMessage :: State -> IO ()

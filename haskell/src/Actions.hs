@@ -76,14 +76,21 @@ look state =
 
 
 goPlace :: State -> String -> State
-goPlace state placeName =
-    case findByName placeName allPlaces of
-        Just place ->
-            if i_am_at state == place
-            then state { message = ["Już tu jesteś"] }
-            else descPlace (state { i_am_at = place})
-        Nothing ->
-            state { message = ["Nie ma takiego miejsca"] }
+goPlace state placeName
+    | officeClosed state
+    , placeName /= "wioska" =
+        state { message = [
+            "Urząd jest zamknięty.",
+            "Możesz tylko poczekać (wait) albo wrócić do wioski (go wioska)."
+        ] }
+
+    | otherwise =
+        case findByName placeName allPlaces of
+            Just place ->
+                if i_am_at state == place
+                then state { message = ["Już tu jesteś"] }
+                else descPlace (state { i_am_at = place })
+            Nothing -> state { message = ["Nie ma takiego miejsca"] }
 
 -- Talk
 talkPerson :: State -> String -> State
@@ -130,10 +137,20 @@ shoutPerson state personName topicName =
 
 wait :: State -> State
 wait state
-  | pl_name (i_am_at state) == "okienko8" = newState
-  | otherwise = state
-  where
-    newState = updated { message = [baseMessage ++ "\n\n" ++ desc] }
-    updated = goPlace state "otwarte_okienko8"
-    baseMessage = "Mija chwila w niezręcznej ciszy. Nagle drzwi skrzypią, a zza nich wyłania się młoda urzędniczka."
-    desc = pl_description (i_am_at updated)
+  | pl_name (i_am_at state) == "okienko8" = waitAtOkienko8 state
+  | pl_name (i_am_at state) == "przed_urzędem" = waitPrzedUrzedem state
+  | otherwise = state { message = ["Czekasz... ale nic się nie dzieje."] }
+
+waitAtOkienko8 :: State -> State
+waitAtOkienko8 state =
+    let updated = goPlace state "otwarte_okienko8"
+        baseMessage = "Mija chwila w niezręcznej ciszy. Nagle drzwi skrzypią, a zza nich wyłania się młoda urzędniczka."
+        desc = pl_description (i_am_at updated)
+    in updated { message = [baseMessage ++ "\n\n" ++ desc] }
+
+waitPrzedUrzedem :: State -> State
+waitPrzedUrzedem state =
+    state {
+        officeClosed = False,
+        message = ["Po chwili coś szczęka w zamku. Urząd znów otwarty."]
+    }
