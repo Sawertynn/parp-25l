@@ -11,3 +11,9 @@ randomSample xs n = do
     let len = length xs
     indices <- replicateM n $ randomRIO (0, len - 1)
     return [xs !! i | i <- indices]
+
+
+fromJust :: Maybe a -> a
+fromJust (Just a) = a
+fromJust Nothing = error "Oops, you goofed up, fool."
+

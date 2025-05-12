@@ -89,7 +89,7 @@ goPlace state placeName
             Just place ->
                 if i_am_at state == place
                 then state { message = ["Już tu jesteś"] }
-                else descPlace (state { i_am_at = place })
+                else descPlace ( useTime (state { i_am_at = place }) 120) 
             Nothing -> state { message = ["Nie ma takiego miejsca"] }
 
 -- Talk
@@ -152,5 +152,6 @@ waitPrzedUrzedem :: State -> State
 waitPrzedUrzedem state =
     state {
         officeClosed = False,
+        time = officeOpeningHours,
         message = ["Po chwili coś szczęka w zamku. Urząd znów otwarty."]
     }
