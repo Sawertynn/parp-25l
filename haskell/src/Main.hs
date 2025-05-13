@@ -31,7 +31,7 @@ gameLoop state = do
         goToNextState (look state)
 
       ["go", place] -> do
-        newState <- useRandTime (goPlace state place)
+        newState <- (goPlaceTime state place)
         goToNextState newState
 
       ["drop", itemName] -> do

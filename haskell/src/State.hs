@@ -7,8 +7,8 @@ import qualified Data.Map as Map
 
 officeOpeningHours = 8 * 60 :: Int
 officeClosingHours = 16 * 60 :: Int
-minDuration = 10 :: Int
-maxDuration = 60 :: Int
+minDuration = 25 :: Int
+maxDuration = 80 :: Int
 
 data State = State {
     i_am_at :: Place,

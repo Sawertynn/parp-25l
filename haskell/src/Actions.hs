@@ -77,6 +77,14 @@ look state =
         fullMsg = [desc] ++ itemsMsg ++ personsMsg
     in state { message = fullMsg }
 
+goPlaceTime :: State -> String -> IO State
+goPlaceTime state placeName =
+    let previousName = pl_name (i_am_at state)
+        newState = goPlace state placeName
+    in
+        if previousName == pl_name (i_am_at newState)
+            then return newState
+            else useRandTime newState
 
 goPlace :: State -> String -> State
 goPlace state placeName
