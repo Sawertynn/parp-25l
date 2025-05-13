@@ -316,26 +316,6 @@ allDialogues = [
         di_placeName = "okienko77",
         di_type = Ask,
         di_topicName = "a38",
-        di_condition = \state ->
-            areItemsInHolding ["niebieski_formularz", "fioletowy_formularz"] state &&
-            not (isItemHere "a38" state),
-        di_effect = \state -> putItemHere a38 state,
-        di_content = [
-            "Asterix i Obelix bez słowa podają niebieski i fioletowy pergamin.",
-            "Urzędniczka przybija pieczątkę z godłem Cesarstwa, owija wszystko w czerwoną wstążkę i kładzie A38 na biurku.",
-            "Urzędniczka: Gratuluję. Kwestor kazał przekazać wam, że będzie czekał na was w jego gabinecie.",
-            "Obelix (z niedowierzaniem): To już?",
-            "Asterix: Tak. Chyba naprawdę to mamy.",
-            "Obelix: Mogę teraz zjeść dzika?",
-            "*\"a38\" jest dostępny do wzięcia przez polecenie \"take a38\"*",
-            "*Nowa lokacja odblokowana: \"gabinet_kwestora\"*"
-        ]
-    },
-    Dialogue {
-        di_personName = "urzędniczka",
-        di_placeName = "okienko77",
-        di_type = Ask,
-        di_topicName = "a38",
         di_condition = \state -> isItemHere "a38" state,
         di_effect = doNothing,
         di_content = [
@@ -347,7 +327,8 @@ allDialogues = [
         di_placeName = "okienko77",
         di_type = Ask,
         di_topicName = "a38",
-        di_condition = \state -> not (areItemsInHolding ["niebieski_formularz"] state),
+        di_condition = \state -> not (areItemsInHolding ["niebieski_formularz"] state) &&
+            not (areItemsInHolding ["a38"] state) && not (isItemHere "a38" state),
         di_effect = doNothing,
         di_content = [
             "Urzędniczka: Przykro mi, potrzebuję niebieskiego formularza.",
@@ -361,13 +342,25 @@ allDialogues = [
         di_placeName = "okienko77",
         di_type = Ask,
         di_topicName = "a38",
-        di_condition = \state -> not (areItemsInHolding ["fioletowy_formularz"] state),
+        di_condition = \state -> not (areItemsInHolding ["fioletowy_formularz"] state) &&
+            not (areItemsInHolding ["a38"] state) && not (isItemHere "a38" state),
         di_effect = doNothing,
         di_content = [
             "Urzędniczka: Przykro mi, potrzebuję fioletowego formularza.",
             "Obelix: Skąd mamy wziąć ten fioletowego bulbularz?",
             "Urzędniczka: Może na trzecim piętrze będą coś wiedzieć",
             "*Możesz wrócić na trzecię piętro poleceniem \"go trzecie_piętro\"*"
+        ]
+    },
+    Dialogue {
+        di_personName = "urzędniczka",
+        di_placeName = "okienko77",
+        di_type = Ask,
+        di_topicName = "a38",
+        di_condition = \state -> areItemsInHolding ["a38"] state,
+        di_effect = doNothing,
+        di_content = [
+            "Urzędniczka: Skoro już macie a38, to wystarczy pójśc do gabinetu kwestora."
         ]
     }]
 
