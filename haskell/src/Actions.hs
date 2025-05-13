@@ -78,13 +78,12 @@ look state =
     in state { message = fullMsg }
 
 goPlaceTime :: State -> String -> IO State
-goPlaceTime state placeName =
+goPlaceTime state placeName = do
     let previousName = pl_name (i_am_at state)
-        newState = goPlace state placeName
-    in
-        if previousName == pl_name (i_am_at newState)
-            then return newState
-            else useRandTime newState
+    let newState = goPlace state placeName
+    if previousName == pl_name (i_am_at newState)
+        then return newState
+        else useRandTime newState
 
 goPlace :: State -> String -> State
 goPlace state placeName
@@ -171,7 +170,15 @@ waitPrzedUrzedem state =
     state {
         officeClosed = False,
         time = officeOpeningHours,
-        message = ["Po chwili coś szczęka w zamku. Urząd znów otwarty."]
+        message = [
+            "Asterix i Obelix postanawiają nie tracić więcej nerwów.",
+            "Udają się do pobliskiego baru \"Pod Rzymską Pieczęcią\", gdzie jedzą kolację i popijają galijskim cydrem.",
+            "Wieczór mija na wspominkach, narzekaniu i... kolejnym dzbanie cydru.",
+            "Obelix: No! To się nazywa urządzenie się.",
+            "Następnego ranka wychodzą z baru i patrzą na wschodzące słońce.",
+            "Asterix: Wybiła 8:00, wygląda na to, że urząd znowu otwarty...",
+            "Po chwili coś szczęka w zamku. Urząd znów otwarty."
+            ]
     }
 
 -- utils
@@ -194,7 +201,7 @@ useTime state duration =
 useRandTime :: State -> IO State
 useRandTime state = do
     duration <- randomRIO (minDuration, maxDuration)
-    return state { time = (time state) + duration }
+    return state { time = (time state) + duration , message = message state ++ [printf "Zajęło to %d minut" duration]}
 
 checkTime :: State -> State
 checkTime state = 
