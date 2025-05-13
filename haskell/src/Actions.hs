@@ -138,6 +138,13 @@ shoutPerson :: State -> String -> String -> State
 shoutPerson state personName topicName =
     handleDialogue state personName topicName Shout ["To krzyczenie nic nie daje."]
 
+waitTime :: State -> IO State
+waitTime state =
+    let newState = wait state
+    in if pl_name (i_am_at state) == "przed_urzędem"
+        then return newState
+        else useRandTime newState
+
 wait :: State -> State
 wait state
   | pl_name (i_am_at state) == "okienko8" = waitAtOkienko8 state

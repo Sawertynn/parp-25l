@@ -50,7 +50,7 @@ gameLoop state = do
         goToNextState (shoutPerson state personName topicName)
 
       ["wait"] -> do
-        newState <- useRandTime (wait state) 
+        newState <- waitTime state
         goToNextState newState
 
       ["quit"] -> do
