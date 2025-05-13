@@ -144,3 +144,5 @@ allPlaces = [
 
 findByName :: String -> [Place] -> Maybe Place
 findByName targetName = find (\p -> pl_name p == targetName)
+
+

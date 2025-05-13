@@ -4,9 +4,12 @@ import Place
 import State
 import Item
 import Dialogues
+import Utils
 
 import Data.List (find)
 import qualified Data.Map as Map
+import System.Random
+import Text.Printf
 
 
 -- Actions
@@ -89,7 +92,7 @@ goPlace state placeName
             Just place ->
                 if i_am_at state == place
                 then state { message = ["Już tu jesteś"] }
-                else descPlace ( useTime (state { i_am_at = place }) 120) 
+                else descPlace (state { i_am_at = place }) 
             Nothing -> state { message = ["Nie ma takiego miejsca"] }
 
 -- Talk
@@ -155,3 +158,38 @@ waitPrzedUrzedem state =
         time = officeOpeningHours,
         message = ["Po chwili coś szczęka w zamku. Urząd znów otwarty."]
     }
+
+-- utils
+
+readMessage :: State -> IO ()
+readMessage state = do
+    let msg = message state
+    putStr (unlines msg)
+    
+    if not (officeClosed state)
+        then do
+            let (hour, minute) = divMod (time state) 60
+            printf "Jest godzina %d:%02d\n" hour minute
+        else return ()
+
+useTime :: State -> Int -> State
+useTime state duration = 
+    state { time = (time state) + duration}
+
+useRandTime :: State -> IO State
+useRandTime state = do
+    duration <- randomRIO (minDuration, maxDuration)
+    return state { time = (time state) + duration }
+
+checkTime :: State -> State
+checkTime state = 
+    if time state >= officeClosingHours
+        then case pl_name (i_am_at state) of
+            "wioska" -> descPlace state
+            "przed_urzędem" -> descPlace state
+            _ -> state { officeClosed = True,  i_am_at = last allPlaces, message = closingOfficeDialogue }
+        else state
+
+finishGame :: State -> State
+finishGame state =
+    state { finished = True }

@@ -5,8 +5,10 @@ import Item
 
 import qualified Data.Map as Map
 
-officeOpeningHours = 8 * 60
-officeClosingHours = 16 * 60
+officeOpeningHours = 8 * 60 :: Int
+officeClosingHours = 16 * 60 :: Int
+minDuration = 10 :: Int
+maxDuration = 60 :: Int
 
 data State = State {
     i_am_at :: Place,
@@ -14,7 +16,8 @@ data State = State {
     itemsAt   :: Map.Map String [Item],
     message :: [[Char]],
     time    :: Int,
-    officeClosed :: Bool
+    officeClosed :: Bool,
+    finished :: Bool
 } deriving (Eq, Show)
 
 initialState :: State
@@ -26,20 +29,6 @@ initialState = State {
     ],
     message = [],
     time = officeOpeningHours,
-    officeClosed = False
+    officeClosed = False,
+    finished = False
 }
-
-readMessage :: State -> IO ()
-readMessage state = do
-    let msg = message state
-    putStr (unlines msg)
-    putStr "Jest około godziny "
-    let textTime = show (time state)
-    putStr textTime
-
-useTime :: State -> Int -> State
-useTime state duration = 
-    let newTime = (time state) + duration
-    in if newTime >= officeClosingHours
-        then state { time = newTime, officeClosed = True, i_am_at = last allPlaces, message = ["Minęła 16, urząd zamkniętu, wyrzucono was z budynku"] }
-        else state { time = newTime, message = (message state) ++ ["Jest godzina: " ++ show (newTime)] }

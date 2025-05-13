@@ -22,45 +22,50 @@ gameLoop state = do
     putStrLn ""
     case words (cmd) of
       ["instructions"] -> do
-        gameLoop (printInstructions state)
+        goToNextState (printInstructions state)
 
       ["start"] -> do
-        gameLoop (printIntroduction state)
+        goToNextState (printIntroduction state)
 
       ["look"] -> do
-        gameLoop (look state)
+        goToNextState (look state)
 
       ["go", place] -> do
-        gameLoop (goPlace state place)
-
-      ["go"] -> do
-        gameLoop (printInstructions state)
+        newState <- useRandTime (goPlace state place)
+        goToNextState newState
 
       ["drop", itemName] -> do
-        gameLoop (dropItem state itemName)
+        goToNextState (dropItem state itemName)
 
       ["take", itemName] -> do
-        gameLoop (takeItem state itemName)
+        goToNextState (takeItem state itemName)
 
       ["talk", personName] -> do
-        gameLoop (talkPerson state personName)
+        goToNextState (talkPerson state personName)
 
       ["ask", personName, topicName] -> do
-        gameLoop (askPerson state personName topicName)
+        goToNextState (askPerson state personName topicName)
 
       ["shout", personName, topicName] -> do
-        gameLoop (shoutPerson state personName topicName)
+        goToNextState (shoutPerson state personName topicName)
 
       ["wait"] -> do
-        gameLoop (wait state)
+        newState <- useRandTime (wait state) 
+        goToNextState newState
 
       ["quit"] -> do
-        putStrLn "Do zobaczenia!"
+        putStrLn "Koniec gry, do zobaczenia!"
 
       _ -> do
-        -- putStrLn "Nieznane polecenie."
-        gameLoop state { message = ["Nieznane polecenie"] }
+        goToNextState state { message = ["Nieznane polecenie"] }
 
+goToNextState :: State -> IO()
+goToNextState state = 
+  if finished state
+    then do
+      readMessage state 
+      putStrLn "Koniec gry, do zobaczenia!"
+    else gameLoop (checkTime state)
 
 main :: IO ()
 main = do

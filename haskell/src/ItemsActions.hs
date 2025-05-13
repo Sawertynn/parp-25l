@@ -30,9 +30,10 @@ dropItem state itemName =
                         "Asterix: Jeśli nie wymaga odwiedzin w żadnym urzędzie... to chyba tak.",
                         "Obelix: Zdecydowanie tak.",
                         "[Zaświadczenie A38 dostarczone. Jedna z prób zakończona]"
-                    ]
+                    ],
+                    finished = True
                 }
-                else finalState { message = ["Upuściłeś " ++ itemName] }
+                else finalState { message = ["Upuściłeś " ++ itemName]}
 
 takeItem :: State -> String -> State
 takeItem state itemName =
