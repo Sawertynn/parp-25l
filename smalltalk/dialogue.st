@@ -420,9 +420,9 @@ Object subclass: Dialogues [
         currentPlace := state at: #currentlyAt.
 
         personDialogues := (self allDialogues select: [ :d |
-            (((d placeName) = currentPlace)
-                and: [ (d personName) = person ])
-                and: [ (d dialogueType) = type ]
+            ((d placeName = currentPlace)
+                and: [ d personName = person ])
+                and: [ d dialogueType = type ]
         ]).
 
         personDialogues isEmpty ifTrue: [

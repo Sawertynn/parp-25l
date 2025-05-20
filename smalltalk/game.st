@@ -53,6 +53,14 @@ Object subclass: Game [
                 isUnknown := false
             ].
 
+            (input startsWith: 'talk ') ifTrue: [
+                | person |
+                person := input allButFirst: 5.
+                self talkPerson: person.
+
+                isUnknown := false
+            ].
+
             (input startsWith: 'ask ') ifTrue: [
                 | tokens person topic |
                 tokens := (input allButFirst: 4) substrings: ' '.
@@ -95,6 +103,35 @@ Object subclass: Game [
 
     lookAround [
         Text printLines: (state at: #currentlyAt) getDescription
+    ]
+
+    talkPerson: personName [
+        | currentPlace topics msg |
+        currentPlace := state at: #currentlyAt.
+
+        topics := (Dialogues allDialogues select: [:d |
+            (d personName = personName)
+                and: [
+                    (d placeName = currentPlace)
+                        and: [
+                            (d dialogueType = #ask)
+                                and: [
+                                    (d conditionBlock value: state)
+                                ]
+                        ]
+                ]
+        ]) collect: [:d | d topicName].
+
+        topics isEmpty
+            ifTrue: [
+                Text printLines: { 'Nie ma tu takiej osoby, rozejrzyj się poleceniem "look"' }.
+            ]
+            ifFalse: [
+                msg := { 'Tematy do rozmowy z ', personName, ':' } , (topics collect: [:t | '- ', t]).
+                Text printLines: msg.
+            ].
+
+        ^ state
     ]
 
     goPlace: place [
