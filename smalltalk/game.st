@@ -45,11 +45,12 @@ Object subclass: Game [
             ].
 
             (input startsWith: 'go ') ifTrue: [
-                | placeName place |
+                | placeName place was_placed_changed |
                 placeName := input allButFirst: 3.
                 place := Location findByName: placeName.
-                self goPlace: place.
-                self lookAround.
+
+                was_placed_changed := self goPlace: place.
+                was_placed_changed ifTrue: [ self lookAround ].
 
                 isUnknown := false
             ].
@@ -71,6 +72,7 @@ Object subclass: Game [
                     ifFalse: [ '' ].
 
                 state :=  self askPerson: state personName: person topicName: topic.
+                Text printLines: #('').
 
                 isUnknown := false
             ].
@@ -84,6 +86,7 @@ Object subclass: Game [
                     ifFalse: [ '' ].
 
                 state :=  self shoutPerson: state personName: person topicName: topic.
+                Text printLines: #('').
 
                 isUnknown := false
             ].
@@ -93,9 +96,10 @@ Object subclass: Game [
                 itemName := input allButFirst: 5.
                 self takeItem: itemName.
 
-                (itemName = 'niebieski_formularz') ifTrue: [
+                (itemName = 'fioletowy_formularz') ifTrue: [
                     self handleKickoutFromOffice.
                 ].
+                Text printLines: #('').
 
                 isUnknown := false.
             ].
@@ -104,6 +108,7 @@ Object subclass: Game [
                 | itemName |
                 itemName := input allButFirst: 5.
                 self dropItem: itemName.
+                Text printLines: #('').
 
                 isUnknown := false.
             ].
@@ -168,7 +173,7 @@ Object subclass: Game [
                 Text printLines: #('Nie ma tu takiej osoby, rozejrzyj się poleceniem "look"').
             ]
             ifFalse: [
-                msg := { 'Tematy do rozmowy z ', personName, ':' } , (topics collect: [:t | '- ', t]).
+                msg := { 'Tematy do rozmowy z ', personName, ':' } , (topics collect: [:t | '- ', t]), #('').
                 Text printLines: msg.
             ].
 
@@ -186,11 +191,14 @@ Object subclass: Game [
                         ]
                         ifFalse: [
                             state at: #currentlyAt put: place.
+                            ^ true.
                         ]
                 ].
         ] ifNil: [
             Text printLines: #('Nie ma takiego miejsca...' '')
         ].
+
+        ^ false.
     ]
 
     askPerson: state personName: person topicName: topic [
@@ -266,8 +274,8 @@ Object subclass: Game [
     ]
 
     handleKickoutFromOffice [
-        state at: #officeClosed put: true.
         self goPlace: (Location findByName: 'przed_urzędem').
+        state at: #officeClosed put: true.
         Text printOfficeClosed
     ]
 ]
