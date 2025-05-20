@@ -1,6 +1,6 @@
 Object subclass: GameState [
 
-    | isGameOver currentlyAt |
+    | isGameOver currentlyAt holding itemsAt |
 
     GameState class >> new [
         | s |
@@ -11,18 +11,24 @@ Object subclass: GameState [
 
     init [
         isGameOver := false.
-        currentlyAt := Location findByName: 'urząd'
+        currentlyAt := Location findByName: 'urząd'.
+        holding := OrderedCollection new.
+        itemsAt := Dictionary new.
     ]
 
     at: key [
         key = #isGameOver ifTrue: [ ^ isGameOver ].
         key = #currentlyAt ifTrue: [ ^ currentlyAt ].
+        key = #holding ifTrue: [ ^ holding ].
+        key = #itemsAt ifTrue: [ ^ itemsAt ].
         self error: 'Nieznany klucz: ', key printString.
     ]
 
     at: key put: value [
         key = #isGameOver ifTrue: [ isGameOver := value. ^ value ].
         key = #currentlyAt ifTrue: [ currentlyAt := value. ^ value ].
+        key = #holding ifTrue: [ holding := value. ^ value ].
+        key = #itemsAt ifTrue: [ itemsAt := value. ^ value ].
         self error: 'Nieznany klucz: ', key printString.
     ]
 ]
