@@ -1,6 +1,7 @@
 ## Uruchomienie gry
 
 ```
+sudo apt install gnu-smalltalk
 make run
 ```
 
@@ -15,3 +16,5 @@ make run
 Inne:
 
 - okienko8 - czekanie
+
+Na razie jest zrobione tak że po wzięciu niebieskiego formularza, wywala nas z urzędu

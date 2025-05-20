@@ -93,6 +93,10 @@ Object subclass: Game [
                 itemName := input allButFirst: 5.
                 self takeItem: itemName.
 
+                (itemName = 'niebieski_formularz') ifTrue: [
+                    self handleKickoutFromOffice.
+                ].
+
                 isUnknown := false.
             ].
 
@@ -176,7 +180,13 @@ Object subclass: Game [
             (place = (state at: #currentlyAt))
                 ifTrue: [Text printLines: #('Już tu jesteś.' '')]
                 ifFalse: [
-                    state at: #currentlyAt put: place.
+                    ((state at: #officeClosed) = true and: [ (place getName) ~= 'wioska' ])
+                        ifTrue: [
+                            Text printLines: #('Urząd jest zamknięty. Nie możesz teraz wejść. Możesz albo zaczekać albo wrócić do wioski')
+                        ]
+                        ifFalse: [
+                            state at: #currentlyAt put: place.
+                        ]
                 ].
         ] ifNil: [
             Text printLines: #('Nie ma takiego miejsca...' '')
@@ -229,8 +239,14 @@ Object subclass: Game [
 
     wait [
         | currentPlace |
-        currentPlace := (state at: #currentlyAt) getName.
+        (state at: #officeClosed) = true
+            ifTrue: [
+                self waitForOfficeOpening.
+                ^ nil
+            ].
 
+
+        currentPlace := (state at: #currentlyAt) getName.
         currentPlace = 'okienko8'
             ifTrue: [ self waitAtOkienko8 ]
             ifFalse: [
@@ -242,6 +258,17 @@ Object subclass: Game [
         | updated baseMessage desc |
         self goPlace: (Location findByName: 'otwarte_okienko8').
         self lookAround.
+    ]
+
+    waitForOfficeOpening [
+        state at: #officeClosed put: false.
+        Text printWaitingForOfficeOpening.
+    ]
+
+    handleKickoutFromOffice [
+        state at: #officeClosed put: true.
+        self goPlace: (Location findByName: 'przed_urzędem').
+        Text printOfficeClosed
     ]
 ]
 
