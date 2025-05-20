@@ -242,7 +242,14 @@ Object subclass: Game [
         itemsHere := (state at: #itemsAt) at: currentPlace ifAbsent: [ OrderedCollection new ].
         itemsHere add: itemName.
 
-        Text printLines: { 'Odłożyłeś ', itemName }.
+        (itemName = 'a38' and: [ currentPlace getName = 'gabinet_kwestora' ])
+            ifTrue: [
+                Text printEndingMsg.
+                state at: #isGameOver put: true.
+            ]
+            ifFalse: [
+                Text printLines: { 'Odłożyłeś ', itemName }.
+            ].
     ]
 
     wait [

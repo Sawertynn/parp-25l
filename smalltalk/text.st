@@ -66,6 +66,16 @@ Object subclass: Text [
             'Po chwili coś szczęka w zamku. Urząd znów otwarty.'
         ).
 
+    endingMessage := #(
+        'Asterix kładzie dokument A38 na biurku przed kwestorem.'
+        'Kwestor bierze formularz, przygląda się mu uważnie, po czym kiwa z uznaniem głową.'
+        'Kwestor: Imponujące. Niewielu przeszło tę ścieżkę bez rozlewu krwi. Gratulacje, Galowie.'
+        'Kwestor: Gotowi na kolejne zadanie?'
+        'Asterix: Jeśli nie wymaga odwiedzin w żadnym urzędzie... to chyba tak.'
+        'Obelix: Zdecydowanie tak.'
+        '[Zaświadczenie A38 dostarczone. Jedna z prób zakończona]'
+    ).
+
     Text class >> printLines: arrayOfLines [
         arrayOfLines do: [:line | Transcript show: line; cr].
     ]
@@ -84,5 +94,9 @@ Object subclass: Text [
 
     Text class >> printWaitingForOfficeOpening [
         self printLines: waitingForOfficeOpeningInfo
+    ]
+
+    Text class >> printEndingMsg [
+        self printLines: endingMessage
     ]
 ]
