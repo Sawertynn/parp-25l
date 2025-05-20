@@ -1,5 +1,5 @@
 Object subclass: Game [
-    | isGameOver currentlyAt |
+    | state |
 
     Game class >> new [
         | g |
@@ -9,9 +9,7 @@ Object subclass: Game [
     ]
 
     init [
-        isGameOver := false.
-        Location setupPlaces.
-        currentlyAt := Location findByName: 'urząd'
+        state := GameState new
     ]
 
     readCommand [
@@ -22,22 +20,20 @@ Object subclass: Game [
     run [
         | input isUnknown |
 
-        Text printIntroduction.
-        Text printInstructions.
-
-        [isGameOver] whileFalse: [
+        [state at: #isGameOver] whileFalse: [
 
             isUnknown := true.
             input := self readCommand.
 
-            input = 'instructions' ifTrue: [
+            input = 'start' ifTrue: [
+                Text printIntroduction.
                 Text printInstructions.
 
                 isUnknown := false
             ].
 
-            input = 'quit' ifTrue: [
-                isGameOver := true.
+            input = 'instructions' ifTrue: [
+                Text printInstructions.
 
                 isUnknown := false
             ].
@@ -52,7 +48,39 @@ Object subclass: Game [
                 | placeName place |
                 placeName := input allButFirst: 3.
                 place := Location findByName: placeName.
-                self goPlace: placeName.
+                self goPlace: place.
+
+                isUnknown := false
+            ].
+
+            (input startsWith: 'ask ') ifTrue: [
+                | tokens person topic |
+                tokens := (input allButFirst: 4) substrings: ' '.
+                person := tokens first.
+                topic := (tokens size >= 2)
+                    ifTrue: [ tokens second ]
+                    ifFalse: [ '' ].
+
+                state :=  self askPerson: state personName: person topicName: topic.
+
+                isUnknown := false
+            ].
+
+            (input startsWith: 'shout ') ifTrue: [
+                | tokens person topic |
+                tokens := (input allButFirst: 6) substrings: ' '.
+                person := tokens first.
+                topic := (tokens size >= 2)
+                    ifTrue: [ tokens second ]
+                    ifFalse: [ '' ].
+
+                state :=  self shoutPerson: state personName: person topicName: topic.
+
+                isUnknown := false
+            ].
+
+            input = 'quit' ifTrue: [
+                state at: #isGameOver put: true.
 
                 isUnknown := false
             ].
@@ -60,26 +88,34 @@ Object subclass: Game [
             isUnknown ifTrue: [
                 Text printLines: #('Nieznana komenda...' '')
             ]
+
+
         ]
     ]
 
-    goPlace: placeName [
-        | place |
-        place := Location findByName: placeName.
+    lookAround [
+        Text printLines: (state at: #currentlyAt) getDescription
+    ]
+
+    goPlace: place [
         place ifNotNil: [
-            (place = currentlyAt)
+            (place = (state at: #currentlyAt))
                 ifTrue: [Text printLines: #('Już tu jesteś.' '')]
-            ifFalse: [
-                currentlyAt := place.
-                Text printLines: #('Przeszedłeś do nowej lokacji.' '')
-            ].
+                ifFalse: [
+                    state at: #currentlyAt put: place.
+                    Text printLines: #('Przeszedłeś do nowej lokacji.' '')
+                ].
         ] ifNil: [
             Text printLines: #('Nie ma takiego miejsca...' '')
         ].
     ]
 
-    lookAround [
-        Text printLines: currentlyAt getDescription
+    askPerson: state personName: person topicName: topic [
+        ^ Dialogues handleDialogue: state person: person topic: topic type: #ask.
+    ]
+
+    shoutPerson: state personName: person topicName: topic [
+        ^ Dialogues handleDialogue: state person: person topic: topic type: #shout.
     ]
 ]
 

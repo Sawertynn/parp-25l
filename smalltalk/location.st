@@ -1,6 +1,6 @@
 Object subclass: Location [
 
-    places := Dictionary new.
+    places := nil.
 
     Location class >> setupPlaces [
         places := Dictionary new.
@@ -120,7 +120,12 @@ Object subclass: Location [
 
     ]
 
+    Location class >> allPlaces [
+        places isNil ifTrue: [ self setupPlaces ].
+        ^ places
+    ]
+
     Location class >> findByName: name [
-        ^ places at: name ifAbsent: [ nil ]
+        ^ self allPlaces at: name ifAbsent: [ nil ]
     ]
 ]
