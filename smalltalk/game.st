@@ -104,6 +104,12 @@ Object subclass: Game [
                 isUnknown := false.
             ].
 
+            input = 'wait' ifTrue: [
+                self wait.
+
+                isUnknown := false
+            ].
+
             input = 'quit' ifTrue: [
                 state at: #isGameOver put: true.
 
@@ -132,6 +138,8 @@ Object subclass: Game [
         items := (state at: #itemsAt) at: currentPlace ifAbsent: [ OrderedCollection new ].
         items isEmpty
             ifFalse: [ Text printLines: { ''. 'Widzisz tutaj przedmioty: ' } , (items collect: [:i | '- ', i]) ].
+
+        Text printLines: #('').
     ]
 
     talkPerson: personName [
@@ -169,7 +177,6 @@ Object subclass: Game [
                 ifTrue: [Text printLines: #('Już tu jesteś.' '')]
                 ifFalse: [
                     state at: #currentlyAt put: place.
-                    Text printLines: #('Przeszedłeś do nowej lokacji.' '')
                 ].
         ] ifNil: [
             Text printLines: #('Nie ma takiego miejsca...' '')
@@ -218,6 +225,23 @@ Object subclass: Game [
         itemsHere add: itemName.
 
         Text printLines: { 'Odłożyłeś ', itemName }.
+    ]
+
+    wait [
+        | currentPlace |
+        currentPlace := (state at: #currentlyAt) getName.
+
+        currentPlace = 'okienko8'
+            ifTrue: [ self waitAtOkienko8 ]
+            ifFalse: [
+                Text printLines: #('Czekasz... ale nic się nie dzieje.').
+            ].
+    ]
+
+    waitAtOkienko8 [
+        | updated baseMessage desc |
+        self goPlace: (Location findByName: 'otwarte_okienko8').
+        self lookAround.
     ]
 ]
 
