@@ -49,6 +49,7 @@ Object subclass: Game [
                 placeName := input allButFirst: 3.
                 place := Location findByName: placeName.
                 self goPlace: place.
+                self lookAround.
 
                 isUnknown := false
             ].
@@ -87,6 +88,14 @@ Object subclass: Game [
                 isUnknown := false
             ].
 
+            (input startsWith: 'take ') ifTrue: [
+                | itemName |
+                itemName := input allButFirst: 5.
+                self takeItem: itemName.
+
+                isUnknown := false.
+            ].
+
             input = 'quit' ifTrue: [
                 state at: #isGameOver put: true.
 
@@ -102,7 +111,19 @@ Object subclass: Game [
     ]
 
     lookAround [
-        Text printLines: (state at: #currentlyAt) getDescription
+        | currentPlace people items |
+        currentPlace := state at: #currentlyAt.
+        Text printLines: currentPlace getDescription.
+
+        people := (Dialogues allDialogues select: [:d | d placeName = currentPlace and: [d conditionBlock value: state]]) collect: [:d | d personName].
+        people := people asSet asSortedCollection.
+
+        people isEmpty
+            ifFalse: [ Text printLines: { ''. 'Są tu:' } , (people collect: [:p | '- ', p]) ].
+
+        items := (state at: #itemsAt) at: currentPlace ifAbsent: [ OrderedCollection new ].
+        items isEmpty
+            ifFalse: [ Text printLines: { ''. 'Widzisz tutaj przedmioty: ' } , (items collect: [:i | '- ', i]) ].
     ]
 
     talkPerson: personName [
@@ -124,7 +145,7 @@ Object subclass: Game [
 
         topics isEmpty
             ifTrue: [
-                Text printLines: { 'Nie ma tu takiej osoby, rozejrzyj się poleceniem "look"' }.
+                Text printLines: #('Nie ma tu takiej osoby, rozejrzyj się poleceniem "look"').
             ]
             ifFalse: [
                 msg := { 'Tematy do rozmowy z ', personName, ':' } , (topics collect: [:t | '- ', t]).
@@ -153,6 +174,24 @@ Object subclass: Game [
 
     shoutPerson: state personName: person topicName: topic [
         ^ Dialogues handleDialogue: state person: person topic: topic type: #shout.
+    ]
+
+    takeItem: itemName [
+        | currentPlace itemsHere itemIndex |
+        currentPlace := state at: #currentlyAt.
+        itemsHere := (state at: #itemsAt) at: currentPlace ifAbsent: [ OrderedCollection new ].
+
+        itemIndex := itemsHere indexOf: itemName.
+        (itemIndex = 0)
+            ifTrue: [
+                Text printLines: #('Nie ma tu takiego przedmiotu.').
+            ]
+            ifFalse: [
+                itemsHere removeAtIndex: itemIndex.
+                (state at: #holding) add: itemName.
+
+                Text printLines: { 'Podniosłeś ', itemName }.
+            ]
     ]
 ]
 
