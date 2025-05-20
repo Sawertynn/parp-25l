@@ -96,6 +96,14 @@ Object subclass: Game [
                 isUnknown := false.
             ].
 
+            (input startsWith: 'drop ') ifTrue: [
+                | itemName |
+                itemName := input allButFirst: 5.
+                self dropItem: itemName.
+
+                isUnknown := false.
+            ].
+
             input = 'quit' ifTrue: [
                 state at: #isGameOver put: true.
 
@@ -192,6 +200,24 @@ Object subclass: Game [
 
                 Text printLines: { 'Podniosłeś ', itemName }.
             ]
+    ]
+
+    dropItem: itemName [
+        | currentPlace holding itemsHere |
+        currentPlace := state at: #currentlyAt.
+        holding := state at: #holding.
+
+        (holding includes: itemName) ifFalse: [
+            Text printLines: #('Nie masz takiego przedmiotu.').
+            ^ nil
+        ].
+
+        holding remove: itemName.
+
+        itemsHere := (state at: #itemsAt) at: currentPlace ifAbsent: [ OrderedCollection new ].
+        itemsHere add: itemName.
+
+        Text printLines: { 'Odłożyłeś ', itemName }.
     ]
 ]
 
