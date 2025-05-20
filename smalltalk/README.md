@@ -1,0 +1,5 @@
+## Uruchomienie gry
+
+```
+make run
+```
