@@ -298,6 +298,20 @@ Object subclass: Dialogues [
             ).
 
             Dialogue newPerson: 'urzędniczka'
+                place: (Location findByName: 'okienko42')
+                type: #ask
+                topic: 'a38'
+                condition: [:state |
+                    (Dialogues areItemsInHolding: #('fioletowy_formularz' 'niebieski_formularz') onState: state)
+                        and: [(Dialogues isItemHere: 'niebieski_formularz' onState: state) not]
+                ]
+                effect: self doNothing
+                content: #(
+                    'Urzędniczka: Już wszystko wymagane do uzyskania formularza a38 macie.'
+                    'Urzędniczka: Możecie iść do okienka 77. Tam wszystko wam wyjaśnią.'
+            ).
+
+            Dialogue newPerson: 'urzędniczka'
                 place: (Location findByName: 'okienko77')
                 type: #ask
                 topic: 'a38'
